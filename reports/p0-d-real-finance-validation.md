@@ -5,9 +5,10 @@
 - ID: `P0-D-20260913`
 - Type: code experiment / external-validity validation
 - Status: `VERIFIED` for the fixed public-source-derived slice; HSBC stress set `N/A`
-- Code commit: recorded in the final run's `config.json`
+- Code commit: `5917f970e591d19ac6148d45d05cd8e9b68b6334`
 - Primary command: `python -m finevidence.eval.p0_d --config configs/p0_d_cpu.json`
 - Source data: local TAT-QA and FinQA clones, pinned by repository commit and raw-file SHA-256
+- Final reproducibility runs: `artifacts/p0_d_runs/20260912T201547361203Z-6b0db505/` and `artifacts/p0_d_runs/20260912T201622794869Z-c227b52f/`
 
 ## Research question
 
@@ -60,6 +61,7 @@ The run produced 100 query traces and 61 failures before the TAT-QA fact-descrip
 
 ## Verification and boundaries
 
+- The two final runs recorded the same metrics and dataset manifest content; each contains 100 query traces and 11 retained failure cases.
 - This report covers a fixed public-source-derived dev slice, not a leaderboard submission.
 - No generation accuracy, executable-program accuracy, citation bbox accuracy, or visual retrieval result is claimed.
 - No FinRAGBench-V full corpus was downloaded.
