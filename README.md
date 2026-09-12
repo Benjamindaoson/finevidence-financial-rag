@@ -48,3 +48,23 @@ Run the source audit and fixed slice builder:
 ```
 
 P0-D reports oracle gold-fact coverage separately from the deterministic predicted-fact baseline, and reports facet-aware ranking under predicted facets separately from the gold-facet condition. The gold-facet condition and facet extraction accuracy are `N/A` because TAT-QA and FinQA do not provide canonical entity/metric/period facet labels. `hsbc_readiness.json` remains `N/A` until a licensed, provenance-bearing local HSBC corpus is supplied. The full FinRAGBench-V corpus is not downloaded.
+
+## P0-E evidence requirement understanding
+
+P0-E evaluates the next bottleneck exposed by P0-D: whether the system knows which facts are required before it asks retrieval to find them. It compares D0 Heuristic, D1 LLM Direct, D2 Schema-constrained, and D3 Evidence-aware decomposition. D1 is explicitly `N/A` without an authorized provider; slot and critical-fact metrics are `N/A` when the source has no canonical structured labels.
+
+```powershell
+.\.venv\Scripts\python.exe -m finevidence.eval.p0_e --config configs/p0_e_cpu.json
+```
+
+The runner writes `metrics.json`, `dataset_manifest.json`, `per_query_trace.jsonl`, and `failure_cases.jsonl` under `artifacts/p0_e_runs/`. It reports fact precision/recall, critical recall, slot accuracy, Initial/Final CER, Recovery, FAER, and Oracle Gap. A negative Oracle Gap is retained as a calibration warning, not a gain claim.
+
+## P0-F HSBC provenance track
+
+The repository contains only official HSBC source URLs and metadata in `data/hsbc_public_sources.json`. Validate without downloading:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/fetch_hsbc_public_sources.py
+```
+
+Use `--download` only when local HSBC analysis is authorized; downloaded files go to ignored `artifacts/hsbc_local_sources/` and are never committed.
