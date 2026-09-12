@@ -1,7 +1,7 @@
 import pytest
 
 from finevidence.contracts.evidence import Evidence
-from finevidence.contracts.benchmark import MiniCase, RequiredEvidenceRef
+from finevidence.contracts.benchmark import FactRequirement, MiniCase, RequiredEvidenceRef
 
 
 def test_evidence_from_content_is_traceable_and_hash_stable():
@@ -69,3 +69,23 @@ def test_unanswerable_case_can_have_no_required_evidence():
 
     assert case.answerable is False
     assert RequiredEvidenceRef(evidence_id="e-1").evidence_id == "e-1"
+
+
+def test_fact_requirement_preserves_acceptable_evidence_alternatives():
+    fact = FactRequirement(
+        fact_id="F3",
+        description="management explanation",
+        acceptable_evidence_ids=["e-35", "e-36"],
+    )
+
+    case = MiniCase(
+        question_id="q-fact",
+        question="Why did the metric change?",
+        gold_answer="Because of the stated management reason.",
+        required_evidence=[RequiredEvidenceRef(evidence_id="e-35")],
+        required_facts=[fact],
+        failure_type="MULTI_EVIDENCE",
+        answerable=True,
+    )
+
+    assert case.required_facts[0].acceptable_evidence_ids == ["e-35", "e-36"]

@@ -1,0 +1,13 @@
+{
+  "benchmark_id": "EvidenceCompleteness-v1",
+  "version": "1.0.0",
+  "evidence_file": "../mini_finance/evidence.jsonl",
+  "questions_file": "questions.jsonl",
+  "evidence_count": 19,
+  "question_count": 30,
+  "files": {
+    "questions.jsonl": "06fda93ed36c7c4e8cc6d4a9a89fb326b695d64a463d06d799f06e09800f362e",
+    "../mini_finance/evidence.jsonl": "a297eff52f8304211f60920fc555cb5859ebd148e7e238ea58e2bc8dafbf1ff3"
+  },
+  "notes": "Controlled multi-fact development slice for initial versus targeted evidence completeness."
+}

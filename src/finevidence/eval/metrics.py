@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 
 from finevidence.contracts.benchmark import MiniCase
-from finevidence.evidence.coverage import coverage_for_case
+from finevidence.evidence.coverage import coverage_for_case, fact_coverage_for_case
 
 
 def _eligible_rankings(cases: list[MiniCase], rankings: dict[str, list[str]]) -> list[tuple[MiniCase, list[str]]]:
@@ -59,3 +59,51 @@ def evaluate_retrieval(cases: list[MiniCase], rankings: dict[str, list[str]], to
         "complete_evidence_rate": sum(complete_values) / len(complete_values),
         "hard_negative_error_rate": hard_negative_error_rate(cases, rankings),
     }
+
+
+def complete_evidence_rates(
+    cases: list[MiniCase],
+    initial_selected: dict[str, set[str]],
+    final_selected: dict[str, set[str]],
+) -> dict[str, float | str]:
+    eligible = [case for case in cases if case.answerable and case.required_facts]
+    if not eligible:
+        return {
+            "initial_complete_evidence_rate": "N/A",
+            "final_complete_evidence_rate": "N/A",
+            "partial_to_complete_recovery_rate": "N/A",
+        }
+    initial_complete = [
+        fact_coverage_for_case(case, initial_selected.get(case.question_id, set())).complete
+        for case in eligible
+    ]
+    final_complete = [
+        fact_coverage_for_case(case, final_selected.get(case.question_id, set())).complete
+        for case in eligible
+    ]
+    partial_count = sum(not item for item in initial_complete)
+    recovered = sum(
+        not initial and final
+        for initial, final in zip(initial_complete, final_complete)
+    )
+    return {
+        "initial_complete_evidence_rate": sum(initial_complete) / len(eligible),
+        "final_complete_evidence_rate": sum(final_complete) / len(eligible),
+        "partial_to_complete_recovery_rate": recovered / partial_count if partial_count else "N/A",
+    }
+
+
+def false_answer_eligibility_rate(
+    cases: list[MiniCase],
+    selected_ids_by_case: dict[str, set[str]],
+    eligibility_by_case: dict[str, bool],
+) -> float | str:
+    eligible_cases = [case for case in cases if case.answerable and case.required_facts]
+    if not eligible_cases:
+        return "N/A"
+    false_eligible = sum(
+        bool(eligibility_by_case.get(case.question_id, False))
+        and not fact_coverage_for_case(case, selected_ids_by_case.get(case.question_id, set())).complete
+        for case in eligible_cases
+    )
+    return false_eligible / len(eligible_cases)

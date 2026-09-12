@@ -17,6 +17,14 @@ class RequiredEvidenceRef(BaseModel):
     column_id: str | None = None
 
 
+class FactRequirement(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    fact_id: str
+    description: str = Field(min_length=1)
+    acceptable_evidence_ids: list[str] = Field(min_length=1)
+
+
 class MiniCase(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -24,7 +32,7 @@ class MiniCase(BaseModel):
     question: str = Field(min_length=1)
     gold_answer: str | None
     required_evidence: list[RequiredEvidenceRef] = Field(default_factory=list)
-    required_facts: list[str] = Field(default_factory=list)
+    required_facts: list[FactRequirement | str] = Field(default_factory=list)
     failure_type: str
     answerable: bool
     positive_evidence_id: str | None = None

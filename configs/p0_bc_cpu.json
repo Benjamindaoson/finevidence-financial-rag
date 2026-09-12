@@ -1,0 +1,9 @@
+{
+  "completeness_root": "benchmarks/evidence_completeness_v1",
+  "finance_hardset_root": "benchmarks/finance_hardset_v1",
+  "artifact_root": "artifacts/p0_bc_runs",
+  "initial_top_k": 1,
+  "targeted_top_k": 5,
+  "max_rounds": 2,
+  "top_k": 5
+}

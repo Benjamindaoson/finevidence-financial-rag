@@ -1,6 +1,11 @@
 from finevidence.contracts.benchmark import MiniCase, RequiredEvidenceRef
-from finevidence.evidence.coverage import coverage_for_case
-from finevidence.eval.metrics import evaluate_retrieval, hard_negative_error_rate
+from finevidence.evidence.coverage import fact_coverage_for_case
+from finevidence.eval.metrics import (
+    complete_evidence_rates,
+    evaluate_retrieval,
+    false_answer_eligibility_rate,
+    hard_negative_error_rate,
+)
 
 
 def _case(**kwargs):
@@ -18,18 +23,35 @@ def _case(**kwargs):
 
 
 def test_partial_evidence_is_not_complete():
-    result = coverage_for_case(_case(), {"e-1"})
+    result = fact_coverage_for_case(
+        _case(
+            required_facts=[
+                {"fact_id": "F1", "description": "first", "acceptable_evidence_ids": ["e-1"]},
+                {"fact_id": "F2", "description": "second", "acceptable_evidence_ids": ["e-2"]},
+            ]
+        ),
+        {"e-1"},
+    )
 
-    assert result.covered_count == 1
+    assert result.covered_fact_count == 1
+    assert result.fact_coverage == 0.5
     assert result.complete is False
-    assert result.missing_evidence_ids == ["e-2"]
+    assert result.missing_facts[0].fact_id == "F2"
 
 
 def test_all_required_evidence_is_complete():
-    result = coverage_for_case(_case(), {"e-1", "e-2", "extra"})
+    result = fact_coverage_for_case(
+        _case(
+            required_facts=[
+                {"fact_id": "F1", "description": "first", "acceptable_evidence_ids": ["e-1"]},
+                {"fact_id": "F2", "description": "second", "acceptable_evidence_ids": ["e-2"]},
+            ]
+        ),
+        {"e-1", "e-2", "extra"},
+    )
 
     assert result.complete is True
-    assert result.covered_count == 2
+    assert result.covered_fact_count == 2
 
 
 def test_hard_negative_error_rate_counts_negative_above_positive():
@@ -67,3 +89,36 @@ def test_retrieval_metrics_exclude_unanswerable_cases_without_gold_evidence():
 
     assert metrics["recall_at_5"] == 1.0
     assert metrics["complete_evidence_rate"] == 1.0
+
+
+def test_complete_evidence_rates_distinguish_initial_and_recovered_facts():
+    case = _case(
+        required_facts=[
+            {"fact_id": "F1", "description": "first", "acceptable_evidence_ids": ["e-1"]},
+            {"fact_id": "F2", "description": "second", "acceptable_evidence_ids": ["e-2"]},
+        ]
+    )
+
+    metrics = complete_evidence_rates(
+        [case],
+        {"q-1": {"e-1"}},
+        {"q-1": {"e-1", "e-2"}},
+    )
+
+    assert metrics == {
+        "initial_complete_evidence_rate": 0.0,
+        "final_complete_evidence_rate": 1.0,
+        "partial_to_complete_recovery_rate": 1.0,
+    }
+
+
+def test_false_answer_eligibility_rate_counts_partial_case_allowed_to_generate():
+    case = _case(
+        required_facts=[
+            {"fact_id": "F1", "description": "first", "acceptable_evidence_ids": ["e-1"]},
+            {"fact_id": "F2", "description": "second", "acceptable_evidence_ids": ["e-2"]},
+        ]
+    )
+
+    assert false_answer_eligibility_rate([case], {"q-1": {"e-1"}}, {"q-1": True}) == 1.0
+    assert false_answer_eligibility_rate([case], {"q-1": {"e-1"}}, {"q-1": False}) == 0.0

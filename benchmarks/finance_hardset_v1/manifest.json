@@ -1,0 +1,25 @@
+{
+  "benchmark_id": "FinanceHardSet-v1",
+  "version": "1.0.0",
+  "evidence_file": "evidence.jsonl",
+  "questions_file": "questions.jsonl",
+  "evidence_count": 10,
+  "question_count": 100,
+  "categories": [
+    "TEMPORAL",
+    "METRIC",
+    "RELATED_METRIC",
+    "ENTITY",
+    "SEGMENT",
+    "BASIS",
+    "CURRENCY",
+    "GEOGRAPHY",
+    "PERIOD_TYPE",
+    "TABLE_CONTEXT"
+  ],
+  "files": {
+    "evidence.jsonl": "6ece7314f8ae62d3f49d48e4e3d8e24b0f586fa84309c381c31541d669218582",
+    "questions.jsonl": "d8378f1bacb537c34eefe197287aab4ba64a751716880fc42adc8080d6f65a62"
+  },
+  "notes": "Controlled hard-negative development fixture; not a claim about public benchmark performance."
+}

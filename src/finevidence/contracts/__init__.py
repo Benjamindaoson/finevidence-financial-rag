@@ -1,4 +1,4 @@
-from .benchmark import Benchmark, MiniCase, RequiredEvidenceRef
+from .benchmark import Benchmark, FactRequirement, MiniCase, RequiredEvidenceRef
 from .evidence import Evidence, RetrievedEvidence
 
-__all__ = ["Benchmark", "Evidence", "MiniCase", "RequiredEvidenceRef", "RetrievedEvidence"]
+__all__ = ["Benchmark", "Evidence", "FactRequirement", "MiniCase", "RequiredEvidenceRef", "RetrievedEvidence"]
