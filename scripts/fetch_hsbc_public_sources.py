@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-from datetime import datetime, timezone
 from pathlib import Path
-from urllib.request import Request, urlopen
+
+from finevidence.benchmarks.hsbc import download_hsbc_corpus
 
 
 def load_manifest(path: str | Path) -> dict:
@@ -25,19 +24,10 @@ def load_manifest(path: str | Path) -> dict:
 
 
 def fetch(manifest: dict, output_root: Path) -> Path:
-    output_root.mkdir(parents=True, exist_ok=True)
-    downloaded = []
-    for index, document in enumerate(manifest["documents"], start=1):
-        suffix = Path(document["source_url"].split("?", 1)[0]).suffix or ".bin"
-        output = output_root / f"{index:02d}-{document['document_type'].lower().replace(' ', '-')}-{document['reporting_period']}{suffix}"
-        request = Request(document["source_url"], headers={"User-Agent": "finevidence-provenance-fetch/0.1"})
-        with urlopen(request, timeout=60) as response:
-            payload = response.read()
-        output.write_bytes(payload)
-        downloaded.append({**document, "local_path": str(output), "sha256": hashlib.sha256(payload).hexdigest(), "downloaded_at": datetime.now(timezone.utc).isoformat()})
-    result = output_root / "manifest.json"
-    result.write_text(json.dumps({"source_page": manifest["source_page"], "documents": downloaded}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return result
+    result = download_hsbc_corpus(Path("data/hsbc_public_sources.json"), output_root)
+    path = output_root / "hsbc_corpus_manifest.json"
+    path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return path
 
 
 def main() -> int:

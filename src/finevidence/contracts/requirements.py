@@ -30,6 +30,7 @@ class Requirement(BaseModel):
     criticality: Criticality = "CRITICAL"
     depends_on: list[str] = Field(default_factory=list)
     acceptable_evidence_ids: list[str] = Field(default_factory=list)
+    evidence_role: Literal["VALUE_SUPPORT", "COMPARISON_SUPPORT", "DERIVATION_INPUT", "EXPLANATION_SUPPORT", "CONTEXT_SUPPORT"] | None = None
 
 
 class RequirementEdge(BaseModel):
