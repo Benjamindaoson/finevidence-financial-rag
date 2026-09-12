@@ -1,0 +1,6 @@
+{
+  "slice_root": "benchmarks/real_finance_v1",
+  "artifact_root": "artifacts/p0_g_runs",
+  "top_k": 5,
+  "max_rounds": 2
+}

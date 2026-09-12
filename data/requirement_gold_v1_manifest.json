@@ -1,0 +1,8 @@
+{
+  "benchmark_id": "RequirementGold-v1",
+  "status": "N/A",
+  "case_count": 0,
+  "source_benchmark": "RealFinance-v1",
+  "reason": "MANUAL_ANNOTATION_NOT_AVAILABLE",
+  "annotation_policy": "Do not promote automatically inferred slots, roles, or criticality to canonical gold labels."
+}
