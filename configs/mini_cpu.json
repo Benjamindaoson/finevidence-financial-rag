@@ -1,0 +1,8 @@
+{
+  "benchmark_root": "benchmarks/mini_finance",
+  "artifact_root": "artifacts/runs",
+  "top_k": 5,
+  "baselines": ["B0", "B1", "B2", "B3"],
+  "dense_backend": "tfidf_svd_dense",
+  "seed": 0
+}
