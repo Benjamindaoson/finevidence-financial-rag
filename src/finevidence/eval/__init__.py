@@ -3,6 +3,7 @@ from .metrics import (
     evaluate_retrieval,
     false_answer_eligibility_rate,
     hard_negative_error_rate,
+    hard_negative_error_rate_by_category,
 )
 
 __all__ = [
@@ -10,4 +11,5 @@ __all__ = [
     "evaluate_retrieval",
     "false_answer_eligibility_rate",
     "hard_negative_error_rate",
+    "hard_negative_error_rate_by_category",
 ]

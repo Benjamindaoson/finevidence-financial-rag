@@ -10,7 +10,12 @@ from uuid import uuid4
 
 from finevidence.benchmarks.loader import load_benchmark
 from finevidence.evidence.coverage import fact_coverage_for_case
-from finevidence.eval.metrics import complete_evidence_rates, evaluate_retrieval, false_answer_eligibility_rate
+from finevidence.eval.metrics import (
+    complete_evidence_rates,
+    evaluate_retrieval,
+    false_answer_eligibility_rate,
+    hard_negative_error_rate_by_category,
+)
 from finevidence.eval.run import _git_commit
 from finevidence.ranking.rerankers import FacetAwareReranker, HardNegativeAwareReranker
 from finevidence.retrieval.dense import DenseRetriever
@@ -88,7 +93,11 @@ def run_p0_bc(config: dict) -> Path:
         ("+ Financial Facets", facet_rankings),
         ("+ Financial-aware Reranker", hard_rankings),
     ):
-        ranking_table.append({"variant": name, **evaluate_retrieval(hardset.cases, rankings, top_k)})
+        ranking_table.append({
+            "variant": name,
+            **evaluate_retrieval(hardset.cases, rankings, top_k),
+            "hard_negative_error_by_category": hard_negative_error_rate_by_category(hardset.cases, rankings),
+        })
 
     base_selected: dict[str, set[str]] = {}
     targeted_selected: dict[str, set[str]] = {}

@@ -5,6 +5,7 @@ from finevidence.eval.metrics import (
     evaluate_retrieval,
     false_answer_eligibility_rate,
     hard_negative_error_rate,
+    hard_negative_error_rate_by_category,
 )
 
 
@@ -70,6 +71,28 @@ def test_hard_negative_error_rate_counts_negative_above_positive():
 
 def test_hard_negative_metric_is_na_without_annotated_cases():
     assert hard_negative_error_rate([_case()], {"q-1": ["e-1"]}) == "N/A"
+
+
+def test_hard_negative_error_rate_is_available_per_category():
+    temporal = _case(
+        question_id="q-temporal",
+        required_evidence=[RequiredEvidenceRef(evidence_id="positive")],
+        positive_evidence_id="positive",
+        hard_negative_ids=["negative"],
+        failure_type="HARD_NEGATIVE_TEMPORAL",
+    )
+    metric = _case(
+        question_id="q-metric",
+        required_evidence=[RequiredEvidenceRef(evidence_id="positive")],
+        positive_evidence_id="positive",
+        hard_negative_ids=["negative"],
+        failure_type="HARD_NEGATIVE_METRIC",
+    )
+
+    assert hard_negative_error_rate_by_category(
+        [temporal, metric],
+        {"q-temporal": ["negative", "positive"], "q-metric": ["positive", "negative"]},
+    ) == {"TEMPORAL": 1.0, "METRIC": 0.0}
 
 
 def test_retrieval_metrics_exclude_unanswerable_cases_without_gold_evidence():

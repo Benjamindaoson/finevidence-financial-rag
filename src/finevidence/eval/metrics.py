@@ -31,6 +31,20 @@ def hard_negative_error_rate(cases: list[MiniCase], rankings: dict[str, list[str
     return errors / len(eligible)
 
 
+def hard_negative_error_rate_by_category(
+    cases: list[MiniCase], rankings: dict[str, list[str]]
+) -> dict[str, float | str]:
+    categories: dict[str, list[MiniCase]] = {}
+    for case in cases:
+        if case.positive_evidence_id and case.hard_negative_ids:
+            category = case.failure_type.removeprefix("HARD_NEGATIVE_")
+            categories.setdefault(category, []).append(case)
+    return {
+        category: hard_negative_error_rate(category_cases, rankings)
+        for category, category_cases in sorted(categories.items())
+    }
+
+
 def evaluate_retrieval(cases: list[MiniCase], rankings: dict[str, list[str]], top_k: int = 5) -> dict[str, float | str]:
     eligible = _eligible_rankings(cases, rankings)
     if not eligible:
