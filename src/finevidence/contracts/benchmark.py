@@ -19,12 +19,28 @@ class RequiredEvidenceRef(BaseModel):
     column_id: str | None = None
 
 
+class FactSlots(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    fact_type: str
+    entity: str | None = None
+    metric: str | None = None
+    period: str | None = None
+    segment: str | None = None
+    basis: str | None = None
+    operation: str | None = None
+    unit: str | None = None
+    role: str
+    critical: bool = True
+
+
 class FactRequirement(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     fact_id: str
     description: str = Field(min_length=1)
     acceptable_evidence_ids: list[str] = Field(min_length=1)
+    slots: FactSlots | None = None
 
 
 class MiniCase(BaseModel):

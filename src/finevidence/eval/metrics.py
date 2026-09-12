@@ -159,3 +159,34 @@ def facet_extraction_metrics(gold: dict[str, str | None], predicted: FinancialFa
         actual = getattr(predicted, field)
         result[f"{field}_accuracy"] = float(bool(actual) and actual.lower() == expected.lower())
     return result
+
+
+def structured_fact_metrics(case: MiniCase, predicted: list[FactRequirement]) -> dict[str, float | str]:
+    lexical = fact_decomposition_metrics(case, predicted)
+    gold = [fact for fact in case.required_facts if isinstance(fact, FactRequirement)]
+    structured_gold = [fact for fact in gold if fact.slots is not None]
+    if not structured_gold:
+        return {
+            "fact_precision": lexical["required_fact_precision"],
+            "fact_recall": lexical["required_fact_recall"],
+            "critical_fact_recall": "N/A",
+            "slot_accuracy": "N/A",
+        }
+    matched = []
+    for gold_fact in structured_gold:
+        matches = [candidate for candidate in predicted if candidate.slots == gold_fact.slots]
+        matched.append(bool(matches))
+    critical = [fact for fact in structured_gold if fact.slots and fact.slots.critical]
+    critical_matched = sum(any(candidate.slots == fact.slots for candidate in predicted) for fact in critical)
+    return {
+        "fact_precision": sum(matched) / len(predicted) if predicted else 0.0,
+        "fact_recall": sum(matched) / len(structured_gold),
+        "critical_fact_recall": critical_matched / len(critical) if critical else "N/A",
+        "slot_accuracy": sum(matched) / len(structured_gold),
+    }
+
+
+def oracle_gap(gold_cer: float | str, predicted_cer: float | str) -> float | str:
+    if not isinstance(gold_cer, (int, float)) or not isinstance(predicted_cer, (int, float)):
+        return "N/A"
+    return float(gold_cer - predicted_cer)

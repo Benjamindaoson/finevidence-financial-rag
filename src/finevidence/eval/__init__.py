@@ -6,6 +6,8 @@ from .metrics import (
     false_answer_eligibility_rate,
     hard_negative_error_rate,
     hard_negative_error_rate_by_category,
+    oracle_gap,
+    structured_fact_metrics,
 )
 
 __all__ = [
@@ -16,4 +18,6 @@ __all__ = [
     "false_answer_eligibility_rate",
     "hard_negative_error_rate",
     "hard_negative_error_rate_by_category",
+    "oracle_gap",
+    "structured_fact_metrics",
 ]
