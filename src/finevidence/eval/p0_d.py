@@ -12,7 +12,7 @@ from uuid import uuid4
 
 from finevidence.benchmarks.loader import load_benchmark
 from finevidence.benchmarks.real_finance import build_real_finance_slice
-from finevidence.eval.metrics import complete_evidence_rates, fact_decomposition_metrics, facet_extraction_metrics, evaluate_retrieval
+from finevidence.eval.metrics import complete_evidence_rates, fact_decomposition_metrics, facet_extraction_metrics, false_answer_eligibility_rate, evaluate_retrieval
 from finevidence.eval.run import _git_commit
 from finevidence.evidence.coverage import fact_coverage_for_case
 from finevidence.evidence.decomposition import decompose_required_facts
@@ -118,6 +118,18 @@ def run_p0_d(config: dict) -> Path:
         generic = hybrid.search(case.question, top_k)
         generic_rankings[case.question_id] = [item.evidence_id for item in generic]
         facet_rankings[case.question_id] = [item.evidence_id for item in facet_ranker.rank(case.question, generic, evidence_by_id, top_k)]
+    top_k_eligibility = {
+        case.question_id: bool(fact_coverage_for_case(case, initial_selected[case.question_id]).covered_fact_count)
+        for case in benchmark.cases
+    }
+    complete_eligibility = {
+        case.question_id: fact_coverage_for_case(case, initial_selected[case.question_id]).complete
+        for case in benchmark.cases
+    }
+    targeted_eligibility = {
+        case.question_id: fact_coverage_for_case(case, final_selected[case.question_id]).complete
+        for case in benchmark.cases
+    }
     metrics = {
         "dataset_type": "public_benchmark_slice",
         "source_splits": {dataset: sum(case.source_dataset == dataset for case in benchmark.cases) for dataset in ("TAT-QA", "FinQA")},
@@ -128,6 +140,11 @@ def run_p0_d(config: dict) -> Path:
             "Facet-aware / gold facets": "N/A (source slice has no canonical facet labels)",
         },
         "gold_fact_condition": complete_evidence_rates(benchmark.cases, initial_selected, final_selected),
+        "evidence_eligibility": {
+            "Top-K RAG": false_answer_eligibility_rate(benchmark.cases, initial_selected, top_k_eligibility),
+            "Coverage Gate": false_answer_eligibility_rate(benchmark.cases, initial_selected, complete_eligibility),
+            "Targeted Retrieval": false_answer_eligibility_rate(benchmark.cases, final_selected, targeted_eligibility),
+        },
         "predicted_fact_condition": _predicted_rates(benchmark.cases, initial_selected, final_selected, evidence_by_id),
         "fact_decomposition": {
             key: sum(row[key] for row in decomposition_rows) / len(decomposition_rows)
