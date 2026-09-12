@@ -5,10 +5,10 @@
 - ID: `P0-D-20260913`
 - Type: code experiment / external-validity validation
 - Status: `VERIFIED` for the fixed public-source-derived slice; HSBC stress set `N/A`
-- Code commit: `5917f970e591d19ac6148d45d05cd8e9b68b6334`
+- Code commit: `d97557d624b7dbe99ef6bff28acc057401d966a4`
 - Primary command: `python -m finevidence.eval.p0_d --config configs/p0_d_cpu.json`
 - Source data: local TAT-QA and FinQA clones, pinned by repository commit and raw-file SHA-256
-- Final reproducibility runs: `artifacts/p0_d_runs/20260912T201547361203Z-6b0db505/` and `artifacts/p0_d_runs/20260912T201622794869Z-c227b52f/`
+- Final reproducibility runs: `artifacts/p0_d_runs/20260912T202547160764Z-62a4fd11/` and `artifacts/p0_d_runs/20260912T202612338140Z-c2f60731/`
 
 ## Research question
 
@@ -51,6 +51,12 @@ Derived hashes are recorded in `benchmarks/real_finance_v1/manifest.json`. The r
 | Gold required facts, targeted retrieval | 0.0300 | 0.8900 | 0.8866 |
 | Predicted required facts, lexical self-coverage | 0.9200 | 0.9900 | 0.8750 |
 
+| Eligibility strategy | FAER |
+|---|---:|
+| Top-K RAG | 0.1200 |
+| Coverage Gate | 0.0000 |
+| Targeted Retrieval | 0.0000 |
+
 Required Fact Precision was `0.0100` and Required Fact Recall was `0.0017` for the deterministic decomposer. The predicted-fact coverage row is therefore not a claim that the decomposer recovered the gold facts; it measures whether the evidence selected appears to satisfy the decomposer's own under-specified fact set. Gold-fact recall is the controlling safety signal.
 
 The run produced 100 query traces and 61 failures before the TAT-QA fact-description projection was corrected. After using source evidence text as the TAT-QA fact description, the final run produced 100 traces and 11 incomplete gold-fact cases. The remaining failures are retained in `failure_cases.jsonl`.
@@ -61,7 +67,7 @@ The run produced 100 query traces and 61 failures before the TAT-QA fact-descrip
 
 ## Verification and boundaries
 
-- The two final runs recorded the same metrics and dataset manifest content; each contains 100 query traces and 11 retained failure cases.
+- The two final runs recorded the same metrics and dataset manifest content; both configs record code commit `d97557d624b7dbe99ef6bff28acc057401d966a4`; each contains 100 query traces and 11 retained failure cases.
 - This report covers a fixed public-source-derived dev slice, not a leaderboard submission.
 - No generation accuracy, executable-program accuracy, citation bbox accuracy, or visual retrieval result is claimed.
 - No FinRAGBench-V full corpus was downloaded.
