@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import math
+import re
 
-from finevidence.contracts.benchmark import MiniCase
+from finevidence.contracts.benchmark import FactRequirement, MiniCase
+from finevidence.ranking.facets import FinancialFacets
 from finevidence.evidence.coverage import coverage_for_case, fact_coverage_for_case
 
 
@@ -121,3 +123,39 @@ def false_answer_eligibility_rate(
         for case in eligible_cases
     )
     return false_eligible / len(eligible_cases)
+
+
+def fact_decomposition_metrics(case: MiniCase, predicted_facts: list[FactRequirement]) -> dict[str, float]:
+    gold_descriptions = [
+        fact.description if isinstance(fact, FactRequirement) else fact
+        for fact in case.required_facts
+    ]
+    gold_tokens = [set(re.findall(r"[a-z0-9]+", description.lower())) for description in gold_descriptions]
+    predicted_tokens = [set(re.findall(r"[a-z0-9]+", fact.description.lower())) for fact in predicted_facts]
+    matched = 0
+    unused = set(range(len(gold_tokens)))
+    for candidate in predicted_tokens:
+        best = max(
+            ((len(candidate & gold_tokens[index]) / max(len(candidate | gold_tokens[index]), 1), index) for index in unused),
+            default=(0.0, -1),
+        )
+        if best[0] >= 0.5:
+            matched += 1
+            unused.remove(best[1])
+    return {
+        "required_fact_precision": matched / len(predicted_tokens) if predicted_tokens else 0.0,
+        "required_fact_recall": matched / len(gold_tokens) if gold_tokens else 0.0,
+    }
+
+
+def facet_extraction_metrics(gold: dict[str, str | None], predicted: FinancialFacets) -> dict[str, float | str]:
+    fields = ("entity", "metric", "period", "segment", "basis", "geography", "currency")
+    result = {}
+    for field in fields:
+        expected = gold.get(field)
+        if expected is None:
+            result[f"{field}_accuracy"] = "N/A"
+            continue
+        actual = getattr(predicted, field)
+        result[f"{field}_accuracy"] = float(bool(actual) and actual.lower() == expected.lower())
+    return result

@@ -1,0 +1,50 @@
+{
+  "TAT-QA": {
+    "status": "READY",
+    "repo": "D:\\01_work\\Enterprise Multimodal RAG\\research\\repos\\tat-qa",
+    "repo_url": "https://github.com/NExTplusplus/tat-qa",
+    "commit": "870accc41953dcde885aabeb963d94aabdc0fbc3",
+    "license_note": "Dataset README states CC BY 4.0; verify terms before redistribution.",
+    "files": [
+      {
+        "relative_path": "dataset_raw/tatqa_dataset_dev.json",
+        "exists": true,
+        "byte_size": 1687079,
+        "sha256": "6c3660345bf155b44bb3b55e63a4355716521028f291263d47c66667335f0144",
+        "record_count": 278
+      },
+      {
+        "relative_path": "dataset_raw/tatqa_dataset_test_gold.json",
+        "exists": true,
+        "byte_size": 2249916,
+        "sha256": "c834dc788c5a61f59b3e95e01ad5a18666c057c7e4e9e5222a11b48ea293f76f",
+        "record_count": 277
+      }
+    ],
+    "missing_files": []
+  },
+  "FinQA": {
+    "status": "READY",
+    "repo": "D:\\01_work\\Enterprise Multimodal RAG\\research\\repos\\FinQA",
+    "repo_url": "https://github.com/czyssrs/FinQA",
+    "commit": "0f16e2867befa6840783e58be38c9efb9229d742",
+    "license_note": "Repository license and dataset terms must be reviewed before redistribution.",
+    "files": [
+      {
+        "relative_path": "dataset/dev.json",
+        "exists": true,
+        "byte_size": 11222546,
+        "sha256": "27cc6c57487bbaba73041f93dba831a39b1cabe999c2ec0ddebc6f1200ff85bd",
+        "record_count": 883
+      },
+      {
+        "relative_path": "dataset/test.json",
+        "exists": true,
+        "byte_size": 14750900,
+        "sha256": "37a6e6e198b7821dc080f079d43a4a7a9d3a7b562803b7e97875bf70cd61fb08",
+        "record_count": 1147
+      }
+    ],
+    "missing_files": []
+  }
+}

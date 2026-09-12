@@ -1,0 +1,30 @@
+{
+  "benchmark_id": "RealFinance-v1",
+  "version": "1.0.0",
+  "evidence_file": "evidence.jsonl",
+  "questions_file": "questions.jsonl",
+  "evidence_count": 1652,
+  "question_count": 100,
+  "selection": {
+    "TAT-QA": 50,
+    "FinQA": 50,
+    "TAT-QA_rule": "first table-text questions in dev order",
+    "FinQA_rule": "first answerable dev records in order"
+  },
+  "sources": {
+    "TAT-QA": {
+      "path": "D:\\01_work\\Enterprise Multimodal RAG\\research\\repos\\tat-qa\\dataset_raw\\tatqa_dataset_dev.json",
+      "commit": "870accc41953dcde885aabeb963d94aabdc0fbc3",
+      "sha256": "6c3660345bf155b44bb3b55e63a4355716521028f291263d47c66667335f0144"
+    },
+    "FinQA": {
+      "path": "D:\\01_work\\Enterprise Multimodal RAG\\research\\repos\\FinQA\\dataset\\dev.json",
+      "commit": "0f16e2867befa6840783e58be38c9efb9229d742",
+      "sha256": "27cc6c57487bbaba73041f93dba831a39b1cabe999c2ec0ddebc6f1200ff85bd"
+    }
+  },
+  "files": {
+    "evidence.jsonl": "f521b1329a7989e3954b5760805236c3c584fb049d0a135d5dfe05b706cd118d",
+    "questions.jsonl": "e4be1e1495131259a3ae0a77fbd787bf963efbf6faa169af0fb9a373df1c4bcf"
+  }
+}

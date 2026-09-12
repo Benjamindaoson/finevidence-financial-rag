@@ -1,0 +1,8 @@
+{
+  "slice_root": "benchmarks/real_finance_v1",
+  "artifact_root": "artifacts/p0_d_runs",
+  "tatqa_limit": 50,
+  "finqa_limit": 50,
+  "top_k": 5,
+  "max_rounds": 2
+}
