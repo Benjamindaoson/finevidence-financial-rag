@@ -1,7 +1,7 @@
 # P0-G Evidence Requirement Graph & Fact–Evidence Alignment
 
 日期：2026-09-13
-实验代码 commit：`429058ecbab4335922390d00026d3c4cf77b4e58`
+实验代码 commit：`ce0167f7e05fc009c6791563b8b78a3767b10a5a`
 
 ## 1. 研究问题与边界
 
@@ -100,8 +100,8 @@ Every formal trace contains question type, gold/predicted graph, initial/final e
 Both runs used `configs/p0_g_cpu.json` and recorded the implementation commit above:
 
 ```text
-finevidence/artifacts/p0_g_runs/20260912T215237402336Z-d20699d7/
-finevidence/artifacts/p0_g_runs/20260912T215349801181Z-e6d7cba3/
+finevidence/artifacts/p0_g_runs/20260912T220223239201Z-a947b3ed/
+finevidence/artifacts/p0_g_runs/20260912T220340528418Z-7b1af325/
 ```
 
 The following SHA-256 values were byte-identical between runs:
@@ -111,6 +111,7 @@ metrics.json              0BC79D38B9DBDC448BF87311077CFBBFD5EC526B4AA6D87CB1AA5B
 dataset_manifest.json     47922310CEF62E54786E32FA286555564A939462FAB94F4FDCEB7A850D8D4240
 per_query_trace.jsonl     4BC0026C2B455B07BACDC34E9294D07782A0CC8F9969E6A689B9075A8C70EB44
 requirement_graphs.jsonl  3313A9C3B04A7322A5A300006F067FABD327D24C68551113A8C787E44FD309A7
+predictions.jsonl         A3C46491FD1E76859E236B9D93D61AA9CEC83698409728A66E9EE394F1BBFA82
 alignment_results.jsonl   B28CDA78CB7DB504F73280907AFED972F72ADFD72E284DBB3E3E397F0CAEE56D
 failure_cases.jsonl       DA3D6A3E19BC97F2FB29332F9A34C8F96848462B6329205841603333BC403BB7
 ```
