@@ -152,7 +152,7 @@ def run_p0_g(config: dict) -> Path:
     methods = (("D0", "D0 Heuristic"), ("D1", "D1 LLM Direct"), ("D2", "D2 Schema-constrained"), ("D3", "D3 Evidence-aware"), ("D4", "D4 Requirement-Graph-Constrained"))
     alignment_rows: dict[str, list] = {label: [] for _, label in methods}
     understanding_rows: dict[str, list] = {label: [] for _, label in methods}
-    traces, graph_rows, alignment_artifacts, failure_rows = [], [], [], []
+    traces, predictions, graph_rows, alignment_artifacts, failure_rows = [], [], [], [], []
     gold_coverage = []
     for case in benchmark.cases:
         gold_graph = _gold_graph(case)
@@ -170,6 +170,7 @@ def run_p0_g(config: dict) -> Path:
                 graph = _flat_graph(result) if result.status == "READY" else None
             if graph is None:
                 understanding_rows[label].append({"status": "N/A", "reason": result.reason, "fact_precision": "N/A", "fact_recall": "N/A", "critical_fact_recall": "N/A", "requirement_count_error": "N/A", "requirement_type_accuracy": "N/A", "slot_accuracy": "N/A"})
+                predictions.append({"question_id": case.question_id, "method": label, "status": "N/A", "reason": result.reason})
                 traces.append({"question_id": case.question_id, "method": label, "status": "N/A", "reason": result.reason})
                 continue
             if variant == "D4":
@@ -213,6 +214,7 @@ def run_p0_g(config: dict) -> Path:
                 "failure_types": _failure_types(graph, coverage, len(gold_graph.requirements)),
             }
             traces.append(trace)
+            predictions.append({"question_id": case.question_id, "method": label, "status": "READY", "question_type": trace["question_type"], "requirements": [item.model_dump() for item in graph.requirements]})
             graph_rows.append({"question_id": case.question_id, "method": label, "graph": graph.model_dump()})
             alignment_artifacts.append({
                 "question_id": case.question_id,
@@ -246,6 +248,7 @@ def run_p0_g(config: dict) -> Path:
     _write_json(run_dir / "config.json", {**config, "git_commit": _git_commit(project_root), "runtime": {"python": sys.version, "platform": platform.platform()}})
     _write_json(run_dir / "dataset_manifest.json", benchmark.manifest)
     _write_json(run_dir / "metrics.json", metrics)
+    (run_dir / "predictions.jsonl").write_text("".join(json.dumps(item, ensure_ascii=False, default=str) + "\n" for item in predictions), encoding="utf-8")
     (run_dir / "per_query_trace.jsonl").write_text("".join(json.dumps(item, ensure_ascii=False, default=str) + "\n" for item in traces), encoding="utf-8")
     (run_dir / "requirement_graphs.jsonl").write_text("".join(json.dumps(item, ensure_ascii=False, default=str) + "\n" for item in graph_rows), encoding="utf-8")
     (run_dir / "alignment_results.jsonl").write_text("".join(json.dumps(item, ensure_ascii=False, default=str) + "\n" for item in alignment_artifacts), encoding="utf-8")

@@ -68,3 +68,17 @@ The repository contains only official HSBC source URLs and metadata in `data/hsb
 ```
 
 Use `--download` only when local HSBC analysis is authorized; downloaded files go to ignored `artifacts/hsbc_local_sources/` and are never committed.
+
+## P0-G evidence requirement graph
+
+P0-G addresses the P0-E false-completeness failure. It adds typed evidence requirements, a Pydantic DAG for retrieved/derived/explanatory/context facts, explicit fact–evidence alignment, conservative independent evidence reuse, and a critical requirement gate. A derived fact is satisfied through independently covered dependencies; it does not need a chunk that literally states the derived result.
+
+Run the frozen RealFinance-v1 public slice:
+
+```powershell
+.\.venv\Scripts\python.exe -m finevidence.eval.p0_g --config configs/p0_g_cpu.json
+```
+
+The runner writes `config.json`, `dataset_manifest.json`, `predictions.jsonl`, `metrics.json`, `requirement_graphs.jsonl`, `alignment_results.jsonl`, `per_query_trace.jsonl`, and `failure_cases.jsonl` under ignored `artifacts/p0_g_runs/`. P0-G reports Raw Self Coverage, Independent CER, Critical Coverage, Evidence Reuse Rate, Invalid Reuse Rate, FAER and Gold-vs-Predicted gaps. D1 is `N/A` without a local LLM provider. `RequirementGold-v1` is currently `N/A` with zero manually annotated cases; no inferred labels are promoted to gold.
+
+The final report is `reports/p0-g-evidence-requirement-graph.md`. This public slice result is not a leaderboard score, and the deterministic alignment is not a neural verifier.
