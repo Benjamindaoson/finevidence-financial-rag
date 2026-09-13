@@ -1,0 +1,32 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+recovery_multimodal,P0-B/C,EvidenceCompleteness-v1,Gold-fact targeted retrieval,Initial CER,,0,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,controlled fixture
+recovery_multimodal,P0-B/C,EvidenceCompleteness-v1,Gold-fact targeted retrieval,Final CER,,1,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+recovery_multimodal,P0-B/C,EvidenceCompleteness-v1,Gold-fact targeted retrieval,Recovery,,1,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+recovery_multimodal,P0-B/C,EvidenceCompleteness-v1,Gold-fact targeted retrieval,FAER,,0,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+recovery_multimodal,P0-D,RealFinance-v1,Gold required facts targeted retrieval,Initial CER,,0.03,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,gold facts known
+recovery_multimodal,P0-D,RealFinance-v1,Gold required facts targeted retrieval,Final CER,,0.89,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,gold facts known; not predicted decomposition
+recovery_multimodal,P0-D,RealFinance-v1,Gold required facts targeted retrieval,Partial-to-Complete Recovery,,0.8866,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-D,RealFinance-v1,Top-K RAG,FAER,,0.12,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-D,RealFinance-v1,Coverage Gate/Targeted,FAER,,0,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-G,RealFinance-v1,D3 Evidence Aware,Raw Self Coverage,,1,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,self-coverage inflation
+recovery_multimodal,P0-G,RealFinance-v1,D3 Evidence Aware,Independent CER,,0.7283,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-G,RealFinance-v1,D3 Evidence Aware,Critical Coverage,,0.74,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-G,RealFinance-v1,D3 Evidence Aware,Invalid Reuse Rate,,0.41,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-G,RealFinance-v1,D3 Evidence Aware,FAER,,0.41,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,P0-G,RealFinance-v1,D4 Requirement Graph,Independent CER,,0.5033,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,not an improvement over D3
+recovery_multimodal,P0-G,RealFinance-v1,D4 Requirement Graph,Critical Coverage,,0.505,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+recovery_multimodal,B3.1,HSBCVisualStress-v1,M1 Conditional,Text Failure Recovery@1,1,0.0167,60,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCVisualStress-v1,M1 Conditional,Text Failure Recovery@5,5,0.0167,60,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCVisualStress-v1,M1 Conditional,Text Failure Recovery@10,10,0.05,60,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCVisualStress-v1,M1 Conditional,Multimodal Regression@10,10,0,60,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCVisualStress-v1,M1 Conditional,Net Recovery@10,10,3,60,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,raw case delta +3
+recovery_multimodal,B3.1,HSBCMultimodalRouting-v1,Conditional Routing,Routing Precision,,0.4348,30,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCMultimodalRouting-v1,Conditional Routing,Routing Recall,,1,30,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCMultimodalRouting-v1,Conditional Routing,Visual Invocation Rate,,0.7667,30,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCMultimodalRouting-v1,Conditional Routing,Unnecessary Visual Invocation Rate,,0.65,30,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B3.1,HSBCMultimodalRouting-v1,Conditional Routing,Critical Requirement Recovery@10,10,0.1176,30,reports/b3-1-public-benchmark-evaluation-closure.md,artifacts/b3_runs/20260913T133136/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B4,HSBCVisualStress-v1,E1 Predicted Failure Router,Route Accuracy,,0.5,60,reports/b4-structure-preserving-evidence-ir-failure-aware-escalation.md,artifacts/b4_runs/,PROJECT_CREATED_STRESS,diagnostic baseline
+recovery_multimodal,B4,HSBCVisualStress-v1,E1 Predicted Failure Router,Critical Recovery@10,10,0.0833,60,reports/b4-structure-preserving-evidence-ir-failure-aware-escalation.md,artifacts/b4_runs/,PROJECT_CREATED_STRESS,
+recovery_multimodal,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Table Page Recovery@10,10,0.2083,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,5/24 = 20.8333%
+recovery_multimodal,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Critical Recovery@10,10,0.1667,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,4/24 = 16.6667%
+recovery_multimodal,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Regression@10,10,0,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,

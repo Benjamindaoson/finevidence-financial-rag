@@ -1,0 +1,11 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+ranking,P0-B/C,FinanceHardSet-v1,Facet-aware deterministic,Recall@5,5,1,100,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,controlled hard-negative fixture
+ranking,P0-B/C,FinanceHardSet-v1,Facet-aware deterministic,MRR,,1,100,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+ranking,P0-B/C,FinanceHardSet-v1,Facet-aware deterministic,nDCG@10,10,1,100,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+ranking,P0-B/C,FinanceHardSet-v1,Facet-aware deterministic,HN Error,,0,100,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,
+ranking,P0-H,HSBCNaturalHard-v1,Dense,HN Error,,0.3898,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+ranking,P0-H,HSBCNaturalHard-v1,Hybrid + Generic,HN Error,,0.3898,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+ranking,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,HN Error,,0.0339,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+ranking,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,Top-1 Positive Rate,1,0.6441,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+ranking,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,Ranking Oracle Gap,,0,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,predicted vs adjudicated facets identical on this slice
+ranking,all,Financial corpus,Neural reranker,Neural Reranker Quality,,,,audit of src/finevidence/ranking and reports,src/finevidence/ranking/,N/A,not implemented; deterministic facet scorer/RRF only

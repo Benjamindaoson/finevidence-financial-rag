@@ -1,0 +1,13 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+generation_citation,all,Financial QA,Answer generation,Answer Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,generation is not primary scope
+generation_citation,all,Financial QA,Answer generation,Answer F1,,,,audit of reports/artifacts,N/A,N/A,not formally evaluated
+generation_citation,all,Financial QA,Claim verification,Claim Support Rate,,,,audit of reports/artifacts,artifacts/,N/A,API exists but claim-level evaluation missing
+generation_citation,all,Financial QA,Citation validation,Citation Precision,,,,audit of reports/artifacts,artifacts/,N/A,page hit cannot substitute
+generation_citation,all,Financial QA,Citation validation,Citation Recall,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,all,Financial QA,Citation validation,Citation F1,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,all,Financial QA,Abstention,Abstention Precision,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,all,Financial QA,Abstention,Abstention Recall,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,all,Financial QA,Abstention,Abstention F1,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,all,Financial QA,Safety,Unsupported Claim Rate,,,,audit of reports/artifacts,artifacts/,N/A,
+generation_citation,Backend v1,Local Evidence Backend v1,HTTP API,API route implementation,,1,6,docs/FIN_EVIDENCE_API_SPEC.md;docs/FIN_EVIDENCE_V1_RELEASE.md,tests/test_api_contract.py,OBSERVED,"health/search/coverage/table/query/verify/citation smoke; value 1 means implemented, not quality score"
+generation_citation,Backend v1,Local Evidence Backend v1,HTTP API,Production throughput/SLA,,,,docs/FIN_EVIDENCE_V1_RELEASE.md,Dockerfile;docker-compose.yml,N/A,in-memory CPU reference backend

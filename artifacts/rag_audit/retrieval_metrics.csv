@@ -1,0 +1,41 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+retrieval,P0-B/C,MiniBench-v1,Dense,Recall@5,5,0.7586,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,controlled development fixture
+retrieval,P0-B/C,MiniBench-v1,Hybrid,Recall@5,5,0.7931,30,reports/p0-d-real-finance-validation.md,artifacts/p0_bc_runs/,PROJECT_CREATED_STRESS,controlled development fixture
+retrieval,P0-D,RealFinance-v1,Dense,Recall@1,1,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Dense,Recall@5,5,0.09,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,50 TAT-QA + 50 FinQA fixed slice
+retrieval,P0-D,RealFinance-v1,Dense,Recall@10,10,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Dense,Recall@50,50,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Dense,MRR,,0.1027,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Dense,nDCG@10,10,0.0773,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Hybrid,Recall@1,1,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Hybrid,Recall@5,5,0.1417,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Hybrid,Recall@10,10,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Hybrid,Recall@50,50,,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,MISSING in formal report
+retrieval,P0-D,RealFinance-v1,Hybrid,MRR,,0.1895,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Hybrid,nDCG@10,10,0.1405,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Facet-aware predicted,Recall@5,5,0.1417,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,deterministic facet scoring
+retrieval,P0-D,RealFinance-v1,Facet-aware predicted,MRR,,0.1912,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-D,RealFinance-v1,Facet-aware predicted,nDCG@10,10,0.1398,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+retrieval,P0-H,HSBCNaturalHard-v1,Dense,Recall@5,5,0.1864,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,project-created natural hard-negative set
+retrieval,P0-H,HSBCNaturalHard-v1,Dense,MRR,,0.1312,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Dense,nDCG@10,10,0.129,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Hybrid + Generic,Recall@5,5,0.2881,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Hybrid + Generic,MRR,,0.2322,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Hybrid + Generic,nDCG@10,10,0.3364,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,Recall@5,5,0.9661,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,not neural reranking
+retrieval,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,MRR,,0.7759,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,P0-H,HSBCNaturalHard-v1,Facet-aware deterministic,nDCG@10,10,0.8313,59,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,PROJECT_CREATED_NATURAL,
+retrieval,B3.2,HSBCNaturalMultimodal-v1,T0 Text Only,Recall@10,10,0.5375,80,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_NATURAL,performance-blind natural control
+retrieval,B3.2,HSBCNaturalMultimodal-v1,T1 Parsed Page Text,Recall@10,10,0.5875,80,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_NATURAL,not verified Structured Table IR
+retrieval,B3.2,HSBCNaturalMultimodal-v1,V0 CLIP,Recall@10,10,0.075,80,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_NATURAL,CPU OpenAI CLIP RN50
+retrieval,B3.2,HSBCNaturalMultimodal-v1,M1 Conditional,Recall@10,10,0.5625,80,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_NATURAL,
+retrieval,B3.2,HSBCVisualStress-v1,T0 Text Only,Recall@10,10,0,60,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_STRESS,construction-biased stress workload
+retrieval,B3.2,HSBCVisualStress-v1,T1 Parsed Page Text,Recall@10,10,0.0333,60,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_STRESS,
+retrieval,B3.2,HSBCVisualStress-v1,V0 CLIP,Recall@10,10,0.1,60,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_STRESS,
+retrieval,B3.2,HSBCVisualStress-v1,M0/M1,Recall@10,10,0.05,60,reports/b3-2-benchmark-integrity-public-closure.md,artifacts/b3_2_runs/,PROJECT_CREATED_STRESS,fusion/conditional did not beat visual-only
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Recall@1,1,0.0167,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,all-60 workload; table-category recovery is separately reported as 5/24
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Recall@5,5,0.0833,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Recall@10,10,0.0833,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,Recall@50,50,,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,MISSING in table report
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,MRR,,0.0381,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,
+retrieval,B4.1,HSBCVisualStress-v1 table slice,T2 TableIR executor,nDCG@10,10,0.0491,60,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,PROJECT_CREATED_STRESS,

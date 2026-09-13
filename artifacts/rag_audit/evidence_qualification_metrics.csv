@@ -1,0 +1,16 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+evidence_qualification,P0-G,RealFinance-v1,Gold evidence condition,Independent CER,,0.9083,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,gold evidence condition
+evidence_qualification,P0-G,RealFinance-v1,Gold evidence condition,Critical Coverage,,0.9083,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,Raw Self Coverage,,1,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,Independent CER,,0.7283,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,Critical Coverage,,0.74,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,Evidence Reuse Rate,,0.41,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,invalid reuse rate emitted
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,Invalid Reuse Rate,,0.41,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D3 Evidence Aware,FAER,,0.41,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D4 Requirement Graph,Independent CER,,0.5033,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D4 Requirement Graph,Critical Coverage,,0.505,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Independent CER,,0.3704,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,adjudicated evidence ceiling=0.2593
+evidence_qualification,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Critical Coverage,,0.375,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+evidence_qualification,P0-D,RealFinance-v1,Top-K RAG,FAER,,0.12,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-D,RealFinance-v1,Coverage Gate/Targeted,FAER,,0,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+evidence_qualification,P0-G,RealFinance-v1,D4 Requirement Graph,Eligible Rate,,0.38,100,reports/p0-g-evidence-requirement-graph.md,artifacts/p0_g_runs/,PUBLIC_BENCHMARK,

@@ -1,0 +1,24 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+query_understanding,P0-D,RealFinance-v1,D0 Required Fact,Fact Precision,,0.01,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,deterministic decomposition
+query_understanding,P0-D,RealFinance-v1,D0 Required Fact,Fact Recall,,0.0017,100,reports/p0-d-real-finance-validation.md,artifacts/p0_d_runs/,PUBLIC_BENCHMARK,
+query_understanding,P0-H,RequirementAdjudicated-v1,D0 Heuristic,Requirement Precision,,0,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,"adjudicated, not human gold"
+query_understanding,P0-H,RequirementAdjudicated-v1,D0 Heuristic,Requirement Recall,,0,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D0 Heuristic,Critical Requirement Recall,,0,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D0 Heuristic,Question Type Accuracy,,1,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D0 Heuristic,Requirement Count Error,,1.3056,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,absolute error
+query_understanding,P0-H,RequirementAdjudicated-v1,D1 LLM Direct,Requirement Precision,,,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,N/A,36/36 malformed JSON; not accuracy=0
+query_understanding,P0-H,RequirementAdjudicated-v1,D1 LLM Direct,Requirement Recall,,,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,N/A,36/36 malformed JSON
+query_understanding,P0-H,RequirementAdjudicated-v1,D2 Schema Constrained,Requirement Precision,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D2 Schema Constrained,Requirement Recall,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D2 Schema Constrained,Critical Requirement Recall,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D2 Schema Constrained,Role Accuracy,,1,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D3 Evidence Aware,Requirement Precision,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D3 Evidence Aware,Requirement Recall,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D3 Evidence Aware,Critical Requirement Recall,,0.2778,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Requirement Precision,,0.7222,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Requirement Recall,,0.7222,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Critical Requirement Recall,,0.7222,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Question Type Accuracy,,1,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Role Accuracy,,1,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Dependency Accuracy,,1,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,
+query_understanding,P0-H,RequirementAdjudicated-v1,D4 Requirement Graph,Requirement Count Error,,0,36,reports/p0-h-gold-requirement-hsbc-natural-hardcases.md,artifacts/p0_h_runs/,MODEL_ASSISTED,

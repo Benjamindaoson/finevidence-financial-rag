@@ -1,0 +1,18 @@
+phase,benchmark,dataset,system,metric,cutoff,value,sample_size,source_file,artifact_path,claim_strength,notes
+parsing,P0-H,HSBC FY2025 corpus,PDF provenance,Document Count,,2,2,data/hsbc_corpus_manifest.json,data/hsbc_corpus_manifest.json,OBSERVED,Annual Report + Pillar 3
+parsing,P0-H,HSBC FY2025 corpus,PDF provenance,Page Count,,494,494,data/hsbc_corpus_manifest.json,data/hsbc_corpus_manifest.json,OBSERVED,372 + 122 pages
+parsing,B3,HSBC page images,Deterministic rendering,Rendered Page Count,,494,494,artifacts/hsbc_page_images/page_render_manifest.json,artifacts/hsbc_page_images/,OBSERVED,72 DPI rendered pages
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Accepted Table Regions,,24,13,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,OBSERVED,24 regions across 13 pages
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Parse Success,,1,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,every accepted region produced TableIR
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Raw Value Round-trip,,1,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Cell Identity Uniqueness,,1,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Row/Column Relation Presence,,1,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Structure Recoverable Rate,,0.7418,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,not semantic table accuracy
+parsing,B4.1,HSBC Annual Report pages 1–26,Geometry TableIR,Header Path Population,,0.7278,24,reports/b4-1-real-financial-table-recovery.md,artifacts/b4_1_runs/20260914T013551/,STRUCTURAL_INVARIANT,
+parsing,all,Financial documents,Table semantics,Cell Value Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,no human-verified TableIR gold
+parsing,all,Financial documents,Table semantics,Header Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,
+parsing,all,Financial documents,Table semantics,Unit Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,
+parsing,all,Financial documents,Table semantics,Merged Cell Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,
+parsing,all,Financial documents,Table semantics,Footnote Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,
+parsing,all,Financial documents,Parsing evaluation,Table Detection Precision/Recall,,,,audit of reports/artifacts,artifacts/,N/A,no page/region gold
+parsing,all,Financial documents,Parsing evaluation,Text Extraction Accuracy,,,,audit of reports/artifacts,artifacts/,N/A,no independent human gold
