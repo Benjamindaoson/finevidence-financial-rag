@@ -1,6 +1,6 @@
-# FinEvidence P0
+# FinEvidence — Evidence Backend v1 + Reproducible Experiments
 
-Evidence-first, reproducible financial RAG experiments. This is the first P0 implementation slice, not a production API.
+Evidence-first, reproducible financial RAG experiments plus a thin local Evidence Backend v1. The backend exposes retrieval, evidence qualification, table lookup, verification, and citation without embedding an Agent loop or changing the historical experiment harness.
 
 ## Run
 
@@ -20,6 +20,28 @@ dataset_manifest.json
 predictions.jsonl
 metrics.json
 failure_cases.jsonl
+```
+
+## Evidence Backend v1
+
+Run the callable local API:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn finevidence.api.app:app --host 127.0.0.1 --port 8000
+```
+
+Check `http://127.0.0.1:8000/health`. The default service loads ignored local
+HSBC page evidence when those artifacts exist; otherwise it reports an honest
+empty catalog. The versioned routes are documented in
+[docs/FIN_EVIDENCE_API_SPEC.md](docs/FIN_EVIDENCE_API_SPEC.md), with the
+Agent boundary in [docs/AI_RESEARCH_AGENT_INTEGRATION.md](docs/AI_RESEARCH_AGENT_INTEGRATION.md)
+and the release boundary in [docs/FIN_EVIDENCE_V1_RELEASE.md](docs/FIN_EVIDENCE_V1_RELEASE.md).
+
+The Docker package is local-only and intentionally excludes ignored PDFs and
+model weights:
+
+```powershell
+docker compose up --build
 ```
 
 ## Interpretation boundary
