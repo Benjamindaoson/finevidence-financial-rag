@@ -45,7 +45,10 @@ def main() -> None:
 
     citation = load_jsonl(candidate_dir / "claim_citation_candidates.jsonl")
     tables = load_jsonl(candidate_dir / "table_semantic_candidates.jsonl")
-    answerability = load_jsonl(candidate_dir / "answerability_candidates.jsonl")
+    answerability_path = root / "artifacts" / "final_rag_eval" / "answerability_candidates_v1.jsonl"
+    if not answerability_path.exists():
+        answerability_path = candidate_dir / "answerability_candidates.jsonl"
+    answerability = load_jsonl(answerability_path)
     candidate_manifest = load_json(candidate_dir / "candidate_manifest.json")
     commit = subprocess.run(
         ["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True
@@ -80,6 +83,8 @@ def main() -> None:
     }
     dataset_manifest = {
         "sources": candidate_manifest["sources"],
+        "answerability_source": str(answerability_path.relative_to(root)),
+        "answerability_sha256": sha256(answerability_path),
         "candidate_manifest_sha256": sha256(candidate_dir / "candidate_manifest.json"),
         "frozen_historical_data": True,
     }
@@ -92,7 +97,8 @@ def main() -> None:
         (output / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     for name in ("claim_citation_candidates.jsonl", "table_semantic_candidates.jsonl", "answerability_candidates.jsonl"):
-        shutil.copyfile(candidate_dir / name, output / name)
+        source = answerability_path if name == "answerability_candidates.jsonl" else candidate_dir / name
+        shutil.copyfile(source, output / name)
     (output / "predictions.jsonl").write_text(
         json.dumps(
             {"status": "N/A", "reason": "No formal model predictions are scored without verified gold.", "code_commit": commit},

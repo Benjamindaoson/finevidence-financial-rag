@@ -79,11 +79,12 @@
 
 P0-J implemented deterministic scoring contracts for claim-level citation,
 financial table semantics and answerability/abstention. It generated a
-candidate-only queue from frozen project evidence: 50 RealFinance citation
-cases, 24 B4.1 HSBC TableIR regions and 60 answerability candidates. The last
-track is answerable-only and cannot be promoted to a balanced
-`FinancialAnswerability-v1` without real review and partial/unanswerable
-examples.
+candidate-only queues from frozen project evidence: 50 RealFinance citation
+cases, 24 B4.1 HSBC TableIR regions and a new balanced
+`FinancialAnswerabilityCandidate-v1` queue with 20 answerable, 20 partial and
+20 proposed unanswerable scoped-evidence cases. The last two classes are
+explicit candidate constructions and require human review; they are not a
+promoted `FinancialAnswerability-v1` gold set.
 
 The repository still has no human-verified rows. Therefore Citation P/R/F1,
 Claim Support Rate, Unsupported Citation Rate, semantic table accuracy and

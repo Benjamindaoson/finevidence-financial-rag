@@ -29,6 +29,13 @@ This phase creates `FinalRAGEvalCandidate-v0`, not Gold:
 | Table semantics | 24 regions | B4.1 HSBC `TableIR` | candidate-only |
 | Answerability | 60 | frozen `RealFinance-v1` | blocked; 60 answerable, 0 partial, 0 unanswerable |
 
+The review package and its local workbench are documented in
+`docs/FIN_EVIDENCE_HUMAN_VERIFIED_FINAL_RESULTS.md`. A second candidate queue,
+`FinancialAnswerabilityCandidate-v1`, contains 20/20/20 proposed
+answerable/partial/unanswerable cases. Its partial and unanswerable labels are
+scoped evidence-availability constructions and still require human correction
+or confirmation; they are not gold.
+
 The queues contain source hashes, annotation status, zero annotators and an
 explicit review requirement. They do not contain invented labels. A real
 reviewer must promote rows and add claim, page/block/cell, table-semantic or
@@ -120,6 +127,12 @@ is retained as the run that exposed the same-second directory collision before
 the microsecond run-id fix.
 
 The OpenSpec change is `openspec/changes/p0-j-final-rag-evaluation/`.
+
+To open the review workbench locally:
+
+```powershell
+& .venv\Scripts\python.exe -m uvicorn finevidence.api.app:app --host 127.0.0.1 --port 8765
+```
 
 ## 7. Next admissible action
 

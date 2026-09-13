@@ -94,7 +94,12 @@ P0-J 已新增可执行的 claim citation、table semantic 和 answerability
 |---|---|---|
 | Claim-level citation support | PARTIAL | contract + 50 candidate rows；Citation P/R/F1、Claim Support Rate、Page/Block/Cell Accuracy = N/A |
 | Verified financial table semantic gold | PARTIAL | 24 B4.1 regions queued；cell/header/unit/period/entity/merged/footnote = N/A |
-| Financial answerability / abstention | PARTIAL | 60 answerable-only candidates；partial/unanswerable verified split 缺失，全部最终指标 = N/A |
+| Financial answerability / abstention | PARTIAL | 60 legacy answerable candidates + 20/20/20 candidate-only scoped queue；verified split 缺失，全部最终指标 = N/A |
+
+人工审核入口：运行 `python -m uvicorn finevidence.api.app:app --host
+127.0.0.1 --port 8765` 后打开 `/review`。`FinancialAnswerabilityCandidate-v1`
+提供 20/20/20 的候选平衡，但仍是 candidate-only；只有工作台的显式确认才
+能进入正式评分。
 
 ### 1. 数据接入与文档解析
 

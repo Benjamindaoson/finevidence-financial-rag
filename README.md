@@ -167,7 +167,7 @@ The formal report is [reports/b4-1-real-financial-table-recovery.md](reports/b4-
 P0-J adds executable, provenance-aware evaluators for claim-level citation
 support, financial table semantics and answerability/abstention. The first run
 created candidate-only queues from frozen evidence (50 claim cases, 24 HSBC
-TableIR regions and 60 answerability candidates). Because no repository row is
+TableIR regions and a 20/20/20 answerability candidate queue). Because no repository row is
 `human_verified=true`, formal P0-J quality metrics remain `N/A`; the candidates
 are not human gold. See [docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md](docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md),
 [docs/FINAL_RESUME_METRICS.md](docs/FINAL_RESUME_METRICS.md) and

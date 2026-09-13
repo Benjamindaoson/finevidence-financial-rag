@@ -3,6 +3,10 @@
 P0-J created evaluation contracts and candidate queues, but produced no new
 formal quality score because no annotation row is `human_verified=true`.
 
+The review workbench is available at
+`http://127.0.0.1:8765/review` when the local API is running. Its 50 citation,
+24 table and balanced 60-case answerability queues are review inputs only.
+
 1. RealFinance-v1 Hybrid Recall@5: **0.1417** on a fixed 100-case slice
    (50 TAT-QA + 50 FinQA).
 2. RealFinance-v1 Hybrid complete evidence rate: **0.0500**.

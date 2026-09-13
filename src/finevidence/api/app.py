@@ -6,11 +6,13 @@ from fastapi import FastAPI, HTTPException
 
 from .schemas import CitationResponse, CoverageRequest, CoverageResponse, HealthResponse, SearchRequest, SearchResponse, TableQueryRequest, TableQueryResponse, VerifyRequest, VerifyResponse
 from .service import AuthorizationBoundaryError, EvidenceService
+from .review import ReviewStore, create_review_router
 
 
-def create_app(service: EvidenceService | None = None) -> FastAPI:
+def create_app(service: EvidenceService | None = None, review_root: Path | None = None) -> FastAPI:
     api = FastAPI(title="FinEvidence Evidence Backend", version="1.0.0")
     api.state.evidence_service = service or EvidenceService.from_local_hsbc(Path(__file__).resolve().parents[3])
+    api.include_router(create_review_router(ReviewStore(review_root or Path(__file__).resolve().parents[3])))
 
     @api.get("/health", response_model=HealthResponse)
     def health() -> dict:
