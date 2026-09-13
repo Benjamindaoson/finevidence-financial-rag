@@ -1,7 +1,7 @@
 # P0-H — Gold Requirement Validation & HSBC Natural Hard Cases
 
 Date: 2026-09-13  
-Formal code commit: `9588559d6c2c8d72f8fdc3156d3a3372153dbcc6`
+Formal code commit: `95885590e2b5d49fb61a8c448e4df4ae46142004`
 Formal runs: `artifacts/p0_h_runs/20260913T004424445930Z/` and `artifacts/p0_h_runs/20260913T005105288692Z/`
 
 ## 1. Current question
@@ -240,7 +240,7 @@ B3 is `READY` only under the explicitly frozen gate: adjudicated requirements ex
 Both formal runs used:
 
 ```text
-code commit      = 9588559d6c2c8d72f8fdc3156d3a3372153dbcc6
+code commit      = 95885590e2b5d49fb61a8c448e4df4ae46142004
 config           = configs/p0_h_cpu.json
 seed/temperature = deterministic / 0.0
 model revision   = local-cache snapshot 12fd25f77366fa6b3b4b768ec3050bf629380bac

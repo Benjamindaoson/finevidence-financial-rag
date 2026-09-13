@@ -91,7 +91,7 @@ Run it with:
 .\.venv\Scripts\python.exe -m finevidence.eval.p0_h --config configs/p0_h_cpu.json
 ```
 
-The final clean-commit reproducibility pair is `artifacts/p0_h_runs/20260913T004424445930Z/` and `artifacts/p0_h_runs/20260913T005105288692Z/`. Both use commit `9588559d6c2c8d72f8fdc3156d3a3372153dbcc6`, the same local `SmolLM2-135M-Instruct` snapshot hash, and byte-identical formal artifacts. D1 is a real Transformers CPU attempt but remains `N/A / MALFORMED_LLM_JSON` for all 36 cases; no heuristic output is substituted.
+The final clean-commit reproducibility pair is `artifacts/p0_h_runs/20260913T004424445930Z/` and `artifacts/p0_h_runs/20260913T005105288692Z/`. Both use commit `95885590e2b5d49fb61a8c448e4df4ae46142004`, the same local `SmolLM2-135M-Instruct` snapshot hash, and byte-identical formal artifacts. D1 is a real Transformers CPU attempt but remains `N/A / MALFORMED_LLM_JSON` for all 36 cases; no heuristic output is substituted.
 
 On the 36-case slice, D4 reaches requirement precision/recall `0.7222/0.7222`, dependency accuracy `1.0000`, Independent CER `0.3704`, Critical Coverage `0.3750`, and eligible rate `0.1944`. D4 still has Raw Self Coverage `0.5185` versus Independent CER `0.3704`, with Invalid Reuse Rate `0.5000`. The adjudicated evidence coverage ceiling is only Independent CER `0.2593`, so the current lightweight alignment/retrieval stack still misses real evidence.
 
