@@ -1,6 +1,6 @@
 # HSBC natural hard cases
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: candidates MUST come from parsed HSBC blocks
 Each hard case MUST contain a real positive and at least one real high-similarity negative, each linked to document, page, block/table and source hash, with at least one evidence-backed facet conflict.

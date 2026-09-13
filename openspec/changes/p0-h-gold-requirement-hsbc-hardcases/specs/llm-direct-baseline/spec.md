@@ -1,6 +1,6 @@
 # LLM direct baseline
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: D1 MUST be a real local model or explicit N/A
 D1 MUST consume the question and schema instruction without gold evidence or gold requirements. Its config MUST record model, revision/hash, runtime, device, prompt version and generation parameters, or an exact technical N/A reason.

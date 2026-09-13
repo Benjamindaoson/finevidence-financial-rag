@@ -42,8 +42,8 @@ def validate_hsbc_corpus_manifest(manifest: dict) -> None:
             raise ValueError("HSBC page_count must be positive")
 
 
-def download_hsbc_corpus(source_manifest_path: str | Path, output_dir: str | Path) -> dict:
-    source = json.loads(Path(source_manifest_path).read_text(encoding="utf-8"))
+def download_hsbc_corpus(source_manifest_path: str | Path | dict, output_dir: str | Path) -> dict:
+    source = source_manifest_path if isinstance(source_manifest_path, dict) else json.loads(Path(source_manifest_path).read_text(encoding="utf-8"))
     output_root = Path(output_dir)
     output_root.mkdir(parents=True, exist_ok=True)
     documents = []

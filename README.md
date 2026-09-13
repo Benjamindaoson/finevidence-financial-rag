@@ -81,4 +81,22 @@ Run the frozen RealFinance-v1 public slice:
 
 The runner writes `config.json`, `dataset_manifest.json`, `predictions.jsonl`, `metrics.json`, `requirement_graphs.jsonl`, `alignment_results.jsonl`, `per_query_trace.jsonl`, and `failure_cases.jsonl` under ignored `artifacts/p0_g_runs/`. P0-G reports Raw Self Coverage, Independent CER, Critical Coverage, Evidence Reuse Rate, Invalid Reuse Rate, FAER and Gold-vs-Predicted gaps. D1 is `N/A` without a local LLM provider. `RequirementGold-v1` is currently `N/A` with zero manually annotated cases; no inferred labels are promoted to gold.
 
+## P0-H gold requirement validation and HSBC natural hard cases
+
+P0-H tests whether the system can separate “relevant evidence was retrieved” from “every critical evidence requirement is satisfied”. It adds a bounded `RequirementAdjudicated-v1` subset of 36 frozen `RealFinance-v1` cases (10 factual, 4 comparison, 18 numerical, 3 trend, 1 explanation), one-to-one requirement matching, real local D1 inference, and a `HSBCNaturalHard-v1` stress set mined only from parsed blocks in the official FY2025 Annual Report and Pillar 3 PDFs. These are model-assisted adjudicated artifacts, not human/expert gold or HSBC-official benchmarks: both record `human_verified=false`.
+
+Run it with:
+
+```powershell
+.\.venv\Scripts\python.exe -m finevidence.eval.p0_h --config configs/p0_h_cpu.json
+```
+
+The final clean-commit reproducibility pair is `artifacts/p0_h_runs/20260913T001206867843Z/` and `artifacts/p0_h_runs/20260913T001841123742Z/`. Both use commit `e66b181709216bca936f4ceb6abfd1b1c029726c`, the same local `SmolLM2-135M-Instruct` snapshot hash, and byte-identical formal artifacts. D1 is a real Transformers CPU attempt but remains `N/A / MALFORMED_LLM_JSON` for all 36 cases; no heuristic output is substituted.
+
+On the 36-case slice, D4 reaches requirement precision/recall `0.7222/0.7222`, dependency accuracy `1.0000`, Independent CER `0.3704`, Critical Coverage `0.3750`, and eligible rate `0.1944`. D4 still has Raw Self Coverage `0.5185` versus Independent CER `0.3704`, with Invalid Reuse Rate `0.5000`. The adjudicated evidence coverage ceiling is only Independent CER `0.2593`, so the current lightweight alignment/retrieval stack still misses real evidence.
+
+The HSBC corpus contains 372 Annual Report pages and 122 Pillar 3 pages, with SHA-256 and page counts in `artifacts/hsbc_local_sources/hsbc_corpus_manifest.json`; PDFs remain ignored and are not committed. Mining produced 59 valid natural cases from real page blocks. Dense and Hybrid+Generic HN Error are `0.3898`; predicted-facet, adjudicated-facet, and financial-aware deterministic ranking each reach `0.0339` HN Error, `0.9661` Recall@5, and `0.6441` Top-1 positive rate. Ranking Oracle Gap is `0.0000`.
+
+The full report is `reports/p0-h-gold-requirement-hsbc-natural-hardcases.md`. P0-H marks B3 `READY` under the explicit gate, but does not implement visual retrieval. The non-human adjudication, limited facet vocabulary, page-only parser, and template overlap with D4 remain scientific limitations.
+
 The final report is `reports/p0-g-evidence-requirement-graph.md`. This public slice result is not a leaderboard score, and the deterministic alignment is not a neural verifier.

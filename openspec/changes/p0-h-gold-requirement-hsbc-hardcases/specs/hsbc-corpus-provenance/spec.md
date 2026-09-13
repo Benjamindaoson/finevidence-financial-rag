@@ -1,6 +1,6 @@
 # HSBC corpus provenance
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: downloaded HSBC documents MUST be reproducible
 Every local HSBC document MUST record document ID, official URL, download time, SHA-256, file size, page count, document type, reporting period, issuer, language and ignored local artifact path.

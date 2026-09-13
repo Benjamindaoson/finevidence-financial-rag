@@ -24,7 +24,7 @@ def load_manifest(path: str | Path) -> dict:
 
 
 def fetch(manifest: dict, output_root: Path) -> Path:
-    result = download_hsbc_corpus(Path("data/hsbc_public_sources.json"), output_root)
+    result = download_hsbc_corpus(manifest, output_root)
     path = output_root / "hsbc_corpus_manifest.json"
     path.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return path

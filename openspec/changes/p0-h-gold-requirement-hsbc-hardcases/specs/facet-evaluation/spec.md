@@ -1,6 +1,6 @@
 # Facet evaluation
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: predicted and adjudicated facets MUST be separated
 Facet extraction metrics MUST be computed against adjudicated facet labels only where a label exists, and predicted-facet ranking MUST be reported separately from adjudicated-facet ranking.

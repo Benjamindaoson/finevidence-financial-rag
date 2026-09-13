@@ -1,6 +1,6 @@
 # Requirement adjudication
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: model-assisted adjudication is not human gold
 The annotation dataset MUST be named `RequirementAdjudicated-v1`, record `annotation_method=dual_pass_model_assisted_adjudication`, and record `human_verified=false`.

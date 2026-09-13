@@ -1,6 +1,6 @@
 # B3 gate
 
-## Requirements
+## ADDED Requirements
 
 ### Requirement: B3 MUST remain blocked without evidence foundations
 B3 MUST be `READY` only when RequirementAdjudicated-v1 exists, Independent Coverage has been validated, HSBC provenance is fixed, and HSBCNaturalHard-v1 has at least 50 valid cases.
