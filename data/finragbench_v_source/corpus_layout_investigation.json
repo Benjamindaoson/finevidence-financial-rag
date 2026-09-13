@@ -1,0 +1,200 @@
+{
+  "status": "SHARD_LAYOUT_REQUIRES_FULL_SHARD_ACCESS",
+  "dataset": "zhaosuifeng/FinRAGBench-V",
+  "revision": "d0d65255c94e687caa81ac9da7758ed25ff046a5",
+  "qrels": {
+    "path": "data\\finragbench_v_source\\qrels_en.tsv",
+    "row_count": 607,
+    "unique_corpus_ids": 504,
+    "sample": [
+      "0001471265-24-000009_117.png",
+      "0001471265-24-000009_119.png",
+      "0001471265-24-000009_120.png",
+      "0001471265-24-000009_71.png",
+      "0001471265-24-000009_88.png",
+      "0001471265-24-000009_94.png",
+      "0001558370-24-011596_17.png",
+      "0001558370-24-011600_7.png",
+      "0001558370-24-014874_16.png",
+      "0001558370-24-014874_22.png"
+    ]
+  },
+  "api_endpoint": "https://huggingface.co/api/datasets/zhaosuifeng/FinRAGBench-V/tree/d0d65255c94e687caa81ac9da7758ed25ff046a5/corpus/en?recursive=false&expand=false&limit=1000",
+  "corpus_en_entries": [
+    {
+      "type": "file",
+      "oid": "bceb0eed5fef4e196e0de5e99ead2cf218ee36c2",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "ad9b6335106f8fb78b26bc653f99288f594adbd185c04d1b8203a508242b3ceb",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "d1dd200c769550584672ac264f010f56c47e0009b34a685c6fde335973a980ae",
+      "path": "corpus/en/part_0000"
+    },
+    {
+      "type": "file",
+      "oid": "049256745813bad34caaf151789cba656d1f9af8",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "90e31793e8e57bfe5001ef695f693e86a013a44b890e113b0c8e1012b351db06",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "209afee4eb0fd1b0c12b601b43a495e09ee0deb32cb3906b167ab7240ef391bc",
+      "path": "corpus/en/part_0001"
+    },
+    {
+      "type": "file",
+      "oid": "1effd37572c2cd1e8b2959707b2d61a711ac5e90",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "97fecc8448c63ee65d88f79cfb2d92094b0c86d44ec8a25ba71460dc6c6f7915",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "591525692e3830339258c64d607c08b55d171815a577046b432c9cd3b594512a",
+      "path": "corpus/en/part_0002"
+    },
+    {
+      "type": "file",
+      "oid": "082c890050f9d28bc5956f20ebfc847a523203a5",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "974f97736980bc37d4b4d5f1f4f9196008f36747b72641068efe39f8ee9f2c86",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "fff48dac7cea76dc0d37cab7fba25cf33bd1fe7d9b1bfe32d41c2e40701310f0",
+      "path": "corpus/en/part_0003"
+    },
+    {
+      "type": "file",
+      "oid": "ec1e782751af8d476d4f3af44eefc2455315f184",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "72e8b03cc7ada4c62c948e6ff09741b838fa7ec9c0c049d5718387d80d151132",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "747197fab78d50e93b7a2f1f8b8c24d91e1eed71ff81c6c4ad973f56f85790d5",
+      "path": "corpus/en/part_0004"
+    },
+    {
+      "type": "file",
+      "oid": "5518841639268ae3ad845b488721481feb91ca87",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "c0ce0503161192279b72665dadc845f1c51a624fac3afb9e94eb2545e61c92b7",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "e6bfe4699f8e3560b09d5f33e32185f123c81141cf553a1edb124118f83287b5",
+      "path": "corpus/en/part_0005"
+    },
+    {
+      "type": "file",
+      "oid": "a15cf8eb2f131213d86fbcc54b475ec98e04e673",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "42a9ac59bb3622a35a3ef3b1e1f1bb96113cd0f2f103430bb75fa1d54aaf2e40",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "89461cb837249f19c07cca821900e7eedccac05b9e2192aa1003b65952ea6441",
+      "path": "corpus/en/part_0006"
+    },
+    {
+      "type": "file",
+      "oid": "fbc1fb27aa6b6fb1f3b5b4ddac478d84186fe2ec",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "396778d7e5198f7e2ecb07b3748a343f803ae06572951545ae460255147756cb",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "19fed33e88df87cd964d12cfdf87d0c80ebda4a632d91c371a6d1ca215af0de6",
+      "path": "corpus/en/part_0007"
+    },
+    {
+      "type": "file",
+      "oid": "e7a0d6a8994d3262ede1560d3d17ddcca966f18c",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "0f809f4e51c5472269cbeac04bb93a9b0a5965faf38c1832ef4f57246dbb9f49",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "a251ea3581ea971716bf95c85a8ac8a36fa6673ec54df887e434474cc6a01785",
+      "path": "corpus/en/part_0008"
+    },
+    {
+      "type": "file",
+      "oid": "46d0718323fdcb188e30faea544141d1d7e36537",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "e6d80c907a9f6dd8443632a2a6345c400593527cfbbb1c56ff55c970aa559d00",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "a39d1910f3a3c1a58696f1531c72c86f26bd392dcb3ac8f7ba4bdc255eaf202a",
+      "path": "corpus/en/part_0009"
+    },
+    {
+      "type": "file",
+      "oid": "b5af45e6a83ea744c22e594165274f706fd083c4",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "954de9daba471b9431eaae5c5ab6531b61dd0d1050df3af84901ff6db06fe03b",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "d44c8815469914d88a75a8b6750b0986293ecd811ca4ad18907227689202ec07",
+      "path": "corpus/en/part_0010"
+    },
+    {
+      "type": "file",
+      "oid": "8fc83cb8ffcfc0a60732c26c3bf4efe99b3adc6e",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "7a546b4bb65985aa8b770ac2894e22991188fc6fb7a511aeaf1f2ea3e6c2c98e",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "2836f38d4a54fa0e353666b85960150445d1d0db8441b18c7035c05e629bfdb9",
+      "path": "corpus/en/part_0011"
+    },
+    {
+      "type": "file",
+      "oid": "f61f814a7b4bfaf7ea851e42e607b901913908a1",
+      "size": 5368709120,
+      "lfs": {
+        "oid": "17bb61e49e7eaa8b2b189b1de43ede031964b4bfd4139df4e0d8c683e3c0a278",
+        "size": 5368709120,
+        "pointerSize": 135
+      },
+      "xetHash": "cba2b684d741b43bce135c296862aed13b395d400130577b9abfc6c4a1e8bdcb",
+      "path": "corpus/en/part_0012"
+    },
+    {
+      "type": "file",
+      "oid": "475ecc2c6183a09ada1abb8e7a65702a61b54210",
+      "size": 2825689504,
+      "lfs": {
+        "oid": "e03326bf5f74d65eb0b16272ba9a9feca0d07f470fe570914be1f5c7fed608d4",
+        "size": 2825689504,
+        "pointerSize": 135
+      },
+      "xetHash": "2472bee23d5f15ed098a2d672209c259aadf0d840354a54bb6d7c54bd6a745aa",
+      "path": "corpus/en/part_0013"
+    }
+  ],
+  "finding": "The pinned corpus/en tree exposes only 5 GiB compressed shard files (part_0000..part_0013), not individually addressable page-image files. A range probe is possible but cannot extract arbitrary gzip members without fetching the containing shard. This investigation does not change the frozen slice or download any shard.",
+  "range_probe": {
+    "status": 206,
+    "content_range": "bytes 0-511/5368709120",
+    "content_type": "application/octet-stream",
+    "first_bytes_hex": "1F-8B-08-00-00-00-00-00-00-03"
+  }
+}

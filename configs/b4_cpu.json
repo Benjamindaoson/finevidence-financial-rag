@@ -1,0 +1,11 @@
+{
+  "artifact_root": "artifacts/b4_runs",
+  "render_manifest": "artifacts/hsbc_page_images/page_render_manifest.json",
+  "hsbc_evidence": "artifacts/hsbc_local_sources/hsbc_evidence.jsonl",
+  "stress_cases": "benchmarks/hsbc_visual_stress_v1/questions.jsonl",
+  "real_finance_questions": "benchmarks/real_finance_v1/questions.jsonl",
+  "tatqa_source": "../research/repos/tat-qa/dataset_raw/tatqa_dataset_dev.json",
+  "seed": 0,
+  "visual_model": "openai-clip-RN50",
+  "device": "cpu"
+}
