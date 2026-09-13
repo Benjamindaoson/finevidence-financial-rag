@@ -1,0 +1,12 @@
+{
+  "artifact_root": "artifacts/b4_1_runs",
+  "render_manifest": "artifacts/hsbc_page_images/page_render_manifest.json",
+  "hsbc_evidence": "artifacts/hsbc_local_sources/hsbc_evidence.jsonl",
+  "stress_cases": "benchmarks/hsbc_visual_stress_v1/questions.jsonl",
+  "table_pdf": "artifacts/hsbc_local_sources/01-hsbc-fy2025-annual-report.pdf",
+  "table_document_id": "hsbc-fy2025-annual-report",
+  "table_page_limit": 26,
+  "seed": 0,
+  "visual_model": "openai-clip-RN50",
+  "device": "cpu"
+}

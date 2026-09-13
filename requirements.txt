@@ -8,6 +8,7 @@ huggingface-hub==0.34.4
 hf-xet==1.6.0
 safetensors==0.6.2
 pypdf==6.0.0
+pdfplumber==0.11.10
 Pillow==11.3.0
 torchvision==0.23.0
 openai-clip==1.0.1

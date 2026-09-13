@@ -16,4 +16,5 @@ artifacts/hf_cache/
 artifacts/models/
 artifacts/b3_runs/
 artifacts/b4_runs/
+artifacts/b4_1_runs/
 artifacts/b3_2_runs/
