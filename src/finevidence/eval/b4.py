@@ -220,7 +220,7 @@ def write_run(result: dict, artifact_root: Path) -> Path:
     while run.exists():
         suffix += 1; run = artifact_root / f"{stamp}-{suffix}"
     run.mkdir()
-    for name, value in (("config.json", result["config"]), ("model_manifest.json", result["visual_model"]), ("dataset_manifest.json", result["dataset"]), ("metrics.json", result["metrics"]), ("latency_metrics.json", result["latency_metrics"]), ("per_failure_type_metrics.json", result["metrics"]["failure_counts"]), ("public_corpus.json", result["public_corpus"])):
+    for name, value in (("config.json", result["config"]), ("model_manifest.json", result["visual_model"]), ("dataset_manifest.json", result["dataset"]), ("metrics.json", result["metrics"]), ("latency_metrics.json", result["latency_metrics"]), ("structure_fidelity.json", result["metrics"]["table_ir"]), ("per_failure_type_metrics.json", result["metrics"]["failure_counts"]), ("public_corpus.json", result["public_corpus"])):
         (run / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     table_records = result["metrics"]["table_ir"].get("records", [])
     (run / "table_ir.jsonl").write_text("".join(json.dumps(item, ensure_ascii=False) + "\n" for item in table_records), encoding="utf-8")
