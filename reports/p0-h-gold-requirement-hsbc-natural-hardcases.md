@@ -1,8 +1,8 @@
 # P0-H — Gold Requirement Validation & HSBC Natural Hard Cases
 
 Date: 2026-09-13  
-Formal code commit: `e66b181709216bca936f4ceb6abfd1b1c029726c`  
-Formal runs: `artifacts/p0_h_runs/20260913T001206867843Z/` and `artifacts/p0_h_runs/20260913T001841123742Z/`
+Formal code commit: `9588559d6c2c8d72f8fdc3156d3a3372153dbcc6`
+Formal runs: `artifacts/p0_h_runs/20260913T004424445930Z/` and `artifacts/p0_h_runs/20260913T005105288692Z/`
 
 ## 1. Current question
 
@@ -151,7 +151,7 @@ The minimal parser creates 492 page-level text Evidence IR records with document
 
 ## 7. HSBCNaturalHard-v1
 
-`HSBCNaturalHard-v1` contains 59 valid project-created cases mined from real parsed HSBC page blocks. Each case has one positive and at least one high lexical-overlap candidate whose real document evidence conflicts on a financial facet or source. Candidates retain evidence ID, source hash, document, page/block provenance. Verification is model-assisted adjudication with `human_verified=false`; this is not an HSBC-official benchmark.
+`HSBCNaturalHard-v1` contains 59 valid project-created cases mined from real parsed HSBC page blocks. Each case has one positive and at least one high lexical-overlap candidate whose real document evidence conflicts on a financial facet or source. Candidates retain evidence ID, source hash, document, page/block provenance. Each kept case records `verification_pass_a=PASS`, `verification_pass_b=PASS`, and `adjudication_status=KEEP`; these are deterministic/model-assisted checks, not human review. The dataset records `human_verified=false` and is not an HSBC-official benchmark.
 
 Category distribution:
 
@@ -240,7 +240,7 @@ B3 is `READY` only under the explicitly frozen gate: adjudicated requirements ex
 Both formal runs used:
 
 ```text
-code commit      = e66b181709216bca936f4ceb6abfd1b1c029726c
+code commit      = 9588559d6c2c8d72f8fdc3156d3a3372153dbcc6
 config           = configs/p0_h_cpu.json
 seed/temperature = deterministic / 0.0
 model revision   = local-cache snapshot 12fd25f77366fa6b3b4b768ec3050bf629380bac
