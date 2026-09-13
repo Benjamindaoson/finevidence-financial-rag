@@ -104,11 +104,20 @@ Candidate queues and the blocked run are under:
 ```text
 artifacts/final_rag_eval/candidates/
 artifacts/final_rag_eval/run_20260913T210959Z/
+artifacts/final_rag_eval/run_20260913T211940Z/
+artifacts/final_rag_eval/run_20260913T211959198877Z/
+artifacts/final_rag_eval/run_20260913T211959607027Z/
 ```
 
-The run contains `config.json`, `dataset_manifest.json`,
+Each valid run contains `config.json`, `dataset_manifest.json`,
 `annotation_manifest.json`, candidate JSONL files, `predictions.jsonl`,
 `metrics.json`, `failure_cases.jsonl` and `run_manifest.json`.
+
+The two post-fix runs at `211959198877Z` and `211959607027Z` used the same
+code commit and produced byte-identical metrics, manifests, candidate queues,
+blocked rows and placeholder prediction records. The earlier `211940Z` run
+is retained as the run that exposed the same-second directory collision before
+the microsecond run-id fix.
 
 The OpenSpec change is `openspec/changes/p0-j-final-rag-evaluation/`.
 

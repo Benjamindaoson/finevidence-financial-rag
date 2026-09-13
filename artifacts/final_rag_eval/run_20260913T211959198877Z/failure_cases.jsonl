@@ -1,0 +1,3 @@
+{"reason": "HUMAN_VERIFICATION_REQUIRED", "track": "claim_citation", "type": "EVALUATION_BLOCKER"}
+{"reason": "HUMAN_VERIFICATION_REQUIRED", "track": "table_semantics", "type": "EVALUATION_BLOCKER"}
+{"reason": "MISSING_PARTIAL_UNANSWERABLE_VERIFIED_SET", "track": "answerability", "type": "EVALUATION_BLOCKER"}
