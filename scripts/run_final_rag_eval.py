@@ -39,7 +39,7 @@ def main() -> None:
     args = parser.parse_args()
     root = args.project_root.resolve()
     candidate_dir = (args.candidate_dir or root / "artifacts" / "final_rag_eval" / "candidates").resolve()
-    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     output = (args.output or root / "artifacts" / "final_rag_eval" / f"run_{run_id}").resolve()
     output.mkdir(parents=True, exist_ok=False)
 
