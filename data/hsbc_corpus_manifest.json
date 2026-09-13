@@ -1,0 +1,32 @@
+{
+  "source_page": "https://www.hsbc.com/investors/results-and-announcements/annual-report",
+  "generated_at": "2026-09-12T22:56:12.815914+00:00",
+  "documents": [
+    {
+      "document_id": "hsbc-fy2025-annual-report",
+      "official_source_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-annual-report-and-accounts-2025.pdf",
+      "downloaded_at": "2026-09-12T22:56:08.393748+00:00",
+      "sha256": "94aab2f5c83d1060ee95d344f1915833869fe4502dc635e4ab9ca84f496ee94b",
+      "file_size": 10110145,
+      "page_count": 372,
+      "document_type": "Annual Report",
+      "reporting_period": "FY2025",
+      "issuer": "HSBC Holdings plc",
+      "language": "en",
+      "local_artifact_path": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_local_sources\\01-hsbc-fy2025-annual-report.pdf"
+    },
+    {
+      "document_id": "hsbc-fy2025-pillar-3",
+      "official_source_url": "https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/260225-pillar-3-disclosures-at-31-december-2025.pdf",
+      "downloaded_at": "2026-09-12T22:56:12.802839+00:00",
+      "sha256": "eb64c8f0fcd32648512979886bceddba7128558761c07948b50f6ecfa83a32f7",
+      "file_size": 985845,
+      "page_count": 122,
+      "document_type": "Pillar 3",
+      "reporting_period": "FY2025",
+      "issuer": "HSBC Holdings plc",
+      "language": "en",
+      "local_artifact_path": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_local_sources\\02-hsbc-fy2025-pillar-3.pdf"
+    }
+  ]
+}
