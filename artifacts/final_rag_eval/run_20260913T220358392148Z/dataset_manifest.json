@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "questions_sha256": "e4be1e1495131259a3ae0a77fbd787bf963efbf6faa169af0fb9a373df1c4bcf",
+    "table_ir_sha256": "050edd1fd47e5ada8f7ed50bb9efc7bce8aa8bda23568ccd9ad53cfa6ff4cae1"
+  },
+  "citation_source": "artifacts\\final_rag_eval\\claim_citation_candidates_v1.jsonl",
+  "citation_sha256": "a5dbb58c9dd515c412cf092e05331d7406681c7021ae90d5c20102eaf124d415",
+  "answerability_source": "artifacts\\final_rag_eval\\answerability_candidates_v1.jsonl",
+  "answerability_sha256": "75242956fc2bf900c35d6112d283af2b4d8a403946b0c435de4b7e081cfd2337",
+  "candidate_manifest_sha256": "3437ac8f6a0b3b7e5e46ac36e42dbcd6e47fc9c88e4fb5e590d1e560718900f9",
+  "frozen_historical_data": true
+}

@@ -124,6 +124,8 @@ artifacts/final_rag_eval/run_20260913T214749913820Z/
 artifacts/final_rag_eval/run_20260913T214750236965Z/
 artifacts/final_rag_eval/run_20260913T215636213814Z/
 artifacts/final_rag_eval/run_20260913T215636539703Z/
+artifacts/final_rag_eval/run_20260913T220437093011Z/
+artifacts/final_rag_eval/run_20260913T220437382694Z/
 ```
 
 Each valid run contains `config.json`, `dataset_manifest.json`,
@@ -145,6 +147,11 @@ The final two runs at `215636213814Z` and `215636539703Z` used commit
 `0dcb8c9350cb10ca0b0602f41a7c8d64a092eb8b` and were byte-identical for the
 same fields. Their citation queue also includes the real P0-D initial Top-K@5
 prediction IDs.
+
+The final empty-review-queue runs at `220437093011Z` and `220437382694Z` used
+commit `fab011641df98db0cd7966040d08a9a7562881d0`. Both reported zero verified
+rows and the same blocked `N/A` metrics; all scored fields remain blocked as
+intended.
 
 The OpenSpec change is `openspec/changes/p0-j-final-rag-evaluation/`.
 
