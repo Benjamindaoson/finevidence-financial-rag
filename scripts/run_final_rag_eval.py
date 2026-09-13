@@ -32,6 +32,8 @@ def sha256(path: Path) -> str:
 
 
 def latest_verified(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
     latest: dict[str, dict[str, Any]] = {}
     for row in load_jsonl(path):
         latest[str(row["case_id"])] = row
@@ -48,7 +50,6 @@ def main() -> None:
     candidate_dir = (args.candidate_dir or root / "artifacts" / "final_rag_eval" / "candidates").resolve()
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     output = (args.output or root / "artifacts" / "final_rag_eval" / f"run_{run_id}").resolve()
-    output.mkdir(parents=True, exist_ok=False)
 
     citation_path = root / "artifacts" / "final_rag_eval" / "claim_citation_candidates_v1.jsonl"
     if not citation_path.exists():
@@ -116,6 +117,7 @@ def main() -> None:
         "historical_metrics_unchanged": True,
         "verified_counts": {"claim_citation": len(citation_annotations), "table_semantics": len(table_annotations), "answerability": len(answerability_annotations)},
     }
+    output.mkdir(parents=True, exist_ok=False)
     config = {
         "run_id": run_id,
         "code_commit": commit,
