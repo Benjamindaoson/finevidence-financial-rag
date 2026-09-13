@@ -1,8 +1,8 @@
 # B4 — Structure-Preserving Evidence IR & Failure-Aware Escalation
 
-Date: 2026-09-14  
-Status: **COMPLETE for the experimental B4 scope**  
-Code commit: `8bee650`  
+Date: 2026-09-14
+Status: **COMPLETE for the experimental B4 scope**
+Code commit: `251b7a895c03a34e182a97058450ae436d21aab6`
 Historical boundary: P0-H, B3.1 and B3.2 were not re-run or rewritten. B3 remains `PARTIAL` because the frozen FinRAGBench-V page-image evaluation is still externally blocked.
 
 ## 1. Research question
@@ -99,15 +99,15 @@ Measured on CPU with the existing CLIP RN50 adapter. Offline visual indexing is 
 
 | Component | P50 ms | P95 ms |
 | --- | ---: | ---: |
-| Text retrieval | 191.40 | 253.82 |
+| Text retrieval | 113.73 | 190.84 |
 | Structured-table retrieval | N/A | No HSBC Table IR |
-| Adjacent-page retrieval | 179.90 | 211.08 |
-| Visual retrieval | 94.24 | 271.79 |
-| Routing | 0.0008 | 0.0011 |
-| Evidence qualification | 5.53 | 9.70 |
-| End-to-end | 516.79 | 977.33 |
+| Adjacent-page retrieval | 105.88 | 129.11 |
+| Visual retrieval | 54.48 | 117.01 |
+| Routing | 0.0005 | 0.0007 |
+| Evidence qualification | 3.48 | 6.00 |
+| End-to-end | 310.50 | 584.74 |
 
-Offline visual indexing took 6,959.86 ms for 78 candidate pages in the formal second run. Visual invocation was 100% for coverage→vision/always-vision, 50% for E0 and E1. No monetary cost estimate is claimed because this is local CPU inference and no token billing exists.
+Offline visual indexing took 3,880.69 ms for 78 candidate pages in the formal second run. Visual invocation was 100% for coverage→vision/always-vision, 50% for E0 and E1. No monetary cost estimate is claimed because this is local CPU inference and no token billing exists.
 
 ## 7. FinRAGBench-V public-corpus investigation
 
@@ -127,10 +127,10 @@ Therefore FinRAGBench-V public page-image evaluation remains `N/A` and is still 
 
 Formal runs:
 
-- `artifacts/b4_runs/20260914T003834/`
-- `artifacts/b4_runs/20260914T003956/`
+- `artifacts/b4_runs/20260914T004659/`
+- `artifacts/b4_runs/20260914T004750/`
 
-Both use commit `8bee650`, the same config, frozen HSBC evidence/render manifests, CPU OpenAI CLIP RN50, and 60 stress cases. `metrics.json` and `failure_cases.jsonl` are semantically identical across the pair. The per-query trace differs only in measured timing fields; therefore exact byte identity is not claimed for timing-bearing traces. Both runs report the same Table IR metrics, route metrics, rankings, and failure rows.
+Both use commit `251b7a895c03a34e182a97058450ae436d21aab6`, the same config, frozen HSBC evidence/render manifests, CPU OpenAI CLIP RN50, and 60 stress cases. `metrics.json` and `failure_cases.jsonl` are semantically identical across the pair. The per-query trace differs only in measured timing fields; therefore exact byte identity is not claimed for timing-bearing traces. Both runs report the same Table IR metrics, route metrics, rankings, and failure rows.
 
 Verification performed after implementation:
 
