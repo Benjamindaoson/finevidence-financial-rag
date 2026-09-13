@@ -111,4 +111,12 @@ B3 adds deterministic 72-DPI page rendering, image-backed Evidence IR, a real Op
 & .venv\Scripts\python.exe -m finevidence.eval.b3 --config configs/b3_cpu.json
 ```
 
-The final B3 status is `PARTIAL`: the real CLIP/HSBC track and two reproducibility runs are complete, but the FinRAGBench-V page-image archive timed out at Hugging Face. Its 100-query metadata/qrels slice is fixed as `FinRAGBench-V-Slice-v1`, while page-image metrics remain `N/A`. Read `reports/b3-multimodal-evidence-retrieval.md` for the exact results and rejected claims.
+T1 is intentionally named `T1 Parsed Page Text`: it is not a verified structured-table IR. Cell identity, row/column relations, multi-level headers, unit edges, footnote edges, and table geometry remain `N/A`.
+
+## B3.1 public benchmark and evaluation closure
+
+B3.1 keeps `HSBCVisualStress-v1` unchanged and adds `HSBCMultimodalRouting-v1`, a balanced 30-case real-page routing workload with 10 `TEXT_SUFFICIENT`, 10 `TABLE_PARSED_SUFFICIENT`, and 10 `VISUAL_NEEDED` cases. Gold modality is evaluation-only; the router receives observed question/coverage signals.
+
+Recovery is now reported at `@1`, `@5`, and `@10`. On the unchanged 60-case HSBC stress track, M1 recovery is `0.0167`, `0.0167`, and `0.0500`, with zero regression at all three cutoffs. On the 30-case routing track, visual invocation is `0.7667`, routing precision is `0.4348`, recall is `1.0000`, and unnecessary invocation is `0.6500`; this workload does not prove cost saving.
+
+The official Hugging Face client was upgraded to `huggingface_hub==0.34.4` plus `hf_xet==1.6.0`, and the existing 100-query FinRAGBench-V slice was pinned to revision `d0d65255c94e687caa81ac9da7758ed25ff046a5`. The 2.38GB PDF archive still produced a zero-byte Xet/HTTP transfer under the local cache configuration; traceback and cache evidence are retained under `data/finragbench_v_source/`. Therefore public page-image metrics remain `N/A` and **B3 remains `PARTIAL`**. The final report is `reports/b3-1-public-benchmark-evaluation-closure.md`.

@@ -5,6 +5,6 @@
 - [x] Add recovery@1/@5/@10 and isolate original stress metrics from routing metrics.
 - [x] Build the real-page HSBCMultimodalRouting-v1 set with balanced route classes.
 - [x] Instrument query components and offline indexing separately.
-- [ ] Run the public page-image slice if the revision-pinned archive becomes available.
-- [ ] Run two post-change reproducibility runs and update the B3.1 report.
-- [ ] Run project verification and leave the repository clean.
+- [x] Attempt the public page-image slice with the revision-pinned archive; retain the official downloader blocker and keep public metrics N/A when transport fails.
+- [x] Run two post-change reproducibility runs and update the B3.1 report.
+- [x] Run project verification; repository cleanliness is checked after documentation commit.

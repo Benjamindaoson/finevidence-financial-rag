@@ -1,6 +1,8 @@
-# B3 — Multimodal Evidence Retrieval & Visual Grounding
+# B3 — Multimodal Evidence Retrieval & Visual Grounding (pre-B3.1 historical record)
 
-Status: `PARTIAL`
+Status: `PARTIAL` (superseded by `reports/b3-1-public-benchmark-evaluation-closure.md`)
+
+This file records the first B3 run before the B3.1 evaluation closure. Current names, recovery cutoffs, mixed routing results, and component latency are in the B3.1 report; do not use the historical unlabelled recovery statements below as the current metric contract.
 
 The executable HSBC visual track is complete. The public FinRAGBench-V page-image track is not complete because its required 2.378GB `pdf_en.tar.gz` archive timed out from Hugging Face after three retries. Queries and qrels are fixed as `FinRAGBench-V-Slice-v1`; no page-image score is claimed for that slice.
 
@@ -43,7 +45,7 @@ The corpus is the official FY2025 HSBC Annual Report and FY2025 Pillar 3 Disclos
 ## 4. Retrieval systems
 
 - `T0 Text Only`: HybridRetriever over pypdf page text.
-- `T1 Structured Text/Table`: the existing lexical/dense page-text adapter with a separate configuration; the current CPU slice does not expose verified cell structure.
+- `T1 Parsed Page Text`: the existing lexical/dense page-text adapter with a separate configuration; verified structured Table IR remains `N/A`.
 - `V0 Visual Only`: CLIP text-to-image ranking over candidate page images.
 - `M0 Fusion RRF`: rank-based fusion.
 - `M0 Fusion Weighted`: min-max-normalized modality scores followed by weighted fusion.
@@ -58,7 +60,7 @@ Final run results on 60 HSBCVisualStress-v1 cases:
 | System | Page R@1 | Page R@5 | Page R@10 | MRR | nDCG@10 |
 |---|---:|---:|---:|---:|---:|
 | T0 Text Only | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| T1 Structured Text/Table | 0.0000 | 0.0000 | 0.0333 | 0.0044 | 0.0108 |
+| T1 Parsed Page Text | 0.0000 | 0.0000 | 0.0333 | 0.0044 | 0.0108 |
 | V0 Visual Only | 0.0167 | 0.0500 | 0.1000 | 0.0303 | 0.0459 |
 | M0 Fusion RRF | 0.0167 | 0.0167 | 0.0500 | 0.0209 | 0.0272 |
 | M0 Fusion Weighted | 0.0167 | 0.0167 | 0.0500 | 0.0200 | 0.0263 |
@@ -70,10 +72,10 @@ The low absolute recall is retained. This stress construction intentionally asks
 
 | Metric | Result |
 |---|---:|
-| Text-only failure recovery rate | 0.0500 (3/60 text failures recovered by M1) |
-| Visual critical-requirement recovery rate | 0.0500 |
-| Multimodal regression rate | 0.0000 |
-| Net recovery | +3 cases |
+| Text Failure Recovery@10 | 0.0500 (3/60 text failures recovered by M1) |
+| Visual Critical Requirement Recovery@10 | 0.0500 |
+| Multimodal Regression@10 | 0.0000 |
+| Net Recovery@10 | +3 cases |
 | Visual routing precision | 0.5000 |
 | Visual routing recall | 1.0000 |
 | Visual invocation rate | 1.0000 |
@@ -110,10 +112,10 @@ CPU P50/P95 query latency in the final run:
 | System | P50 ms | P95 ms |
 |---|---:|---:|
 | T0 Text Only | 210.5 | 237.5 |
-| T1 Structured Text/Table | 211.9 | 246.1 |
+| T1 Parsed Page Text | 211.9 | 246.1 |
 | V0 Visual Only | 73.1 | 86.2 |
 
-Fusion and routing composition time was not separately instrumented in the first B3 runner and is therefore `N/A`, not zero. Model indexing time is excluded from query latency. GPU memory/seconds are `N/A` on a CUDA-free host; `peak_gpu_memory_mb=0.0` records the observed CPU path.
+Fusion and routing composition time was not separately instrumented in this pre-B3.1 historical run and is therefore `N/A`, not zero. See the B3.1 report for the corrected component-level latency run. Model indexing time is excluded from query latency. GPU memory/seconds are `N/A` on a CUDA-free host; `peak_gpu_memory_mb=0.0` records the observed CPU path.
 
 ## 11. Representative badcases
 
