@@ -86,6 +86,8 @@ The invocation result is an important negative finding: every case initially lac
 
 Page precision/recall/F1 are computed per query in `grounding_predictions.jsonl`; aggregate page F1 is equivalent to page hit on this one-positive-page design. Bbox IoU and region precision/recall are `N/A: no bbox gold in HSBCVisualStress-v1`. Page hit is not reported as bbox grounding.
 
+For M1 top-5 citations, macro page precision/recall/F1 are `0.0033 / 0.0167 / 0.0056`. These values are intentionally low and consistent with the stress-set retrieval result.
+
 ## 8. Structure fidelity
 
 The regression probe exists in `src/finevidence/eval/structure.py`. On the current pypdf page parser, cell alignment, multi-level header relations, footnote edges, cross-page continuity, and multi-column reading order are explicitly `N/A`; the system does not claim that page text preserved them. The executable result therefore supports only this limited conclusion: page images are available for a second retrieval channel, while the current structured IR is not yet a verified table-structure representation.
