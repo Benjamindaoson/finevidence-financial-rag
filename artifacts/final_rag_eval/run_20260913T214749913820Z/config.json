@@ -1,0 +1,7 @@
+{
+  "run_id": "20260913T214749913820Z",
+  "code_commit": "143f52074457f7bf0b660b15e68bd5ca22d336b9",
+  "status": "BLOCKED_FOR_HUMAN_VERIFICATION",
+  "human_verification_required": true,
+  "scoring": "N/A until human_verified=true rows exist"
+}

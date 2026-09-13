@@ -114,6 +114,8 @@ artifacts/final_rag_eval/run_20260913T210959Z/
 artifacts/final_rag_eval/run_20260913T211940Z/
 artifacts/final_rag_eval/run_20260913T211959198877Z/
 artifacts/final_rag_eval/run_20260913T211959607027Z/
+artifacts/final_rag_eval/run_20260913T214749913820Z/
+artifacts/final_rag_eval/run_20260913T214750236965Z/
 ```
 
 Each valid run contains `config.json`, `dataset_manifest.json`,
@@ -125,6 +127,11 @@ code commit and produced byte-identical metrics, manifests, candidate queues,
 blocked rows and placeholder prediction records. The earlier `211940Z` run
 is retained as the run that exposed the same-second directory collision before
 the microsecond run-id fix.
+
+The two post-workbench runs at `214749913820Z` and `214750236965Z` used commit
+`143f52074457f7bf0b660b15e68bd5ca22d336b9` and were also byte-identical for
+metrics, manifests, all three queues, blocked rows and placeholder predictions.
+They include the balanced 20/20/20 answerability candidate queue.
 
 The OpenSpec change is `openspec/changes/p0-j-final-rag-evaluation/`.
 
