@@ -100,3 +100,15 @@ The HSBC corpus contains 372 Annual Report pages and 122 Pillar 3 pages, with SH
 The full report is `reports/p0-h-gold-requirement-hsbc-natural-hardcases.md`. P0-H marks B3 `READY` under the explicit gate, but does not implement visual retrieval. The non-human adjudication, limited facet vocabulary, page-only parser, and template overlap with D4 remain scientific limitations.
 
 The final report is `reports/p0-g-evidence-requirement-graph.md`. This public slice result is not a leaderboard score, and the deterministic alignment is not a neural verifier.
+
+## B3 multimodal evidence retrieval
+
+B3 adds deterministic 72-DPI page rendering, image-backed Evidence IR, a real OpenAI CLIP RN50 image/text retrieval adapter, normalized RRF/weighted fusion, coverage-aware routing, page citation metrics, and reproducible latency/recovery traces. The executable track is `HSBCVisualStress-v1`, a 60-case project-created stress set mined from the official FY2025 Annual Report and Pillar 3 pages; it is not an HSBC-official benchmark and has `human_verified=false`.
+
+```powershell
+& .venv\Scripts\python.exe scripts\render_pdf_pages.py --dpi 72
+& .venv\Scripts\python.exe scripts\build_hsbc_visual_stress.py --limit 60
+& .venv\Scripts\python.exe -m finevidence.eval.b3 --config configs/b3_cpu.json
+```
+
+The final B3 status is `PARTIAL`: the real CLIP/HSBC track and two reproducibility runs are complete, but the FinRAGBench-V page-image archive timed out at Hugging Face. Its 100-query metadata/qrels slice is fixed as `FinRAGBench-V-Slice-v1`, while page-image metrics remain `N/A`. Read `reports/b3-multimodal-evidence-retrieval.md` for the exact results and rejected claims.
