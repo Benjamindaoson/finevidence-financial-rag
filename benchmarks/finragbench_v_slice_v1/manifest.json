@@ -2,6 +2,7 @@
   "dataset_name": "FinRAGBench-V-Slice-v1",
   "source_dataset": "zhaosuifeng/FinRAGBench-V",
   "source_url": "https://huggingface.co/datasets/zhaosuifeng/FinRAGBench-V",
+  "dataset_revision": "d0d65255c94e687caa81ac9da7758ed25ff046a5",
   "license": "repository LICENSE; dataset terms must be checked before redistribution",
   "source_files": {
     "queries_en.json": "e748958ed09450066cd06cf8dc5ee324c8c66380e3169f235e3f66faaa5277c6",
@@ -11,5 +12,5 @@
   "queries_sha256": "5958a2e08f6cffe9327163cc558cd4e70052cfb9199d7f805459b33fa5374a8a",
   "pdf_status": "UNAVAILABLE_HF_ARCHIVE_TIMEOUT",
   "pdf_required": "pdfs_for_QA/pdf_en.tar.gz",
-  "note": "Metadata and qrels are fixed; page-image retrieval metrics are N/A because the required multi-gigabyte archive could not be obtained in this run."
+  "note": "Metadata and qrels are fixed; page-image metrics remain N/A until the revision-pinned PDF archive is obtained."
 }

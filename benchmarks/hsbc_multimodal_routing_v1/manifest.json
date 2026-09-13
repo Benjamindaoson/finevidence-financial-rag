@@ -1,0 +1,16 @@
+{
+  "dataset_name": "HSBCMultimodalRouting-v1",
+  "description": "project-created mixed routing evaluation mined from real HSBC disclosure pages",
+  "case_count": 30,
+  "class_counts": {
+    "TEXT_SUFFICIENT": 10,
+    "TABLE_PARSED_SUFFICIENT": 10,
+    "VISUAL_NEEDED": 10
+  },
+  "cases_sha256": "6a2f135a04c112dab29163de44759951f66a17b04650656d88de697506701ac0",
+  "source_evidence": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_local_sources\\hsbc_evidence.jsonl",
+  "source_render_manifest": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_page_images\\page_render_manifest.json",
+  "human_verified": false,
+  "verification_method": "automatic_candidate_mining_plus_dual_model_assisted_adjudication",
+  "gold_modality_is_eval_only": true
+}

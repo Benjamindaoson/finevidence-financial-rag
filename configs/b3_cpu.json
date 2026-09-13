@@ -3,6 +3,7 @@
   "render_manifest": "artifacts/hsbc_page_images/page_render_manifest.json",
   "hsbc_evidence": "artifacts/hsbc_local_sources/hsbc_evidence.jsonl",
   "stress_cases": "benchmarks/hsbc_visual_stress_v1/questions.jsonl",
+  "routing_cases": "benchmarks/hsbc_multimodal_routing_v1/questions.jsonl",
   "dpi": 72,
   "seed": 0,
   "fusion": ["rrf", "weighted"],

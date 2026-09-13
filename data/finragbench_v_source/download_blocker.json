@@ -1,0 +1,15 @@
+{
+  "dataset": "zhaosuifeng/FinRAGBench-V",
+  "revision": "d0d65255c94e687caa81ac9da7758ed25ff046a5",
+  "filename": "pdfs_for_QA/pdf_en.tar.gz",
+  "started_at": "2026-09-13T05:02:53.482314+00:00",
+  "cache_dir": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hf_cache",
+  "output_dir": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\finragbench_v_source\\downloads",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "status": "BLOCKED",
+  "error_type": "OSError",
+  "error": "I/O error: I/O error: 系统找不到指定的路径。 (os error 3)",
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\scripts\\download_finragbench_pdf.py\", line 37, in main\n    path = Path(hf_hub_download(repo_id=record[\"dataset\"], repo_type=\"dataset\", filename=record[\"filename\"], revision=args.revision, cache_dir=str(cache_dir), local_dir=str(output_dir), force_download=False))\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\.venv\\Lib\\site-packages\\huggingface_hub\\utils\\_validators.py\", line 114, in _inner_fn\n    return fn(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\.venv\\Lib\\site-packages\\huggingface_hub\\file_download.py\", line 990, in hf_hub_download\n    return _hf_hub_download_to_local_dir(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\.venv\\Lib\\site-packages\\huggingface_hub\\file_download.py\", line 1300, in _hf_hub_download_to_local_dir\n    _download_to_tmp_and_move(\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\.venv\\Lib\\site-packages\\huggingface_hub\\file_download.py\", line 1723, in _download_to_tmp_and_move\n    xet_get(\n  File \"D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\.venv\\Lib\\site-packages\\huggingface_hub\\file_download.py\", line 629, in xet_get\n    download_files(\nOSError: I/O error: I/O error: 系统找不到指定的路径。 (os error 3)\n",
+  "completed_at": "2026-09-13T05:02:55.377205+00:00"
+}
