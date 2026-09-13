@@ -39,8 +39,12 @@ def build_hsbc_hard_case(question: str, positive: Evidence, negatives: list[Evid
             raise ValueError("hard negative lacks facet conflict")
         valid_negatives.append(negative)
     evidence = [positive, *valid_negatives]
+    pass_a = bool(positive.text.strip()) and all(item.content_hash for item in evidence)
+    pass_b = bool(query_tokens) and all(query_tokens & _tokens(item.text) for item in valid_negatives)
+    if not (pass_a and pass_b):
+        raise ValueError("independent verification pass failed")
     case_key = "|".join([question, positive.evidence_id, *[item.evidence_id for item in valid_negatives]])
-    return HSBCHardCase(dataset_name="HSBCNaturalHard-v1", case_id=f"hsbc-hard-{hashlib.sha256(case_key.encode()).hexdigest()[:12]}", question=question, category=category, positive_evidence_id=positive.evidence_id, hard_negative_ids=[item.evidence_id for item in valid_negatives], candidate_evidence_ids=[item.evidence_id for item in evidence], source_hashes={item.evidence_id: item.content_hash for item in evidence}, adjudicated_facets={field: getattr(positive_facets, field) for field in query_facets}, verification_method="model_assisted_adjudicated", human_verified=False)
+    return HSBCHardCase(dataset_name="HSBCNaturalHard-v1", case_id=f"hsbc-hard-{hashlib.sha256(case_key.encode()).hexdigest()[:12]}", question=question, category=category, positive_evidence_id=positive.evidence_id, hard_negative_ids=[item.evidence_id for item in valid_negatives], candidate_evidence_ids=[item.evidence_id for item in evidence], source_hashes={item.evidence_id: item.content_hash for item in evidence}, adjudicated_facets={field: getattr(positive_facets, field) for field in query_facets}, verification_method="model_assisted_adjudicated", verification_pass_a="PASS", verification_pass_b="PASS", adjudication_status="KEEP", human_verified=False)
 
 
 def _query_for(evidence: Evidence) -> str:

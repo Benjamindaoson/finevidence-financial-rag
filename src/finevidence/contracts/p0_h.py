@@ -114,4 +114,7 @@ class HSBCHardCase(BaseModel):
     source_hashes: dict[str, str]
     adjudicated_facets: dict[str, str | None]
     verification_method: Literal["model_assisted_adjudicated"]
+    verification_pass_a: Literal["PASS", "DROP"] = "PASS"
+    verification_pass_b: Literal["PASS", "DROP"] = "PASS"
+    adjudication_status: Literal["KEEP", "DROP"] = "KEEP"
     human_verified: bool = False

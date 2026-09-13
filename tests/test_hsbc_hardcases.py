@@ -14,6 +14,9 @@ def test_hard_case_requires_positive_negative_and_facet_conflict():
     case = build_hsbc_hard_case("HSBC Holdings FY2025 CET1 ratio", positive, [negative], category="TEMPORAL")
     assert case.positive_evidence_id == "E1"
     assert case.hard_negative_ids == ["E2"]
+    assert case.verification_pass_a == "PASS"
+    assert case.verification_pass_b == "PASS"
+    assert case.adjudication_status == "KEEP"
 
 
 def test_hard_case_rejects_candidate_without_facet_conflict():
