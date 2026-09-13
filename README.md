@@ -172,3 +172,29 @@ TableIR regions and a 20/20/20 answerability candidate queue). Because no reposi
 are not human gold. See [docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md](docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md),
 [docs/FINAL_RESUME_METRICS.md](docs/FINAL_RESUME_METRICS.md) and
 `artifacts/final_rag_eval/`.
+
+## B5 — Neural Retrieval & Controlled Agentic Search
+
+B5 starts from the frozen Evidence Backend v1 and adds only evidence-qualified
+adapters. The first increment includes a real, optional
+`QwenEmbeddingRetriever`, a bounded typed search controller, a small typed
+in-memory `EvidenceGraph`, and a fresh B5.1 runner. Model adapters never
+bypass alignment, independent coverage, critical coverage, or provenance.
+
+The B5.1 run uses the immutable `RealFinance-v1` manifest. The current CPU
+dense and hybrid baselines execute; the cached Qwen3 snapshot has tokenizer and
+configuration files but no model weights. A revision-pinned HF/Xet weight fetch
+made no progress during the bounded attempt, so Qwen metrics remain honest
+`N/A`. This is not evidence that Qwen is worse or better. See
+[`CURRENT_STATE_AUDIT.md`](CURRENT_STATE_AUDIT.md),
+[`B5_RESULTS.md`](B5_RESULTS.md), and `artifacts/b5_1_runs/`.
+
+Run the bounded stage with:
+
+```powershell
+& .venv\Scripts\python.exe scripts\run_b5.py --stage b5.1 --config configs\b5_1_cpu.json
+```
+
+Neural reranking, ColBERT-style late interaction, modern visual retrieval,
+and graph-backed retrieval are not claimed as implemented experiments until a
+real runnable model path and a frozen ablation produce evidence.

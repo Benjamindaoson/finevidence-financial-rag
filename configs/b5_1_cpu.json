@@ -1,0 +1,11 @@
+{
+  "benchmark_root": "benchmarks/real_finance_v1",
+  "artifact_root": "artifacts/b5_1_runs",
+  "top_k": 10,
+  "model_id": "Qwen/Qwen3-Embedding-0.6B",
+  "model_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "device": "cpu",
+  "cache_dir": "C:/Users/Admin（无密码）/.cache/huggingface/hub",
+  "local_files_only": true,
+  "seed": 0
+}

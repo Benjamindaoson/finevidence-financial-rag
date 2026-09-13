@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen3-Embedding-0.6B",
+  "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "runtime": "huggingface_hub 0.34.4 + hf_xet via transformers 4.55.4",
+  "device": "cpu",
+  "cache_before_attempt": "configuration/tokenizer files present; model.safetensors absent",
+  "attempt": {
+    "mechanism": "hf_hub_download",
+    "filename": "model.safetensors",
+    "local_files_only": false,
+    "recorded_at": "2026-09-14",
+    "observed_expected_size": "1.19G (progress display)",
+    "observed_progress_after_118_seconds": "0 bytes",
+    "reason": "bounded attempt interrupted after no transfer progress",
+    "error": "KeyboardInterrupt while hf_xet xet_get was waiting for transfer"
+  },
+  "formal_b5_1_result": "N/A",
+  "formal_b5_1_reason": "model weights not locally available; no real Qwen inference executed",
+  "historical_results_untouched": true
+}

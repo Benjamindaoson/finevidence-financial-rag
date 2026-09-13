@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "FinEvidence B5 Retrieval Architecture",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "layout": {"mode": "grid", "cols": 4, "gapX": 56, "gapY": 48, "cellW": 240, "cellH": 110},
+  "components": [
+    {"id": "question", "type": "external", "label": "Financial Question", "sublabel": "query + constraints", "row": 0, "col": 0, "size": [220, 80]},
+    {"id": "requirements", "type": "backend", "label": "Requirement Graph", "sublabel": "critical evidence plan", "row": 0, "col": 1, "size": [220, 80]},
+    {"id": "retrieval", "type": "backend", "label": "Retrieval", "sublabel": "keyword + neural", "row": 0, "col": 2, "size": [220, 80]},
+    {"id": "rerank", "type": "backend", "label": "Ranking", "sublabel": "reranker + facets", "row": 0, "col": 3, "size": [220, 80]},
+    {"id": "evidence", "type": "database", "label": "Evidence IR", "sublabel": "page · block · table · image", "row": 1, "col": 1, "size": [220, 80]},
+    {"id": "qualification", "type": "security", "label": "Qualification", "sublabel": "alignment + coverage", "row": 1, "col": 2, "size": [220, 80]},
+    {"id": "controller", "type": "backend", "label": "Search Control", "sublabel": "continue · stop · abstain", "row": 1, "col": 3, "size": [220, 80]},
+    {"id": "provenance", "type": "database", "label": "Run Artifacts", "sublabel": "manifests · traces · failures", "row": 2, "col": 2, "size": [220, 80]}
+  ],
+  "connections": [
+    {"id": "q-req", "from": "question", "to": "requirements", "fromSide": "right", "toSide": "left"},
+    {"id": "req-ret", "from": "requirements", "to": "retrieval", "fromSide": "right", "toSide": "left"},
+    {"id": "ret-rank", "from": "retrieval", "to": "rerank", "fromSide": "right", "toSide": "left"},
+    {"id": "rank-evidence", "from": "rerank", "to": "evidence", "fromSide": "bottom", "toSide": "top"},
+    {"id": "evidence-qual", "from": "evidence", "to": "qualification", "label": "qualify", "fromSide": "right", "toSide": "left"},
+    {"id": "qual-control", "from": "qualification", "to": "controller", "label": "coverage delta", "fromSide": "right", "toSide": "left"},
+    {"id": "qual-prov", "from": "qualification", "to": "provenance", "label": "trace", "fromSide": "bottom", "toSide": "top", "labelDy": 24},
+    {"id": "control-prov", "from": "controller", "to": "provenance", "label": "stop", "fromSide": "bottom", "toSide": "top"}
+  ],
+  "cards": [
+    {"dot": "cyan", "title": "Frozen boundary", "items": ["Historical benchmarks remain immutable", "N/A is retained for unverified model paths"]},
+    {"dot": "amber", "title": "Promotion gate", "items": ["Quality delta must survive evidence qualification", "Cost and failure attribution are reported"]}
+  ]
+}
