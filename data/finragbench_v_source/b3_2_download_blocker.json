@@ -1,0 +1,22 @@
+{
+  "status": "BLOCKED",
+  "dataset": "zhaosuifeng/FinRAGBench-V",
+  "revision": "d0d65255c94e687caa81ac9da7758ed25ff046a5",
+  "filename": "pdfs_for_QA/pdf_en.tar.gz",
+  "expected_size_bytes": 2378037659,
+  "expected_x_linked_etag": "f7bc85c97359614e47153965a2f5eec8308e71cc1d067bfc8ac2c6916e5219e9",
+  "transport": "WSL Ubuntu wget -c through official Hugging Face resolve URL",
+  "official_response_evidence": {
+    "x_repo_commit": "d0d65255c94e687caa81ac9da7758ed25ff046a5",
+    "http_status": 200,
+    "content_length_bytes": 2378037659,
+    "accept_ranges": true,
+    "xet_hash": "e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4"
+  },
+  "attempt_log": "data/finragbench_v_source/wsl_wget_attempt.log",
+  "partial_path": "artifacts/finragbench_v_source/downloads/pdf_en.tar.gz",
+  "partial_size_bytes": 10037760,
+  "reason": "Official archive was reachable but observed transfer rate projected more than two hours for the 2.38 GB file; the bounded attempt was interrupted before completion. Partial file is not treated as an archive and no public metrics were run.",
+  "slice_unchanged": true,
+  "public_metrics": "N/A"
+}

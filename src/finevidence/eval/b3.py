@@ -139,27 +139,35 @@ def run_b3(config: dict) -> dict:
     render_path = project_root / config.get("render_manifest", "artifacts/hsbc_page_images/page_render_manifest.json")
     stress_path = project_root / config.get("stress_cases", "benchmarks/hsbc_visual_stress_v1/questions.jsonl")
     routing_path = project_root / config.get("routing_cases", "benchmarks/hsbc_multimodal_routing_v1/questions.jsonl")
+    natural_path = project_root / config.get("natural_cases", "benchmarks/hsbc_natural_multimodal_v1/questions.jsonl")
     evidence_path = project_root / config.get("hsbc_evidence", "artifacts/hsbc_local_sources/hsbc_evidence.jsonl")
     render_manifest = json.loads(render_path.read_text(encoding="utf-8"))
     stress_cases = [json.loads(line) for line in stress_path.read_text(encoding="utf-8").splitlines() if line.strip()]
     routing_cases = [json.loads(line) for line in routing_path.read_text(encoding="utf-8").splitlines() if line.strip()] if routing_path.exists() else []
-    cases = stress_cases + routing_cases
+    natural_cases = [json.loads(line) for line in natural_path.read_text(encoding="utf-8").splitlines() if line.strip()] if natural_path.exists() else []
+    cases = stress_cases + routing_cases + natural_cases
     evidence, by_id = _load_evidence(render_manifest, evidence_path)
     text_evidence = [item for item in evidence if item.modality == "text"]
-    candidate_ids = {item_id for row in cases for item_id in row["candidate_evidence_ids"]}
-    image_evidence = [item for item in evidence if item.modality == "image" and item.evidence_id in candidate_ids]
+    legacy_candidate_ids = {item_id for row in stress_cases + routing_cases for item_id in row["candidate_evidence_ids"]}
+    natural_candidate_ids = {item_id for row in natural_cases for item_id in row["candidate_evidence_ids"]}
+    image_evidence = [item for item in evidence if item.modality == "image" and item.evidence_id in legacy_candidate_ids]
+    natural_image_evidence = [item for item in evidence if item.modality == "image" and item.evidence_id in natural_candidate_ids]
     text = HybridRetriever()
     start = time.perf_counter(); text.fit(text_evidence); text_index_ms = (time.perf_counter() - start) * 1000
     structured = HybridRetriever(alpha=0.45)
     start = time.perf_counter(); structured.fit(text_evidence); structured_index_ms = (time.perf_counter() - start) * 1000
-    visual = None
+    visual_by_scope = {}
     visual_manifest = {"model_name": "N/A", "model_revision": "N/A", "runtime": "N/A", "device": "cpu", "image_encoder": False, "weights_sha256": None, "status": "N/A", "reason": "not attempted"}
     visual_index_ms = 0.0
     try:
         encoder = ClipImageEncoder(model_path=str(project_root / "artifacts/models"), device="cpu")
-        visual = VisualRetriever(encoder)
-        start = time.perf_counter(); visual.fit(image_evidence); visual_index_ms = (time.perf_counter() - start) * 1000
-        visual_manifest = encoder.manifest() if visual.available else {**visual_manifest, "reason": "no rendered image evidence"}
+        visual_manifest = encoder.manifest()
+        for scope, scoped_images in (("legacy", image_evidence), ("natural", natural_image_evidence)):
+            if not scoped_images:
+                continue
+            scoped_visual = VisualRetriever(encoder)
+            start = time.perf_counter(); scoped_visual.fit(scoped_images); visual_index_ms += (time.perf_counter() - start) * 1000
+            visual_by_scope[scope] = scoped_visual
     except Exception as exc:
         visual_manifest["reason"] = f"{type(exc).__name__}: {exc}"
     rankings = {name: {} for name in SYSTEMS}
@@ -172,8 +180,9 @@ def run_b3(config: dict) -> dict:
         initial_coverage, text_critical, _ = _qualified(row, t0_ids[:10], by_id)
         start = time.perf_counter(); decision = route_query(q, initial_critical_coverage=initial_coverage, parser_confidence=0.8); component_latencies["routing"].append((time.perf_counter() - start) * 1000)
         v_results, v0_ids = [], []
-        if visual and visual.available:
-            start = time.perf_counter(); v_results = visual.search(q, 10); component_latencies["visual_query_encoding_retrieval"].append((time.perf_counter() - start) * 1000); v0_ids = [item.evidence_id for item in v_results]
+        active_visual = visual_by_scope.get("natural" if row["case_id"].startswith("hsbc-n-") else "legacy")
+        if active_visual and active_visual.available:
+            start = time.perf_counter(); v_results = active_visual.search(q, 10); component_latencies["visual_query_encoding_retrieval"].append((time.perf_counter() - start) * 1000); v0_ids = [item.evidence_id for item in v_results]
         else:
             component_latencies["visual_query_encoding_retrieval"].append(0.0)
         start = time.perf_counter()
@@ -198,15 +207,17 @@ def run_b3(config: dict) -> dict:
     metrics = {name: _rank_metrics(stress_cases, ranking, by_id) for name, ranking in rankings.items()}
     metrics["all_cases"] = {name: _rank_metrics(cases, ranking, by_id) for name, ranking in rankings.items()}
     metrics["routing_retrieval"] = {name: _rank_metrics(routing_cases, ranking, by_id) for name, ranking in rankings.items()}
+    metrics["natural_retrieval"] = {name: _rank_metrics(natural_cases, ranking, by_id) for name, ranking in rankings.items()}
     metrics["b3_recovery"] = _recovery_metrics(stress_cases, rankings[SYSTEMS[0]], rankings[SYSTEMS[5]], by_id)
     metrics["routing_recovery"] = _recovery_metrics(routing_cases, rankings[SYSTEMS[0]], rankings[SYSTEMS[5]], by_id)
+    metrics["natural_recovery"] = _recovery_metrics(natural_cases, rankings[SYSTEMS[0]], rankings[SYSTEMS[5]], by_id)
     metrics["b3"] = {"case_count": len(stress_cases), "text_only_failure_recovery_rate_at_10": metrics["b3_recovery"]["10"]["text_failure_recovery_rate"], "visual_critical_requirement_recovery_rate_at_10": metrics["b3_recovery"]["10"]["visual_critical_requirement_recovery_rate"], "multimodal_regression_rate_at_10": metrics["b3_recovery"]["10"]["multimodal_regression_rate"], "net_recovery_at_10": metrics["b3_recovery"]["10"]["net_recovery"], "visual_pages_per_query": sum(len(trace["visual_candidates"]) for trace in traces) / len(traces) if traces else 0.0, "peak_gpu_memory_mb": 0.0}
     metrics["routing"] = _routing_metrics(routing_cases, [trace for trace in traces if trace["case_id"].startswith("hsbc-r-")], failure_rows)
     metrics["per_failure_type"] = {category: {name: _rank_metrics([row for row in stress_cases if row.get("category") == category], ranking, by_id)["page_recall_at_5"] for name, ranking in rankings.items()} for category in sorted({row.get("category", "UNKNOWN") for row in stress_cases})}
     latency_metrics = {name: {"p50_ms": _percentile(values, 50), "p95_ms": _percentile(values, 95)} for name, values in component_latencies.items()}
-    latency_metrics["offline_indexing"] = {"text_indexing_ms": text_index_ms, "parsed_page_indexing_ms": structured_index_ms, "visual_image_indexing_ms": visual_index_ms, "visual_pages_indexed": len(image_evidence)}
+    latency_metrics["offline_indexing"] = {"text_indexing_ms": text_index_ms, "parsed_page_indexing_ms": structured_index_ms, "visual_image_indexing_ms": visual_index_ms, "visual_pages_indexed": len(image_evidence) + len(natural_image_evidence), "legacy_visual_pages_indexed": len(image_evidence), "natural_visual_pages_indexed": len(natural_image_evidence)}
     config = {**config, "code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project_root, text=True).strip(), "recovery_cutoffs": list(RECOVERY_K), "t1_name": "T1 Parsed Page Text", "verified_structured_table_ir": "N/A"}
-    return {"config": config, "visual_model": visual_manifest, "case_count": len(cases), "stress_case_count": len(stress_cases), "routing_case_count": len(routing_cases), "evidence_count": len(evidence), "metrics": metrics, "latency_metrics": latency_metrics, "failure_cases": failure_rows, "traces": traces, "rankings": rankings, "citation_bbox": "N/A: no bbox gold in HSBCVisualStress-v1 or HSBCMultimodalRouting-v1", "environment": {"device": "cpu", "cuda": False, "pid": os.getpid()}}
+    return {"config": config, "visual_model": visual_manifest, "case_count": len(cases), "stress_case_count": len(stress_cases), "routing_case_count": len(routing_cases), "natural_case_count": len(natural_cases), "evidence_count": len(evidence), "metrics": metrics, "latency_metrics": latency_metrics, "failure_cases": failure_rows, "traces": traces, "rankings": rankings, "citation_bbox": "N/A: no bbox gold in HSBCVisualStress-v1, HSBCMultimodalRouting-v1, or HSBCNaturalMultimodal-v1", "environment": {"device": "cpu", "cuda": False, "pid": os.getpid()}}
 
 
 def write_run(result: dict, artifact_root: Path) -> Path:
@@ -230,7 +241,7 @@ def write_run(result: dict, artifact_root: Path) -> Path:
     for name, rows in result["rankings"].items():
         filename = name.lower().replace(" ", "_").replace("+", "plus").replace("/", "_") + "_predictions.jsonl"
         (run / filename).write_text("".join(json.dumps({"case_id": case_id, "ranking": ranking}) + "\n" for case_id, ranking in rows.items()), encoding="utf-8")
-    (run / "dataset_manifest.json").write_text(json.dumps({"datasets": {"stress": "HSBCVisualStress-v1", "routing": "HSBCMultimodalRouting-v1"}, "case_count": result["case_count"], "stress_case_count": result["stress_case_count"], "routing_case_count": result["routing_case_count"], "evidence_count": result["evidence_count"], "citation_bbox": result["citation_bbox"], "stress_manifest_sha256": _sha256(project_root / "benchmarks/hsbc_visual_stress_v1/manifest.json"), "routing_manifest_sha256": _sha256(project_root / "benchmarks/hsbc_multimodal_routing_v1/manifest.json") if (project_root / "benchmarks/hsbc_multimodal_routing_v1/manifest.json").exists() else "N/A", "render_manifest_sha256": _sha256(project_root / "artifacts/hsbc_page_images/page_render_manifest.json")}, indent=2) + "\n", encoding="utf-8")
+    (run / "dataset_manifest.json").write_text(json.dumps({"datasets": {"stress": "HSBCVisualStress-v1", "routing": "HSBCMultimodalRouting-v1", "natural": "HSBCNaturalMultimodal-v1"}, "case_count": result["case_count"], "stress_case_count": result["stress_case_count"], "routing_case_count": result["routing_case_count"], "natural_case_count": result["natural_case_count"], "evidence_count": result["evidence_count"], "citation_bbox": result["citation_bbox"], "stress_manifest_sha256": _sha256(project_root / "benchmarks/hsbc_visual_stress_v1/manifest.json"), "routing_manifest_sha256": _sha256(project_root / "benchmarks/hsbc_multimodal_routing_v1/manifest.json") if (project_root / "benchmarks/hsbc_multimodal_routing_v1/manifest.json").exists() else "N/A", "natural_manifest_sha256": _sha256(project_root / "benchmarks/hsbc_natural_multimodal_v1/manifest.json") if (project_root / "benchmarks/hsbc_natural_multimodal_v1/manifest.json").exists() else "N/A", "render_manifest_sha256": _sha256(project_root / "artifacts/hsbc_page_images/page_render_manifest.json")}, indent=2) + "\n", encoding="utf-8")
     return run
 
 

@@ -1,0 +1,205 @@
+--2026-09-13 23:42:36--  https://huggingface.co/datasets/zhaosuifeng/FinRAGBench-V/resolve/d0d65255c94e687caa81ac9da7758ed25ff046a5/pdfs_for_QA/pdf_en.tar.gz?download=true
+Connecting to 127.0.0.1:10808... connected.
+Proxy request sent, awaiting response... 
+  HTTP/1.1 302 Found
+  Content-Type: text/plain; charset=utf-8
+  Content-Length: 1067
+  Connection: keep-alive
+  Date: Sun, 13 Sep 2026 15:42:44 GMT
+  Location: https://us.aws.cdn.hf.co/xet-bridge-us/689b63df55b55c2e0c6df100/e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4?X-Xet-Cas-Uid=public&response-content-type=application%2Fgzip&user_id=public&response-content-disposition=attachment%3B+filename*%3DUTF-8%27%27pdf_en.tar.gz%3B+filename%3D%22pdf_en.tar.gz%22%3B&Expires=1789317764&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjg5YjYzZGY1NWI1NWMyZTBjNmRmMTAwL2U1YzY5NmU4M2Q0YTVkYzc0OTIzYTNlMzU3MDlhZTcxN2M2MDY1ZmRjZTQ5MjY3YTI5NjBkNWU1NGRhNDJlYTRcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LXR5cGU9YXBwbGljYXRpb24lMkZnemlwJnVzZXJfaWQ9cHVibGljJnJlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249YXR0YWNobWVudCUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3cGRmX2VuLnRhci5neiUzQitmaWxlbmFtZSUzRCUyMnBkZl9lbi50YXIuZ3olMjIlM0IiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc4OTMxNzc2NH19fV19&Signature=MEYCIQC5UxEXpu6bbtqm5t4VgQI-sxAO6XBiAV-M%7EWBnSD7vKgIhAOso2NMxKwdvSQylywsJdzyIF3EMqiQOA9MRQGFfu68k&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F
+  X-Powered-By: huggingface-moon
+  X-Request-Id: Root=1-6aa6c474-30d321b25172b66876101b86
+  RateLimit: "resolvers";r=2999;t=84
+  RateLimit-Policy: "fixed window";"resolvers";q=3000;w=300
+  cross-origin-opener-policy: same-origin
+  Referrer-Policy: strict-origin-when-cross-origin
+  Access-Control-Max-Age: 86400
+  Access-Control-Allow-Origin: https://huggingface.co
+  Vary: Origin, Accept
+  Access-Control-Expose-Headers: X-Repo-Commit,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash
+  X-Repo-Commit: d0d65255c94e687caa81ac9da7758ed25ff046a5
+  Accept-Ranges: bytes
+  X-HF-Warning: unauthenticated; Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  X-Linked-Size: 2378037659
+  X-Linked-ETag: "f7bc85c97359614e47153965a2f5eec8308e71cc1d067bfc8ac2c6916e5219e9"
+  Cache-Control: no-store
+  X-Xet-Hash: e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4
+  Link: <https://huggingface.co/api/datasets/zhaosuifeng/FinRAGBench-V/xet-read-token/d0d65255c94e687caa81ac9da7758ed25ff046a5>; rel="xet-auth", <https://cas-server.xethub.hf.co/v1/reconstructions/e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4>; rel="xet-reconstruction-info"
+  X-Cache: Miss from cloudfront
+  Via: 1.1 b5afed9af6ab9ac8245e8872d677a7bc.cloudfront.net (CloudFront)
+  X-Amz-Cf-Pop: LAX53-P4
+  Alt-Svc: h3=":443"; ma=86400
+  X-Amz-Cf-Id: sVhzOTo8fReYgmb_NKfR3mWweMdq2uOd-25V3hnyjECLTZQubV7ong==
+  Strict-Transport-Security: max-age=31536000
+Location: https://us.aws.cdn.hf.co/xet-bridge-us/689b63df55b55c2e0c6df100/e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4?X-Xet-Cas-Uid=public&response-content-type=application%2Fgzip&user_id=public&response-content-disposition=attachment%3B+filename*%3DUTF-8%27%27pdf_en.tar.gz%3B+filename%3D%22pdf_en.tar.gz%22%3B&Expires=1789317764&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjg5YjYzZGY1NWI1NWMyZTBjNmRmMTAwL2U1YzY5NmU4M2Q0YTVkYzc0OTIzYTNlMzU3MDlhZTcxN2M2MDY1ZmRjZTQ5MjY3YTI5NjBkNWU1NGRhNDJlYTRcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LXR5cGU9YXBwbGljYXRpb24lMkZnemlwJnVzZXJfaWQ9cHVibGljJnJlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249YXR0YWNobWVudCUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3cGRmX2VuLnRhci5neiUzQitmaWxlbmFtZSUzRCUyMnBkZl9lbi50YXIuZ3olMjIlM0IiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc4OTMxNzc2NH19fV19&Signature=MEYCIQC5UxEXpu6bbtqm5t4VgQI-sxAO6XBiAV-M%7EWBnSD7vKgIhAOso2NMxKwdvSQylywsJdzyIF3EMqiQOA9MRQGFfu68k&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F [following]
+--2026-09-13 23:42:40--  https://us.aws.cdn.hf.co/xet-bridge-us/689b63df55b55c2e0c6df100/e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4?X-Xet-Cas-Uid=public&response-content-type=application%2Fgzip&user_id=public&response-content-disposition=attachment%3B+filename*%3DUTF-8%27%27pdf_en.tar.gz%3B+filename%3D%22pdf_en.tar.gz%22%3B&Expires=1789317764&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly91cy5hd3MuY2RuLmhmLmNvL3hldC1icmlkZ2UtdXMvNjg5YjYzZGY1NWI1NWMyZTBjNmRmMTAwL2U1YzY5NmU4M2Q0YTVkYzc0OTIzYTNlMzU3MDlhZTcxN2M2MDY1ZmRjZTQ5MjY3YTI5NjBkNWU1NGRhNDJlYTRcXD9YLVhldC1DYXMtVWlkPXB1YmxpYyZyZXNwb25zZS1jb250ZW50LXR5cGU9YXBwbGljYXRpb24lMkZnemlwJnVzZXJfaWQ9cHVibGljJnJlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249YXR0YWNobWVudCUzQitmaWxlbmFtZSUyQSUzRFVURi04JTI3JTI3cGRmX2VuLnRhci5neiUzQitmaWxlbmFtZSUzRCUyMnBkZl9lbi50YXIuZ3olMjIlM0IiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkVwb2NoVGltZSI6MTc4OTMxNzc2NH19fV19&Signature=MEYCIQC5UxEXpu6bbtqm5t4VgQI-sxAO6XBiAV-M%7EWBnSD7vKgIhAOso2NMxKwdvSQylywsJdzyIF3EMqiQOA9MRQGFfu68k&Key-Pair-Id=01KXEF4KZ1B6FV465MAWR4M21F
+Connecting to 127.0.0.1:10808... connected.
+Proxy request sent, awaiting response... 
+  HTTP/1.1 200 OK
+  content-type: application/gzip
+  accept-ranges: bytes
+  content-disposition: attachment; filename*=UTF-8''pdf_en.tar.gz; filename="pdf_en.tar.gz";
+  etag: "e5c696e83d4a5dc74923a3e35709ae717c6065fdce49267a2960d5e54da42ea4"
+  access-control-allow-headers: Content-Range, Content-Type, Content-Disposition, ETag
+  access-control-expose-headers: *
+  content-length: 2378037659
+  vary: origin, access-control-request-method, access-control-request-headers
+  access-control-allow-origin: *
+  x-request-id: 01M2DPYY6SPPVFWYVW0YS4NEZZ
+  x-hf-cdn-pop: aws-ap-southeast-1
+  date: Sun, 13 Sep 2026 15:42:49 GMT
+  alt-svc: h3=":443";ma=60;
+Length: 2378037659 (2.2G) [application/gzip]
+Saving to: ‘/mnt/d/01_work/Enterprise Multimodal RAG/finevidence/artifacts/finragbench_v_source/downloads/pdf_en.tar.gz’
+
+     0K .......... .......... .......... .......... ..........  0% 79.3K 8h7m
+    50K .......... .......... .......... .......... ..........  0% 86.4K 7h48m
+   100K .......... .......... .......... .......... ..........  0% 7.34M 5h13m
+   150K .......... .......... .......... .......... ..........  0% 9.05M 3h56m
+   200K .......... .......... .......... .......... ..........  0%  234K 3h42m
+   250K .......... .......... .......... .......... ..........  0%  735K 3h13m
+   300K .......... .......... .......... .......... ..........  0%  325K 3h3m
+   350K .......... .......... .......... .......... ..........  0% 67.8K 3h51m
+   400K .......... .......... .......... .......... ..........  0%  306K 3h39m
+   450K .......... .......... .......... .......... ..........  0% 2.80M 3h19m
+   500K .......... .......... .......... .......... ..........  0% 13.6M 3h1m
+   550K .......... .......... .......... .......... ..........  0% 14.6M 2h46m
+   600K .......... .......... .......... .......... ..........  0%  133K 2h56m
+   650K .......... .......... .......... .......... ..........  0%  227K 2h55m
+   700K .......... .......... .......... .......... ..........  0%  566K 2h48m
+   750K .......... .......... .......... .......... ..........  0%  107K 3h0m
+   800K .......... .......... .......... .......... ..........  0% 19.5M 2h50m
+   850K .......... .......... .......... .......... ..........  0% 27.7M 2h40m
+   900K .......... .......... .......... .......... ..........  0% 1.05M 2h34m
+   950K .......... .......... .......... .......... ..........  0%  408K 2h31m
+  1000K .......... .......... .......... .......... ..........  0%  337K 2h29m
+  1050K .......... .......... .......... .......... ..........  0% 74.1K 2h46m
+  1100K .......... .......... .......... .......... ..........  0% 11.2M 2h39m
+  1150K .......... .......... .......... .......... ..........  0% 16.8M 2h32m
+  1200K .......... .......... .......... .......... ..........  0% 31.3M 2h26m
+  1250K .......... .......... .......... .......... ..........  0%  658K 2h23m
+  1300K .......... .......... .......... .......... ..........  0%  115K 2h30m
+  1350K .......... .......... .......... .......... ..........  0% 1.03M 2h26m
+  1400K .......... .......... .......... .......... ..........  0%  260K 2h26m
+  1450K .......... .......... .......... .......... ..........  0%  283K 2h26m
+  1500K .......... .......... .......... .......... ..........  0%  349K 2h24m
+  1550K .......... .......... .......... .......... ..........  0%  119K 2h30m
+  1600K .......... .......... .......... .......... ..........  0% 7.42M 2h26m
+  1650K .......... .......... .......... .......... ..........  0% 24.1M 2h21m
+  1700K .......... .......... .......... .......... ..........  0%  532K 2h19m
+  1750K .......... .......... .......... .......... ..........  0%  361K 2h19m
+  1800K .......... .......... .......... .......... ..........  0%  380K 2h18m
+  1850K .......... .......... .......... .......... ..........  0%  128K 2h22m
+  1900K .......... .......... .......... .......... ..........  0% 17.2M 2h18m
+  1950K .......... .......... .......... .......... ..........  0%  275K 2h18m
+  2000K .......... .......... .......... .......... ..........  0%  522K 2h17m
+  2050K .......... .......... .......... .......... ..........  0%  374K 2h16m
+  2100K .......... .......... .......... .......... ..........  0%  222K 2h17m
+  2150K .......... .......... .......... .......... ..........  0% 9.17M 2h14m
+  2200K .......... .......... .......... .......... ..........  0%  431K 2h13m
+  2250K .......... .......... .......... .......... ..........  0%  269K 2h13m
+  2300K .......... .......... .......... .......... ..........  0%  540K 2h12m
+  2350K .......... .......... .......... .......... ..........  0%  491K 2h11m
+  2400K .......... .......... .......... .......... ..........  0%  409K 2h10m
+  2450K .......... .......... .......... .......... ..........  0%  440K 2h9m
+  2500K .......... .......... .......... .......... ..........  0% 94.5K 2h14m
+  2550K .......... .......... .......... .......... ..........  0% 23.4M 2h12m
+  2600K .......... .......... .......... .......... ..........  0% 16.1M 2h9m
+  2650K .......... .......... .......... .......... ..........  0%  571K 2h8m
+  2700K .......... .......... .......... .......... ..........  0%  399K 2h8m
+  2750K .......... .......... .......... .......... ..........  0%  103K 2h12m
+  2800K .......... .......... .......... .......... ..........  0% 1.69M 2h10m
+  2850K .......... .......... .......... .......... ..........  0% 22.1M 2h8m
+  2900K .......... .......... .......... .......... ..........  0% 27.8M 2h6m
+  2950K .......... .......... .......... .......... ..........  0%  843K 2h4m
+  3000K .......... .......... .......... .......... ..........  0%  119K 2h8m
+  3050K .......... .......... .......... .......... ..........  0%  127K 2h11m
+  3100K .......... .......... .......... .......... ..........  0% 10.7M 2h9m
+  3150K .......... .......... .......... .......... ..........  0% 24.9M 2h7m
+  3200K .......... .......... .......... .......... ..........  0%  817K 2h5m
+  3250K .......... .......... .......... .......... ..........  0%  509K 2h5m
+  3300K .......... .......... .......... .......... ..........  0%  229K 2h5m
+  3350K .......... .......... .......... .......... ..........  0% 8.50M 2h3m
+  3400K .......... .......... .......... .......... ..........  0%  270K 2h4m
+  3450K .......... .......... .......... .......... ..........  0%  118K 2h7m
+  3500K .......... .......... .......... .......... ..........  0% 12.4M 2h5m
+  3550K .......... .......... .......... .......... ..........  0% 22.4M 2h3m
+  3600K .......... .......... .......... .......... ..........  0% 14.6M 2h1m
+  3650K .......... .......... .......... .......... ..........  0%  131K 2h4m
+  3700K .......... .......... .......... .......... ..........  0% 1.67M 2h2m
+  3750K .......... .......... .......... .......... ..........  0%  267K 2h3m
+  3800K .......... .......... .......... .......... ..........  0% 12.2M 2h1m
+  3850K .......... .......... .......... .......... ..........  0% 1.05M 2h0m
+  3900K .......... .......... .......... .......... ..........  0%  347K 2h0m
+  3950K .......... .......... .......... .......... ..........  0% 9.76M 1h58m
+  4000K .......... .......... .......... .......... ..........  0% 2.02M 1h57m
+  4050K .......... .......... .......... .......... ..........  0%  246K 1h58m
+  4100K .......... .......... .......... .......... ..........  0%  269K 1h58m
+  4150K .......... .......... .......... .......... ..........  0% 73.5K 2h3m
+  4200K .......... .......... .......... .......... ..........  0% 9.45M 2h1m
+  4250K .......... .......... .......... .......... ..........  0% 16.3M 2h0m
+  4300K .......... .......... .......... .......... ..........  0% 19.2M 1h59m
+  4350K .......... .......... .......... .......... ..........  0% 29.7M 1h57m
+  4400K .......... .......... .......... .......... ..........  0%  196K 1h58m
+  4450K .......... .......... .......... .......... ..........  0% 11.6M 1h57m
+  4500K .......... .......... .......... .......... ..........  0% 23.9M 1h56m
+  4550K .......... .......... .......... .......... ..........  0% 32.8M 1h54m
+  4600K .......... .......... .......... .......... ..........  0% 23.4M 1h53m
+  4650K .......... .......... .......... .......... ..........  0%  144K 1h55m
+  4700K .......... .......... .......... .......... ..........  0%  293K 1h55m
+  4750K .......... .......... .......... .......... ..........  0% 29.3M 1h54m
+  4800K .......... .......... .......... .......... ..........  0% 11.5M 1h53m
+  4850K .......... .......... .......... .......... ..........  0% 29.3M 1h52m
+  4900K .......... .......... .......... .......... ..........  0% 27.9M 1h50m
+  4950K .......... .......... .......... .......... ..........  0% 11.7M 1h49m
+  5000K .......... .......... .......... .......... ..........  0%  453K 1h49m
+  5050K .......... .......... .......... .......... ..........  0%  169K 1h50m
+  5100K .......... .......... .......... .......... ..........  0%  140K 1h52m
+  5150K .......... .......... .......... .......... ..........  0%  800K 1h51m
+  5200K .......... .......... .......... .......... ..........  0%  350K 1h51m
+  5250K .......... .......... .......... .......... ..........  0%  414K 1h51m
+  5300K .......... .......... .......... .......... ..........  0%  759K 1h50m
+  5350K .......... .......... .......... .......... ..........  0% 9.28M 1h49m
+  5400K .......... .......... .......... .......... ..........  0% 15.3M 1h48m
+  5450K .......... .......... .......... .......... ..........  0% 6.26M 1h48m
+  5500K .......... .......... .......... .......... ..........  0% 10.6M 1h47m
+  5550K .......... .......... .......... .......... ..........  0% 9.96M 1h46m
+  5600K .......... .......... .......... .......... ..........  0% 12.7M 1h45m
+  5650K .......... .......... .......... .......... ..........  0% 6.82M 1h44m
+  5700K .......... .......... .......... .......... ..........  0% 65.2K 1h48m
+  5750K .......... .......... .......... .......... ..........  0% 1.05M 1h47m
+  5800K .......... .......... .......... .......... ..........  0% 20.4M 1h47m
+  5850K .......... .......... .......... .......... ..........  0% 17.0M 1h46m
+  5900K .......... .......... .......... .......... ..........  0% 22.1M 1h45m
+  5950K .......... .......... .......... .......... ..........  0% 27.1M 1h44m
+  6000K .......... .......... .......... .......... ..........  0% 28.1M 1h43m
+  6050K .......... .......... .......... .......... ..........  0%  201K 1h44m
+  6100K .......... .......... .......... .......... ..........  0%  807K 1h43m
+  6150K .......... .......... .......... .......... ..........  0% 1.02M 1h43m
+  6200K .......... .......... .......... .......... ..........  0%  848K 1h42m
+  6250K .......... .......... .......... .......... ..........  0%  478K 1h42m
+  6300K .......... .......... .......... .......... ..........  0%  853K 1h42m
+  6350K .......... .......... .......... .......... ..........  0%  759K 1h41m
+  6400K .......... .......... .......... .......... ..........  0%  829K 1h41m
+  6450K .......... .......... .......... .......... ..........  0%  631K 1h41m
+  6500K .......... .......... .......... .......... ..........  0%  704K 1h40m
+  6550K .......... .......... .......... .......... ..........  0% 33.3K 1h48m
+  6600K .......... .......... .......... .......... ..........  0% 2.00M 1h48m
+  6650K .......... .......... .......... .......... ..........  0% 8.93M 1h47m
+  6700K .......... .......... .......... .......... ..........  0% 1.00M 1h46m
+  6750K .......... .......... .......... .......... ..........  0% 9.41M 1h45m
+  6800K .......... .......... .......... .......... ..........  0% 1.35M 1h45m
+  6850K .......... .......... .......... .......... ..........  0% 2.91M 1h44m
+  6900K .......... .......... .......... .......... ..........  0% 14.0K 2h3m
+  6950K .......... .......... .......... .......... ..........  0%  204K 2h4m
+  7000K .......... .......... .......... .......... ..........  0%  132K 2h5m
+  7050K .......... .......... .......... .......... ..........  0% 2.13M 2h4m
+  7100K .......... .......... .......... .......... ..........  0% 39.5K 2h10m
+  7150K .......... .......... .......... .......... ..........  0%  100K 2h12m
+  7200K .......... .......... .......... .......... ..........  0%  271K 2h12m
+  7250K .......... .......... .......... .......... ..........  0%  147K 2h13m
+  7300K .......... .......... .......... .......... ..........  0%  116K 2h14m
+  7350K .......... .......... .......... .......... ..........  0%  116K 2h16m
+  7400K .......... .......... .......... .......... ..........  0%  164K 2h16m
+  7450K .......... .......... .......... .......... ..........  0% 92.7K 2h18m
+  7500K .......... .......... .......... .......... ......

@@ -1,0 +1,22 @@
+{
+  "dataset_name": "HSBCNaturalMultimodal-v1",
+  "description": "project-created natural control set from public HSBC disclosure pages",
+  "case_count": 80,
+  "cases_sha256": "0bf6ce4a4c323508980f603eae44be8055cb13ea920bc8e60603aad9350a803a",
+  "human_verified": false,
+  "verification_method": "corpus_hash_selection_plus_real_page_adjudication",
+  "selection_basis": "SHA256-ranked eligible corpus pages per document",
+  "selection_frozen_before_retrieval": true,
+  "performance_blind": true,
+  "stress_candidate_pages_excluded": true,
+  "source_evidence_sha256": "d061e786210a52bd7dfd73c0312c9579d066bfd666dde76f04bd05def5dcdfd5",
+  "source_render_manifest_sha256": "58e3b8ea105fdc808b52256702069b9a04529174234f7647fb382f577a21246e",
+  "stress_cases_sha256": "70d8c8015acebfeb34f12950e2b69d6a5a9b35d552aa107aec52d271cc820a72",
+  "excluded_stress_page_count": 78,
+  "selected_source_pages": 80,
+  "documents": [
+    "hsbc-fy2025-annual-report",
+    "hsbc-fy2025-pillar-3"
+  ],
+  "selection_note": "Selection was made from corpus identity and page content hashes only; T0/V0 rankings were unavailable to this script."
+}
