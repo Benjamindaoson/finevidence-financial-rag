@@ -34,7 +34,7 @@ def _coverage(graph: RequirementGraph, question: str, evidence_by_id: dict, retr
         selected.update(ids)
         if round_number == 0:
             initial = set(ids)
-        alignments = [align_requirement_to_evidence(requirement, evidence_by_id[evidence_id]) for requirement in graph.requirements for evidence_id in selected if evidence_id in evidence_by_id and requirement.fact_type != "DERIVED_FACT"]
+        alignments = [align_requirement_to_evidence(requirement, evidence_by_id[evidence_id]) for requirement in graph.requirements for evidence_id in sorted(selected) if evidence_id in evidence_by_id and requirement.fact_type != "DERIVED_FACT"]
         result = evaluate_independent_coverage(graph, alignments, selected)
         if result.answer_eligible or round_number >= max_rounds:
             break
@@ -87,7 +87,7 @@ def evaluate_requirement_methods(cases: list, annotations: dict[str, Requirement
         if values and values[0].get("status") == "N/A":
             summary[label] = values[0]
             continue
-        numeric = set(values[0]) - {"status", "unmatched_predicted", "unmatched_gold"}
+        numeric = sorted(set(values[0]) - {"status", "unmatched_predicted", "unmatched_gold"})
         summary[label] = {"status": "READY", **{field: _mean([item[field] for item in values if isinstance(item.get(field), (int, float))]) for field in numeric}}
     gold_cov = {"independent_cer": _mean([item.independent_coverage for item in adjudicated_coverage]), "critical_coverage": _mean([item.critical_coverage for item in adjudicated_coverage])}
     return {"summary": summary, "traces": traces, "failures": failures, "adjudicated_coverage": gold_cov}
