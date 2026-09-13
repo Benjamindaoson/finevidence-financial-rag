@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "FinEvidence Evidence Backend v1",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "viewBox": [1320, 760]
+  },
+  "components": [
+    { "id": "agent", "type": "external", "label": "AI Research Agent", "sublabel": "Question / claim", "pos": [30, 300], "size": [156, 72] },
+    { "id": "api", "type": "backend", "label": "Evidence API", "sublabel": "Search · coverage · verify", "pos": [220, 300], "size": [170, 72] },
+    { "id": "service", "type": "backend", "label": "Evidence Service", "sublabel": "Stable backend contract", "pos": [430, 300], "size": [176, 72] },
+    { "id": "retrieval", "type": "backend", "label": "Retrieval Engines", "sublabel": "Text · TableIR · Visual", "pos": [646, 300], "size": [180, 72] },
+    { "id": "evidence", "type": "database", "label": "Evidence Objects", "sublabel": "Provenance + facets", "pos": [866, 300], "size": [180, 72] },
+    { "id": "qualification", "type": "security", "label": "Verification Gate", "sublabel": "Alignment · coverage", "pos": [1084, 300], "size": [180, 72] },
+    { "id": "documents", "type": "external", "label": "Financial Documents", "sublabel": "PDF · tables · pages", "pos": [430, 520], "size": [176, 72] },
+    { "id": "ingestion", "type": "backend", "label": "Ingestion + IR", "sublabel": "Parse · render · preserve", "pos": [646, 520], "size": [180, 72] },
+    { "id": "artifacts", "type": "database", "label": "Evidence Store", "sublabel": "Indexes · hashes · traces", "pos": [866, 520], "size": [180, 72] },
+    { "id": "evaluation", "type": "external", "label": "Evaluation Harness", "sublabel": "Benchmarks · regressions", "pos": [1084, 520], "size": [180, 72] }
+  ],
+  "connections": [
+    { "id": "agent-api", "from": "agent", "to": "api", "label": "HTTPS request", "variant": "emphasis", "labelDy": -30 },
+    { "id": "api-service", "from": "api", "to": "service", "label": "validated payload", "labelDy": -30 },
+    { "id": "service-retrieval", "from": "service", "to": "retrieval", "label": "query + filters", "labelDy": -30 },
+    { "id": "retrieval-evidence", "from": "retrieval", "to": "evidence", "label": "ranked objects", "labelDy": -30 },
+    { "id": "evidence-qualification", "from": "evidence", "to": "qualification", "label": "claims + sources", "labelDy": -30 },
+    { "id": "qualification-api", "from": "qualification", "to": "api", "label": "qualified response", "variant": "dashed", "fromSide": "top", "toSide": "top", "route": "orthogonal-h", "via": [[1174, 220], [305, 220]] },
+    { "id": "documents-ingestion", "from": "documents", "to": "ingestion", "label": "source files", "fromSide": "right", "toSide": "left", "labelDy": 60 },
+    { "id": "ingestion-artifacts", "from": "ingestion", "to": "artifacts", "label": "IR + provenance", "fromSide": "right", "toSide": "left", "labelDy": 60 },
+    { "id": "artifacts-retrieval", "from": "artifacts", "to": "retrieval", "label": "indexes", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "artifacts-evaluation", "from": "artifacts", "to": "evaluation", "label": "traces", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Evidence boundary", "items": ["Agents consume Evidence Objects", "Agents do not parse or self-verify PDFs"] },
+    { "dot": "amber", "title": "Trust boundary", "items": ["Every returned object retains source provenance", "Qualification can deny unsupported claims"] }
+  ]
+}

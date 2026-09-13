@@ -1,0 +1,15 @@
+.venv
+.git
+.codegraph
+__pycache__
+*.pyc
+artifacts
+benchmarks
+configs
+data
+docs
+openspec
+reports
+scripts
+tests
+requirements.txt
