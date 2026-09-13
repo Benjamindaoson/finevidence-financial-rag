@@ -120,3 +120,11 @@ B3.1 keeps `HSBCVisualStress-v1` unchanged and adds `HSBCMultimodalRouting-v1`, 
 Recovery is now reported at `@1`, `@5`, and `@10`. On the unchanged 60-case HSBC stress track, M1 recovery is `0.0167`, `0.0167`, and `0.0500`, with zero regression at all three cutoffs. On the 30-case routing track, visual invocation is `0.7667`, routing precision is `0.4348`, recall is `1.0000`, and unnecessary invocation is `0.6500`; this workload does not prove cost saving.
 
 The official Hugging Face client was upgraded to `huggingface_hub==0.34.4` plus `hf_xet==1.6.0`, and the existing 100-query FinRAGBench-V slice was pinned to revision `d0d65255c94e687caa81ac9da7758ed25ff046a5`. The 2.38GB PDF archive still produced a zero-byte Xet/HTTP transfer under the local cache configuration; traceback and cache evidence are retained under `data/finragbench_v_source/`. Therefore public page-image metrics remain `N/A` and **B3 remains `PARTIAL`**. The final report is `reports/b3-1-public-benchmark-evaluation-closure.md`.
+
+## B3.2 benchmark integrity and public closure
+
+B3.2 did not rerun or rewrite B3.1. It froze a 20-case performance-blind audit sample for `HSBCVisualStress-v1` (two per category) and found a construction bias: all 60 cases use only ten fixed keyword templates and positive pages were selected by keyword occurrence. T0 page Recall is reproducibly `0/60` at @10 but `7/60` at @50, so the @10 result is real under the stress workload but is not an unbiased natural-text estimate. Per-case source/ranking evidence is retained in `artifacts/b3_2_runs/visualstress_audit/`.
+
+The separate `HSBCNaturalMultimodal-v1` control contains 80 real HSBC pages selected by corpus hash before T0/V0 inspection, with stress candidate pages excluded. On its 80 cases, T0/T1/M1 Recall@10 are `0.5375/0.5875/0.5625`; V0 is `0.0750`. This control reverses the stress narrative and prevents a general “vision wins” claim. The exact B3.2 report is `reports/b3-2-benchmark-integrity-public-closure.md`.
+
+B3.2 made a second official, revision-pinned FinRAGBench-V transfer attempt from WSL Ubuntu. Hugging Face returned the frozen commit and expected archive identity, but the 2.38GB transfer remained operationally blocked; the partial file is not used and public page-image metrics stay `N/A`. B3 therefore remains `PARTIAL`; B4 production hardening is not justified yet.

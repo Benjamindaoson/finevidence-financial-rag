@@ -35,8 +35,8 @@ def _load_pages(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-def _source_block(row: dict, pages: dict[tuple[str, int], dict]) -> dict | None:
-    return pages.get((row["document_id"], int(row["gold_page"])))
+def _source_block(row: dict, evidence_by_page: dict[tuple[str, int], dict]) -> dict | None:
+    return evidence_by_page.get((row["document_id"], int(row["gold_page"])))
 
 
 def _overlap(query: str, source: str) -> dict:
@@ -97,6 +97,7 @@ def main() -> int:
     render = json.loads((root / args.render_manifest).read_text(encoding="utf-8"))
     render_pages = {(item["document_id"], int(item["page"])): item for item in render["pages"]}
     raw_evidence = _load_pages(root / args.evidence)
+    evidence_by_page = {(item["document_id"], int(item["page"])): item for item in raw_evidence}
     evidence = []
     by_id: dict[str, Evidence] = {}
     for raw in raw_evidence:
@@ -110,7 +111,7 @@ def main() -> int:
     retriever.fit(evidence)
     records = []
     for row in cases:
-        source = _source_block(row, render_pages) or next((item for item in raw_evidence if item["document_id"] == row["document_id"] and int(item["page"]) == int(row["gold_page"])), None)
+        source = _source_block(row, evidence_by_page)
         source_text = source.get("text", "") if source else ""
         rankings = [item.evidence_id for item in retriever.search(row["question"], 50)]
         page_rank = _page_ids(rankings, by_id)
