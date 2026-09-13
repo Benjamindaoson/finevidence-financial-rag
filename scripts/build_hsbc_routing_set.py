@@ -61,6 +61,8 @@ def main() -> int:
     cases += _mine(rows, pages, "TEXT_SUFFICIENT", ("purpose",), args.per_class, used)
     cases += _mine(rows, pages, "TABLE_PARSED_SUFFICIENT", ("table",), args.per_class, used)
     cases += _mine(rows, pages, "VISUAL_NEEDED", ("figure",), args.per_class, used)
+    for index, case in enumerate(cases, 1):
+        case["case_id"] = f"hsbc-r-{index:04d}"
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
     payload = "".join(json.dumps(item, ensure_ascii=False, sort_keys=True) + "\n" for item in cases)
