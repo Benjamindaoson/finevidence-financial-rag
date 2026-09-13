@@ -1,0 +1,31 @@
+{
+  "dataset_version": "FinalRAGEvalCandidate-v0",
+  "created_at": "2026-09-13T21:09:52.071900+00:00",
+  "human_verified": false,
+  "annotation_status": "candidate_only",
+  "tracks": {
+    "claim_citation": {
+      "count": 50,
+      "source": "benchmarks\\real_finance_v1\\questions.jsonl"
+    },
+    "table_semantics": {
+      "count": 24,
+      "source": "artifacts\\b4_1_runs\\20260914T013551\\table_ir.jsonl"
+    },
+    "answerability": {
+      "count": 60,
+      "source": "benchmarks\\real_finance_v1\\questions.jsonl",
+      "class_counts": {
+        "ANSWERABLE": 60,
+        "PARTIAL_EVIDENCE": 0,
+        "UNANSWERABLE": 0
+      },
+      "status": "BLOCKED",
+      "reason": "No verified partial/unanswerable annotation source exists in the frozen slice."
+    }
+  },
+  "sources": {
+    "questions_sha256": "e4be1e1495131259a3ae0a77fbd787bf963efbf6faa169af0fb9a373df1c4bcf",
+    "table_ir_sha256": "050edd1fd47e5ada8f7ed50bb9efc7bce8aa8bda23568ccd9ad53cfa6ff4cae1"
+  }
+}

@@ -81,6 +81,21 @@
 
 ## 按阶段的账本结论
 
+### P0-J 最终 RAG 评测闭环（当前状态）
+
+P0-J 已新增可执行的 claim citation、table semantic 和 answerability
+评测契约，并从冻结数据导出 50/24/60 条候选审核队列。由于仓库没有任何
+`human_verified=true` 标注，三条正式质量结果仍为 `N/A`；候选投影不能被
+称为 human gold，也不能被用来填充零分。详见
+`docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md` 和
+`artifacts/final_rag_eval/`。
+
+| Track | 当前状态 | 可报告结论 |
+|---|---|---|
+| Claim-level citation support | PARTIAL | contract + 50 candidate rows；Citation P/R/F1、Claim Support Rate、Page/Block/Cell Accuracy = N/A |
+| Verified financial table semantic gold | PARTIAL | 24 B4.1 regions queued；cell/header/unit/period/entity/merged/footnote = N/A |
+| Financial answerability / abstention | PARTIAL | 60 answerable-only candidates；partial/unanswerable verified split 缺失，全部最终指标 = N/A |
+
 ### 1. 数据接入与文档解析
 
 最强证据是 provenance 完整和局部结构 invariant：

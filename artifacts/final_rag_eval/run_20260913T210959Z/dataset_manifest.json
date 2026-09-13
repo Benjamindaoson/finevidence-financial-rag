@@ -1,0 +1,8 @@
+{
+  "sources": {
+    "questions_sha256": "e4be1e1495131259a3ae0a77fbd787bf963efbf6faa169af0fb9a373df1c4bcf",
+    "table_ir_sha256": "050edd1fd47e5ada8f7ed50bb9efc7bce8aa8bda23568ccd9ad53cfa6ff4cae1"
+  },
+  "candidate_manifest_sha256": null,
+  "frozen_historical_data": true
+}

@@ -3,6 +3,14 @@
 > 目的：给简历、面试材料和项目介绍提供唯一的安全取数边界。
 > 原则：每个数字都必须能回到正式报告或 artifact；如果一项能力没有可靠 gold，就写 N/A；不要把项目创建的 stress set 写成官方 benchmark。
 
+## P0-J final evaluation status
+
+P0-J created pure scoring contracts and candidate-only review queues for
+claim-level citation, table semantics and answerability. No new formal metric
+is resume-safe yet: there are no `human_verified=true` rows. Use
+`docs/FINAL_RESUME_METRICS.md` for the compact safe list. Do not describe the
+50 citation rows, 24 table regions or 60 answerability rows as human gold.
+
 ## A. 可以直接写，但仍要保留数据集和口径
 
 这些指标有正式运行证据，适合写入简历。推荐使用“在……上”而不是裸报一个看似通用的百分比。

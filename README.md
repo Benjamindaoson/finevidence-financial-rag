@@ -161,3 +161,14 @@ On the HSBC stress workload, E1 route accuracy is `0.5000`, visual invocation fa
 B4.1 adds a bounded geometry-assisted PDF-to-TableIR extractor over the existing public HSBC FY2025 Annual Report artifact and a deterministic cell-level `StructuredTableRetriever`. T2 preserves table/row/column/bbox provenance and is evaluated through the existing Evidence Qualification and Independent Coverage gates; it is not a renamed page-text retriever and it is not a neural reranker.
 
 The formal report is [reports/b4-1-real-financial-table-recovery.md](reports/b4-1-real-financial-table-recovery.md). On the frozen 60-case HSBC stress workload, T2 reached Page Recall@1/5/10 of `0.0167/0.0833/0.0833` and recovered 5 table-category page misses by @10 relative to T1. Semantic cell accuracy, unit accuracy, and merged-cell accuracy remain `N/A` without verified human TableIR gold. B3's FinRAGBench-V external blocker remains unchanged.
+
+# P0-J — final RAG evaluation contracts
+
+P0-J adds executable, provenance-aware evaluators for claim-level citation
+support, financial table semantics and answerability/abstention. The first run
+created candidate-only queues from frozen evidence (50 claim cases, 24 HSBC
+TableIR regions and 60 answerability candidates). Because no repository row is
+`human_verified=true`, formal P0-J quality metrics remain `N/A`; the candidates
+are not human gold. See [docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md](docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md),
+[docs/FINAL_RESUME_METRICS.md](docs/FINAL_RESUME_METRICS.md) and
+`artifacts/final_rag_eval/`.

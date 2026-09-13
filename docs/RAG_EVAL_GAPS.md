@@ -75,6 +75,23 @@
 
 ## 本阶段审计结论
 
+## P0-J progress: final RAG evaluation contracts
+
+P0-J implemented deterministic scoring contracts for claim-level citation,
+financial table semantics and answerability/abstention. It generated a
+candidate-only queue from frozen project evidence: 50 RealFinance citation
+cases, 24 B4.1 HSBC TableIR regions and 60 answerability candidates. The last
+track is answerable-only and cannot be promoted to a balanced
+`FinancialAnswerability-v1` without real review and partial/unanswerable
+examples.
+
+The repository still has no human-verified rows. Therefore Citation P/R/F1,
+Claim Support Rate, Unsupported Citation Rate, semantic table accuracy and
+abstention metrics remain `N/A`, not zero. This closes the evaluator contract
+gap but does not close the annotation gap. The blocked run is under
+`artifacts/final_rag_eval/`; the full explanation is in
+`docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md`.
+
 当前项目最完整的是：
 
 - evidence provenance 与可追踪对象；
