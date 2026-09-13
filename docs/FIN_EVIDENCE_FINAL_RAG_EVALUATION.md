@@ -36,6 +36,12 @@ answerable/partial/unanswerable cases. Its partial and unanswerable labels are
 scoped evidence-availability constructions and still require human correction
 or confirmation; they are not gold.
 
+`ClaimCitationCandidate-v1` additionally preserves the real P0-D initial
+Top-K@5 prediction IDs beside the source-projected supporting-evidence
+candidates. The reviewer can therefore distinguish what the historical
+retriever returned from what the source record suggests should support the
+claim.
+
 The queues contain source hashes, annotation status, zero annotators and an
 explicit review requirement. They do not contain invented labels. A real
 reviewer must promote rows and add claim, page/block/cell, table-semantic or

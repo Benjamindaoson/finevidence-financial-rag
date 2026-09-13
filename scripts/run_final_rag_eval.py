@@ -43,7 +43,10 @@ def main() -> None:
     output = (args.output or root / "artifacts" / "final_rag_eval" / f"run_{run_id}").resolve()
     output.mkdir(parents=True, exist_ok=False)
 
-    citation = load_jsonl(candidate_dir / "claim_citation_candidates.jsonl")
+    citation_path = root / "artifacts" / "final_rag_eval" / "claim_citation_candidates_v1.jsonl"
+    if not citation_path.exists():
+        citation_path = candidate_dir / "claim_citation_candidates.jsonl"
+    citation = load_jsonl(citation_path)
     tables = load_jsonl(candidate_dir / "table_semantic_candidates.jsonl")
     answerability_path = root / "artifacts" / "final_rag_eval" / "answerability_candidates_v1.jsonl"
     if not answerability_path.exists():
@@ -83,6 +86,8 @@ def main() -> None:
     }
     dataset_manifest = {
         "sources": candidate_manifest["sources"],
+        "citation_source": str(citation_path.relative_to(root)),
+        "citation_sha256": sha256(citation_path),
         "answerability_source": str(answerability_path.relative_to(root)),
         "answerability_sha256": sha256(answerability_path),
         "candidate_manifest_sha256": sha256(candidate_dir / "candidate_manifest.json"),
@@ -97,7 +102,12 @@ def main() -> None:
         (output / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     for name in ("claim_citation_candidates.jsonl", "table_semantic_candidates.jsonl", "answerability_candidates.jsonl"):
-        source = answerability_path if name == "answerability_candidates.jsonl" else candidate_dir / name
+        if name == "answerability_candidates.jsonl":
+            source = answerability_path
+        elif name == "claim_citation_candidates.jsonl":
+            source = citation_path
+        else:
+            source = candidate_dir / name
         shutil.copyfile(source, output / name)
     (output / "predictions.jsonl").write_text(
         json.dumps(

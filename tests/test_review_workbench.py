@@ -18,6 +18,9 @@ def _review_root(tmp_path):
     (candidates / "table_semantic_candidates.jsonl").write_text(
         json.dumps({"table_id": "table:1", "cells": []}) + "\n", encoding="utf-8"
     )
+    (candidates / "answerability_candidates.jsonl").write_text(
+        json.dumps({"case_id": "answer:1", "available_evidence_ids": [], "missing_evidence_ids": []}) + "\n", encoding="utf-8"
+    )
     evidence = tmp_path / "benchmarks" / "real_finance_v1"
     evidence.mkdir(parents=True)
     (evidence / "evidence.jsonl").write_text(
@@ -52,6 +55,12 @@ def test_verified_review_requires_track_label(tmp_path):
     root = _review_root(tmp_path)
     with pytest.raises(ValueError, match="VERIFIED_REQUIRES_TRACK_LABEL"):
         ReviewStore(root).save("citation", "case:1", ReviewSubmission(annotator_id="u1", annotation_status="VERIFIED"))
+    with pytest.raises(ValueError, match="VERIFIED_REQUIRES_TRACK_LABEL"):
+        ReviewStore(root).save(
+            "answerability",
+            "answer:1",
+            ReviewSubmission(annotator_id="u1", annotation_status="VERIFIED", answerability="UNANSWERABLE"),
+        )
 
 
 def test_review_page_and_queue_are_local_api_routes(tmp_path):

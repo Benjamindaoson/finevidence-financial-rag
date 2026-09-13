@@ -1,0 +1,10 @@
+{
+  "dataset_name": "ClaimCitationCandidate-v1",
+  "status": "CANDIDATE_ONLY",
+  "human_verified": false,
+  "record_count": 50,
+  "source_question_sha256": "e4be1e1495131259a3ae0a77fbd787bf963efbf6faa169af0fb9a373df1c4bcf",
+  "source_prediction_sha256": "9c3c3a2a8cfdcfa4e6ef4b1d00d6ddd0e94539b0113ff4dff573b9b7f095ec65",
+  "prediction_policy": "P0-D initial Top-K, top_k=5",
+  "output_sha256": "a5dbb58c9dd515c412cf092e05331d7406681c7021ae90d5c20102eaf124d415"
+}

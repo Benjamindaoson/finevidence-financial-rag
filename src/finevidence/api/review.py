@@ -46,6 +46,10 @@ class ReviewStore:
         self._evidence: dict[str, dict[str, Any]] | None = None
 
     def _candidate_path(self, track: str) -> Path:
+        if track == "citation":
+            v1 = self.candidate_root / "claim_citation_candidates_v1.jsonl"
+            if v1.exists():
+                return v1
         if track == "answerability":
             v1 = self.candidate_root / "answerability_candidates_v1.jsonl"
             return v1 if v1.exists() else self.candidate_root / "candidates" / "answerability_candidates.jsonl"
@@ -74,7 +78,7 @@ class ReviewStore:
             row = dict(candidate)
             row["case_id"] = self._case_id(candidate)
             row["annotation"] = annotations.get(row["case_id"])
-            ids = candidate.get("supporting_evidence_ids", []) + candidate.get("available_evidence_ids", [])
+            ids = candidate.get("evidence_candidate_ids", []) + candidate.get("supporting_evidence_ids", []) + candidate.get("available_evidence_ids", [])
             row["evidence"] = [
                 {
                     "evidence_id": item,
@@ -85,6 +89,8 @@ class ReviewStore:
                     "table_id": evidence.get(item, {}).get("table_id"),
                     "row_id": evidence.get(item, {}).get("row_id"),
                     "column_id": evidence.get(item, {}).get("column_id"),
+                    "predicted": item in candidate.get("predicted_evidence_ids", []),
+                    "proposed_supporting": item in candidate.get("proposed_supporting_evidence_ids", candidate.get("supporting_evidence_ids", [])),
                 }
                 for item in dict.fromkeys(ids)
             ]
@@ -102,7 +108,7 @@ class ReviewStore:
             valid = {
                 "citation": submission.support_status is not None,
                 "table": bool(submission.cell_labels) or bool(submission.notes.strip()),
-                "answerability": submission.answerability is not None,
+                "answerability": submission.answerability is not None and submission.action is not None,
             }[track]
             if not valid:
                 raise ValueError("VERIFIED_REQUIRES_TRACK_LABEL")
@@ -141,9 +147,9 @@ let queue=[],index=0;const track=document.getElementById('track'),annotator=docu
 function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function load(){let r=await fetch(`/api/v1/review/queue?track=${track.value}`);queue=await r.json();index=0;render()}
 function render(){document.getElementById('position').textContent=queue.length?`${index+1}/${queue.length}`:'0/0';if(!queue.length){document.getElementById('case').innerHTML='没有候选记录';return}let x=queue[index],a=x.annotation||{};let h=`<h2>${esc(x.question||x.claim||x.case_id)}</h2><p class="muted">${esc(x.case_id)} · candidate=${esc(x.candidate_status||x.annotation_status)} · previous=${esc(a.annotation_status||'未审核')}</p>`;
-if(track.value==='citation')h+=`<label>Claim status <select id="support"><option value="">请选择</option><option>SUPPORTED</option><option>PARTIALLY_SUPPORTED</option><option>UNSUPPORTED</option></select></label><div class="grid"><div><h3>Evidence candidates（可多选）</h3>${(x.evidence||[]).map(e=>`<div class="evidence"><label><input type="checkbox" class="support-id" value="${esc(e.evidence_id)}"> <strong>${esc(e.evidence_id)}</strong></label><span>${esc(e.document_id)} page=${esc(e.page)} block=${esc(e.block_id)} table=${esc(e.table_id)} row=${esc(e.row_id)} col=${esc(e.column_id)}</span><br>${esc(e.text)}</div>`).join('')}</div><div><p>位置可确认时填写，否则留空。</p><input id="page" type="number" min="1" placeholder="page"><input id="block" placeholder="block_id"><input id="tableid" placeholder="table_id"><input id="cell" placeholder="cell_id"></div></div>`;
+if(track.value==='citation')h+=`<label>Claim status <select id="support"><option value="">请选择</option><option>SUPPORTED</option><option>PARTIALLY_SUPPORTED</option><option>UNSUPPORTED</option></select></label><div class="grid"><div><h3>Predicted / candidate evidence（可多选确认）</h3>${(x.evidence||[]).map(e=>`<div class="evidence"><label><input type="checkbox" class="support-id" value="${esc(e.evidence_id)}"> <strong>${esc(e.evidence_id)}</strong></label><span>predicted=${e.predicted?'YES':'NO'} · source-proposed=${e.proposed_supporting?'YES':'NO'} · ${esc(e.document_id)} page=${esc(e.page)} block=${esc(e.block_id)} table=${esc(e.table_id)} row=${esc(e.row_id)} col=${esc(e.column_id)}</span><br>${esc(e.text)}</div>`).join('')}</div><div><p>位置可确认时填写，否则留空。</p><input id="page" type="number" min="1" placeholder="page"><input id="block" placeholder="block_id"><input id="tableid" placeholder="table_id"><input id="cell" placeholder="cell_id"></div></div>`;
 if(track.value==='table')h+=`<div class="grid"><div><h3>原始页面</h3><img class="page" src="${esc(x.image_url)}"></div><div><h3>TableIR cells</h3><div class="cells">${(x.cells||[]).map(c=>`<div class="cell"><span>${esc(c.cell_id)}</span><span>${esc(c.value)}<br><small>${esc((c.header_path||[]).join(' / '))} · bbox=${esc(c.bbox)}</small></span><select class="cell-label" data-cell="${esc(c.cell_id)}"><option value="">未判断</option><option>CORRECT</option><option>INCORRECT</option><option>NOT_APPLICABLE</option><option>UNCERTAIN</option></select></div>`).join('')}</div></div></div>`;
-if(track.value==='answerability')h+=`<p>Required facts: ${esc((x.required_facts||[]).map(f=>f.description||f).join(' | ')||'未提供')}<br>Available: ${esc((x.available_evidence_ids||[]).join(', ')||'无')}<br>Missing: ${esc((x.missing_evidence_ids||[]).join(', ')||'无')}</p><label>Status <select id="answerability"><option value="">请选择</option><option>ANSWERABLE</option><option>PARTIAL_EVIDENCE</option><option>UNANSWERABLE</option></select></label> <label>Action <select id="action"><option value="">请选择</option><option>ANSWER</option><option>RETRIEVE_MORE</option><option>ABSTAIN</option></select></label><br><textarea id="reason" rows="2" placeholder="为什么？"></textarea>`;
+if(track.value==='answerability')h+=`<p>Required facts: ${esc((x.required_facts||[]).map(f=>f.description||f).join(' | ')||'未提供')}<br>Available: ${esc((x.available_evidence_ids||[]).join(', ')||'无')}<br>Missing: ${esc((x.missing_evidence_ids||[]).join(', ')||'无')}</p>${(x.evidence||[]).map(e=>`<div class="evidence"><strong>${esc(e.evidence_id)}</strong> ${esc(e.document_id)} page=${esc(e.page)}<br>${esc(e.text)}</div>`).join('')}<label>Status <select id="answerability"><option value="">请选择</option><option>ANSWERABLE</option><option>PARTIAL_EVIDENCE</option><option>UNANSWERABLE</option></select></label> <label>Action <select id="action"><option value="">请选择</option><option>ANSWER</option><option>RETRIEVE_MORE</option><option>ABSTAIN</option></select></label><br><textarea id="reason" rows="2" placeholder="为什么？"></textarea>`;
 h+=`<br><textarea id="notes" rows="3" placeholder="notes"></textarea>`;document.getElementById('case').innerHTML=h;if(a.support_status)document.getElementById('support').value=a.support_status;if(a.answerability)document.getElementById('answerability').value=a.answerability;if(a.action)document.getElementById('action').value=a.action;if(a.notes)document.getElementById('notes').value=a.notes;if(a.reason)document.getElementById('reason').value=a.reason;if(a.gold_supporting_evidence_ids)document.querySelectorAll('.support-id').forEach(e=>e.checked=a.gold_supporting_evidence_ids.includes(e.value))}
 function payload(status){let p={annotator_id:annotator.value.trim(),annotation_status:status,notes:document.getElementById('notes')?.value||''};if(track.value==='citation'){p.support_status=document.getElementById('support')?.value||null;p.gold_supporting_evidence_ids=[...document.querySelectorAll('.support-id:checked')].map(e=>e.value);p.page=Number(document.getElementById('page')?.value)||null;p.block_id=document.getElementById('block')?.value||null;p.table_id=document.getElementById('tableid')?.value||null;p.cell_id=document.getElementById('cell')?.value||null}if(track.value==='table')p.cell_labels=[...document.querySelectorAll('.cell-label')].filter(e=>e.value).map(e=>({cell_id:e.dataset.cell,label:e.value}));if(track.value==='answerability'){p.answerability=document.getElementById('answerability')?.value||null;p.action=document.getElementById('action')?.value||null;p.reason=document.getElementById('reason')?.value||''}return p}
 async function save(status){if(!annotator.value.trim()){alert('请先填写 annotator');return}let x=queue[index],r=await fetch(`/api/v1/review/${track.value}/${encodeURIComponent(x.case_id)}`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload(status))});let b=await r.json();document.getElementById('message').textContent=r.ok?`已保存：${status}（human_verified=${b.human_verified}）`:`保存失败：${b.detail||'unknown'}`;if(r.ok)queue[index].annotation=b}function move(d){if(queue.length){index=Math.max(0,Math.min(queue.length-1,index+d));render()}}load();
