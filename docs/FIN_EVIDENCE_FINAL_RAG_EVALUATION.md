@@ -154,6 +154,10 @@ To open the review workbench locally:
 & .venv\Scripts\python.exe -m uvicorn finevidence.api.app:app --host 127.0.0.1 --port 8765
 ```
 
+After reviewers create `artifacts/final_rag_eval/human_annotations/*.jsonl`,
+rerun `scripts/run_final_rag_eval.py`. It consumes the latest verified rows
+automatically; no candidate row is promoted by the runner.
+
 ## 7. Next admissible action
 
 The next action is annotation, not another retrieval feature: a real reviewer

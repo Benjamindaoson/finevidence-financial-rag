@@ -44,6 +44,8 @@ Until the review files are populated, all values below remain `N/A`.
 | Answerability | Action Accuracy, Abstention P/R/F1, False Answer, False Abstention, Partial Detection | N/A; no verified gold |
 
 Run the existing final evaluator after review records are complete. It will
-score only verified rows and keep fields without applicable gold as `N/A`.
+automatically consume the latest `human_verified=true` rows, pair citation
+gold with the preserved historical Top-K prediction IDs, and keep fields
+without applicable gold as `N/A`.
 The previous P0/B3/B4/P0-J candidate metrics are preserved in
 `docs/FIN_EVIDENCE_FINAL_RAG_EVALUATION.md` and are not overwritten here.

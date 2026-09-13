@@ -31,6 +31,13 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def latest_verified(path: Path) -> list[dict[str, Any]]:
+    latest: dict[str, dict[str, Any]] = {}
+    for row in load_jsonl(path):
+        latest[str(row["case_id"])] = row
+    return [row for row in latest.values() if row.get("human_verified") is True]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -57,18 +64,57 @@ def main() -> None:
         ["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True
     ).stdout.strip()
 
+    annotation_root = root / "artifacts" / "final_rag_eval" / "human_annotations"
+    citation_annotations = latest_verified(annotation_root / "citation.jsonl")
+    table_annotations = latest_verified(annotation_root / "table.jsonl")
+    answerability_annotations = latest_verified(annotation_root / "answerability.jsonl")
+    evidence_by_id = {row["evidence_id"]: row for row in load_jsonl(root / "benchmarks" / "real_finance_v1" / "evidence.jsonl")}
+    citation_by_id = {str(row["case_id"]): row for row in citation}
+    if citation_annotations:
+        citation_gold = []
+        citation_predictions = []
+        for annotation in citation_annotations:
+            candidate = citation_by_id.get(str(annotation["case_id"]), {})
+            predicted_ids = candidate.get("predicted_evidence_ids", [])
+            citation_gold.append({
+                "case_id": annotation["case_id"],
+                "supporting_evidence_ids": annotation.get("gold_supporting_evidence_ids", []),
+                "page": annotation.get("page"),
+                "block_id": annotation.get("block_id"),
+                "cell_id": annotation.get("cell_id"),
+                "human_verified": True,
+            })
+            citation_predictions.append({
+                "case_id": annotation["case_id"],
+                "cited_evidence_ids": predicted_ids,
+                "cited_pages": [evidence_by_id[item]["page"] for item in predicted_ids if item in evidence_by_id and evidence_by_id[item].get("page") is not None],
+            })
+    else:
+        citation_gold, citation_predictions = citation, []
+    table_by_id = {str(row.get("table_id")): row for row in tables}
+    if table_annotations:
+        table_rows = []
+        for annotation in table_annotations:
+            merged = dict(table_by_id.get(str(annotation["case_id"]), table_by_id.get(str(annotation.get("table_id")), {})))
+            merged.update(annotation)
+            table_rows.append(merged)
+    else:
+        table_rows = tables
+    answerability_rows = answerability_annotations or answerability
+
     metrics = {
         "status": "BLOCKED_FOR_HUMAN_VERIFICATION",
         "human_verified_required": True,
-        "claim_citation": citation_metrics(citation, []),
-        "table_semantics": table_semantic_metrics(tables),
-        "answerability": answerability_metrics(answerability),
+        "claim_citation": citation_metrics(citation_gold, citation_predictions),
+        "table_semantics": table_semantic_metrics(table_rows),
+        "answerability": answerability_metrics(answerability_rows),
         "candidate_counts": {
             "claim_citation": len(citation),
             "table_semantics": len(tables),
             "answerability": len(answerability),
         },
         "historical_metrics_unchanged": True,
+        "verified_counts": {"claim_citation": len(citation_annotations), "table_semantics": len(table_annotations), "answerability": len(answerability_annotations)},
     }
     config = {
         "run_id": run_id,
