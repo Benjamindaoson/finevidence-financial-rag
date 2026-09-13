@@ -14,8 +14,8 @@ def route_query(question: str, *, initial_critical_coverage: float = 1.0, parser
     table = bool(_TABLE.search(question))
     if visual and table:
         route, reason = "MIXED", "visual and tabular cues"
-    elif visual or initial_critical_coverage < 1.0 and parser_confidence < 0.75:
-        route, reason = "VISUAL", "visual cue or unresolved low-confidence text evidence"
+    elif visual or initial_critical_coverage < 1.0:
+        route, reason = "VISUAL", "visual cue or unresolved critical text evidence"
     elif table:
         route, reason = "TABLE", "tabular/numeric cue"
     elif not question.strip():

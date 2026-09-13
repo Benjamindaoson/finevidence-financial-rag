@@ -47,3 +47,4 @@ def test_fusion_normalizes_scores_and_is_deterministic():
 def test_conditional_router_does_not_invoke_visual_for_plain_text():
     assert not route_query("What was revenue in 2025?").visual_invoked
     assert route_query("Which chart shows the revenue trend?").visual_invoked
+    assert route_query("What was revenue in 2025?", initial_critical_coverage=0.0).visual_invoked
