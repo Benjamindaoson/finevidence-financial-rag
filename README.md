@@ -1,3 +1,6 @@
+> **Portfolio role: PRIVATE RESEARCH**  
+> Evidence-qualified retrieval and support evaluation. This is a research artifact, not a production financial product or investment-advice system.
+
 # FinEvidence
 
 **Evidence-qualified retrieval for financial research.** FinEvidence is a research-grade financial RAG backend that treats retrieval relevance as a starting point—not proof that an answer is supported. It models required evidence, checks whether each critical requirement is independently satisfied, preserves source provenance, and exposes the result through a small API.
