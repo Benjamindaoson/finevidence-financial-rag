@@ -32,9 +32,20 @@ class Evidence(BaseModel):
     table_id: str | None = None
     row_id: str | None = None
     column_id: str | None = None
+
+    # Financial semantic layer. These fields are optional so existing benchmark
+    # fixtures remain valid while richer ingestion paths can preserve scope.
     entity: str | None = None
     metric: str | None = None
     period: str | None = None
+    currency: str | None = None
+    unit: str | None = None
+    accounting_basis: str | None = None
+    segment: str | None = None
+    scope: str | None = None
+    source_type: str | None = None
+    section_path: tuple[str, ...] = ()
+
     retrieval_score: float | None = None
     rerank_score: float | None = None
     content_hash: str

@@ -19,8 +19,14 @@ class FinancialFacets:
 
 
 _METRICS = (
-    "CET1 ratio", "CET1 capital", "total capital ratio", "profit before tax",
-    "cost of risk", "ECL charge", "average net loans", "revenue",
+    "CET1 ratio",
+    "CET1 capital",
+    "total capital ratio",
+    "profit before tax",
+    "cost of risk",
+    "ECL charge",
+    "average net loans",
+    "revenue",
 )
 _ENTITIES = ("HSBC Group", "HSBC Bank plc", "HSBC Holdings")
 _VOCAB = {
@@ -40,7 +46,21 @@ def _find(text: str, values: tuple[str, ...]) -> str | None:
 
 
 def extract_facets(query: str) -> FinancialFacets:
-    period_type = _find(query, ("full year", "FY", "first half", "H1", "second half", "H2", "Q1", "Q2", "Q3", "Q4"))
+    period_type = _find(
+        query,
+        (
+            "full year",
+            "FY",
+            "first half",
+            "H1",
+            "second half",
+            "H2",
+            "Q1",
+            "Q2",
+            "Q3",
+            "Q4",
+        ),
+    )
     if period_type in {"full year", "FY"}:
         period_type = "FY"
     elif period_type in {"first half", "H1"}:
@@ -65,10 +85,10 @@ def evidence_facets(evidence: Evidence) -> FinancialFacets:
         entity=evidence.entity or parsed.entity,
         metric=evidence.metric or parsed.metric,
         period=evidence.period or parsed.period,
-        basis=parsed.basis,
-        segment=parsed.segment,
+        basis=evidence.accounting_basis or parsed.basis,
+        segment=evidence.segment or parsed.segment,
         geography=parsed.geography,
-        currency=parsed.currency,
+        currency=evidence.currency or parsed.currency,
         period_type=parsed.period_type,
     )
 
@@ -77,8 +97,21 @@ def facet_features(query: str, evidence: Evidence) -> tuple[float, ...]:
     query_facets = extract_facets(query)
     item_facets = evidence_facets(evidence)
     values = []
-    for field in ("entity", "metric", "period", "basis", "segment", "geography", "currency", "period_type"):
+    for field in (
+        "entity",
+        "metric",
+        "period",
+        "basis",
+        "segment",
+        "geography",
+        "currency",
+        "period_type",
+    ):
         expected = getattr(query_facets, field)
         actual = getattr(item_facets, field)
-        values.append(1.0 if expected and actual and expected.lower() == actual.lower() else 0.0)
+        values.append(
+            1.0
+            if expected and actual and expected.lower() == actual.lower()
+            else 0.0
+        )
     return tuple(values)

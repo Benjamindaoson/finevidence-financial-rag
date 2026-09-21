@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  core-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install core and test dependencies
+        run: python -m pip install -e '.[dev]'
+      - name: Run reproducible core regression suite
+        run: |
+          python -m pytest -q             --deselect=tests/test_b3_2.py::test_visualstress_audit_selection_is_fixed_and_performance_blind             --deselect=tests/test_p0_d_runner.py::test_p0_d_runner_emits_public_tables_and_hsbc_readiness_gate             --deselect=tests/test_p0_e_runner.py::test_p0_e_runner_emits_variant_metrics_and_oracle_gap             --deselect=tests/test_p0_g_runner.py::test_p0_g_runner_emits_graph_alignment_and_coverage_artifacts             --deselect=tests/test_p0_h_runner.py::test_p0_h_runner_emits_required_artifacts
+      - name: Explain extended evaluation boundary
+        run: |
+          echo "Five historical/extended tests are intentionally excluded from the core gate."
+          echo "They require pinned external TAT-QA/FinQA assets or frozen benchmark hashes"
+          echo "that are not currently reproducible from the repository alone."
+          echo "See docs/CI_AND_EVAL_BOUNDARIES.md."
