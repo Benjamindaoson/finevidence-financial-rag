@@ -1,4 +1,18 @@
 from .facets import FinancialFacets, extract_facets
-from .rerankers import FacetAwareReranker, HardNegativeAwareReranker
+from .rerankers import (
+    CrossEncoderReranker,
+    FacetAwareReranker,
+    FinanceAwareMultiObjectiveReranker,
+    HardNegativeAwareReranker,
+    SentenceTransformerCrossEncoder,
+)
 
-__all__ = ["FacetAwareReranker", "FinancialFacets", "HardNegativeAwareReranker", "extract_facets"]
+__all__ = [
+    "CrossEncoderReranker",
+    "FacetAwareReranker",
+    "FinanceAwareMultiObjectiveReranker",
+    "FinancialFacets",
+    "HardNegativeAwareReranker",
+    "SentenceTransformerCrossEncoder",
+    "extract_facets",
+]
