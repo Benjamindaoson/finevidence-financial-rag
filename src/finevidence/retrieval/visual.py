@@ -3,6 +3,8 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
+import numpy as np
+
 from finevidence.contracts.evidence import Evidence, RetrievedEvidence
 
 
@@ -16,7 +18,11 @@ class ClipImageEncoder:
         import torch
 
         self.device = device
-        self.model, self.preprocess = clip.load("RN50", device=device, download_root=model_path or "artifacts/models")
+        self.model, self.preprocess = clip.load(
+            "RN50",
+            device=device,
+            download_root=model_path or "artifacts/models",
+        )
         self.model.eval()
         self._clip = clip
         self._torch = torch
@@ -25,13 +31,17 @@ class ClipImageEncoder:
         from PIL import Image
 
         with self._torch.no_grad():
-            batch = self._torch.stack([self.preprocess(Image.open(path).convert("RGB")) for path in paths]).to(self.device)
+            batch = self._torch.stack(
+                [self.preprocess(Image.open(path).convert("RGB")) for path in paths]
+            ).to(self.device)
             vectors = self.model.encode_image(batch).float()
             return vectors / vectors.norm(dim=-1, keepdim=True).clamp_min(1e-12)
 
     def encode_text(self, texts: list[str]) -> object:
         with self._torch.no_grad():
-            vectors = self.model.encode_text(self._clip.tokenize(texts).to(self.device)).float()
+            vectors = self.model.encode_text(
+                self._clip.tokenize(texts).to(self.device)
+            ).float()
             return vectors / vectors.norm(dim=-1, keepdim=True).clamp_min(1e-12)
 
     def manifest(self) -> dict:
@@ -40,7 +50,15 @@ class ClipImageEncoder:
         for key in sorted(state):
             digest.update(key.encode())
             digest.update(state[key].detach().cpu().numpy().tobytes())
-        return {"model_name": self.model_name, "model_revision": "openai-public-RN50", "runtime": "openai-clip", "device": self.device, "image_encoder": True, "weights_sha256": digest.hexdigest(), "status": "READY"}
+        return {
+            "model_name": self.model_name,
+            "model_revision": "openai-public-RN50",
+            "runtime": "openai-clip",
+            "device": self.device,
+            "image_encoder": True,
+            "weights_sha256": digest.hexdigest(),
+            "status": "READY",
+        }
 
 
 class VisualRetriever:
@@ -54,18 +72,45 @@ class VisualRetriever:
 
     @property
     def available(self) -> bool:
-        return self.encoder is not None and bool(self._visual) and self._vectors is not None
+        return (
+            self.encoder is not None
+            and bool(self._visual)
+            and self._vectors is not None
+        )
 
     def fit(self, evidence: list[Evidence]) -> None:
-        self._visual = [item for item in evidence if item.image_path and Path(item.image_path).exists()]
+        self._visual = [
+            item for item in evidence if item.image_path and Path(item.image_path).exists()
+        ]
         if not self._visual or self.encoder is None:
             return
-        self._vectors = self.encoder.encode_images([item.image_path for item in self._visual])
+        self._vectors = self.encoder.encode_images(
+            [item.image_path for item in self._visual]
+        )
+
+    @staticmethod
+    def _scores_to_list(scores: object) -> list[float]:
+        # Accept torch tensors for the real CLIP adapter and NumPy arrays for
+        # lightweight deterministic tests/adapters.
+        if hasattr(scores, "detach"):
+            return [float(value) for value in scores.detach().cpu().tolist()]
+        return [float(value) for value in np.asarray(scores).tolist()]
 
     def search(self, query: str, top_k: int) -> list[RetrievedEvidence]:
         if not self.available:
             return []
         query_vector = self.encoder.encode_text([query])[0]
-        scores = (self._vectors @ query_vector).detach().cpu().tolist()
-        order = sorted(range(len(self._visual)), key=lambda i: (-float(scores[i]), self._visual[i].evidence_id))
-        return [RetrievedEvidence(evidence_id=self._visual[index].evidence_id, rank=rank, retrieval_score=float(scores[index])) for rank, index in enumerate(order[:top_k], start=1)]
+        scores = self._vectors @ query_vector
+        values = self._scores_to_list(scores)
+        order = sorted(
+            range(len(self._visual)),
+            key=lambda i: (-values[i], self._visual[i].evidence_id),
+        )
+        return [
+            RetrievedEvidence(
+                evidence_id=self._visual[index].evidence_id,
+                rank=rank,
+                retrieval_score=values[index],
+            )
+            for rank, index in enumerate(order[:top_k], start=1)
+        ]
