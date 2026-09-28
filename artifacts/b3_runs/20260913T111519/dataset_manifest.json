@@ -1,0 +1,6 @@
+{
+  "dataset": "HSBCVisualStress-v1",
+  "case_count": 60,
+  "evidence_count": 984,
+  "citation_bbox": "N/A: no bbox gold in HSBCVisualStress-v1"
+}

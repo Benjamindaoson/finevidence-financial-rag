@@ -1,0 +1,26 @@
+{
+  "T0 Text Only": {
+    "p50_ms": 236.10045004170388,
+    "p95_ms": 333.59429501579143
+  },
+  "T1 Structured Text/Table": {
+    "p50_ms": 245.92114999541081,
+    "p95_ms": 330.84743499639444
+  },
+  "V0 Visual Only": {
+    "p50_ms": 106.36615002295002,
+    "p95_ms": 202.67829502408858
+  },
+  "M0 Fusion RRF": {
+    "p50_ms": "N/A",
+    "p95_ms": "N/A"
+  },
+  "M0 Fusion Weighted": {
+    "p50_ms": "N/A",
+    "p95_ms": "N/A"
+  },
+  "M1 Conditional Multimodal": {
+    "p50_ms": "N/A",
+    "p95_ms": "N/A"
+  }
+}

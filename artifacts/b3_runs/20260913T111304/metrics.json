@@ -1,0 +1,63 @@
+{
+  "T0 Text Only": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.0,
+    "page_recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+  },
+  "T1 Structured Text/Table": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.0,
+    "page_recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+  },
+  "V0 Visual Only": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.06666666666666667,
+    "page_recall_at_10": 0.15,
+    "mrr": 0.0321494708994709,
+    "ndcg_at_10": 0.05905932230147242
+  },
+  "M0 Fusion RRF": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.03333333333333333,
+    "page_recall_at_10": 0.06666666666666667,
+    "mrr": 0.013121693121693121,
+    "ndcg_at_10": 0.025353602270530937
+  },
+  "M0 Fusion Weighted": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.0,
+    "page_recall_at_10": 0.05,
+    "mrr": 0.006527777777777777,
+    "ndcg_at_10": 0.016012281503527313
+  },
+  "M1 Conditional Multimodal": {
+    "page_recall_at_1": 0.0,
+    "page_recall_at_5": 0.0,
+    "page_recall_at_10": 0.0,
+    "mrr": 0.0,
+    "ndcg_at_10": 0.0
+  },
+  "b3": {
+    "text_only_failure_recovery_rate": 0.0,
+    "visual_critical_requirement_recovery_rate": 0.0,
+    "multimodal_regression_rate": 0.0,
+    "net_recovery": 0,
+    "visual_routing_precision": 0.0,
+    "visual_routing_recall": 0.0,
+    "visual_invocation_rate": 0.0
+  },
+  "per_failure_type": {
+    "TABLE_ROW_MIXING": {
+      "T0 Text Only": 0.0,
+      "T1 Structured Text/Table": 0.0,
+      "V0 Visual Only": 0.06666666666666667,
+      "M0 Fusion RRF": 0.03333333333333333,
+      "M0 Fusion Weighted": 0.0,
+      "M1 Conditional Multimodal": 0.0
+    }
+  }
+}

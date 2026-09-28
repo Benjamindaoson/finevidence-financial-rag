@@ -38,6 +38,11 @@ class Evidence(BaseModel):
     retrieval_score: float | None = None
     rerank_score: float | None = None
     content_hash: str
+    page_image_id: str | None = None
+    image_path: str | None = None
+    render_hash: str | None = None
+    region_bbox: tuple[float, float, float, float] | None = None
+    region_type: str | None = None
 
     @model_validator(mode="after")
     def validate_content_hash(self) -> "Evidence":

@@ -1,0 +1,10 @@
+{
+  "dataset_name": "HSBCVisualStress-v1",
+  "description": "project-created stress benchmark from public HSBC disclosures",
+  "human_verified": false,
+  "verification_method": "automatic_candidate_mining_plus_dual_model_assisted_adjudication",
+  "case_count": 60,
+  "cases_sha256": "634cdf1659868febb093d218fb9af50bdb691ed02ff3b0a7ebb432d58eb600f9",
+  "source_evidence": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_local_sources\\hsbc_evidence.jsonl",
+  "source_render_manifest": "D:\\01_work\\Enterprise Multimodal RAG\\finevidence\\artifacts\\hsbc_page_images\\page_render_manifest.json"
+}

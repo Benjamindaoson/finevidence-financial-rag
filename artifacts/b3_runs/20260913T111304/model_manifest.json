@@ -1,0 +1,9 @@
+{
+  "model_name": "openai-clip-RN50",
+  "model_revision": "openai-public-RN50",
+  "runtime": "openai-clip",
+  "device": "cpu",
+  "image_encoder": true,
+  "weights_sha256": "f410876a343583bfc8b66cf22fe4cf228447c424b9a862c135d7f0d2b1b49998",
+  "status": "READY"
+}
